@@ -1,26 +1,27 @@
 #include<iostream>
-#include <window.h>
+#include <Windows.h>
 #include <direct.h>
 
 bool CheckStorage(const DWORDLONG diskSpaceNeeded)
 {
     int const drive = _getdrive();
     struct _diskfree_t diskFree;
-    _getDiskfree(drive, &diskFree);
+	_getdiskfree(drive, &diskFree);
     
-    unsigned __int64 const neededCluster;
-    neededCluster = diskSpaceNeeded / (diskFree.sectors_per_cluster * diskFree.bytes_per_sector);
+    unsigned __int64 const neededCluster = diskSpaceNeeded / (diskFree.sectors_per_cluster * diskFree.bytes_per_sector);
     
     if(diskFree.avail_clusters < neededCluster)
     {
-        GCC_ERROR("CheckStorage Failure: Not enough physical storage.");
+		std::cout << ("CheckStorage Failure: Not enough physical storage.") << std::endl;
         return false;
     }
+
+	std::cout << "CheckStorage Success: Enough physical storage." << std::endl;
     return true;
 }
 
 int main()
 {
-    CheckStorage(300);
+    CheckStorage(314572800);
 	return 0;
 }
