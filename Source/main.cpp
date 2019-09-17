@@ -20,5 +20,6 @@ DWORD ReadCpuSpeed()
 
 int main()
 {
+    std::cout << "CHECK MY CPU SPEED: " << ReadCpuSpeed() << std::endl;
 	return 0;
 }
