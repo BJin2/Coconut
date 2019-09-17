@@ -13,7 +13,7 @@ DWORD ReadCpuSpeed()
     
     if(lError == ERROR_SUCCESS)
     {   // query the key:
-        RegQueryValueEx(hKey, "MHz", NULL, &type, (LPBYTE) &dwMHz, &BufSize);
+        RegQueryValueEx(hKey, "~MHz", NULL, &type, (LPBYTE) &dwMHz, &BufSize);
     }
     return dwMHz;
 }
