@@ -12,14 +12,40 @@ DWORD ReadCpuSpeed()
     long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
     
     if(lError == ERROR_SUCCESS)
-    {   // query the key:
+    {  
         RegQueryValueEx(hKey, "~MHz", NULL, &type, (LPBYTE) &dwMHz, &BufSize);
     }
     return dwMHz;
 }
 
+char* readCpuArchitecture()
+{
+	char regVal[1024];
+	//char *regVal = (char*)malloc(1024 * sizeof(char)); //If I use this one, sizeof(regVal) fixed at 8.
+	HKEY hKey;
+	DWORD size = sizeof(regVal);
+	DWORD type = REG_SZ;
+	//printf("SIZE: %d \n", size);
+
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE, "HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0, KEY_READ, &hKey);
+
+	if (lError == ERROR_SUCCESS)
+	{
+
+		RegQueryValueEx(hKey, "ProcessorNameString", NULL, &type, (PBYTE)& regVal, &size);
+		return regVal;
+	}
+	else
+	{
+		printf("Fail to red CPU Architecture \n");
+	}
+	
+}
+
 int main()
 {
-    std::cout << "CHECK MY CPU SPEED: " << ReadCpuSpeed() << std::endl;
+	printf("CHECK MY CPU SPEED: %d GHz\n", ReadCpuSpeed());
+	printf("CHECK MY CPU Architecture: %s\n", readCpuArchitecture());
+
 	return 0;
 }
