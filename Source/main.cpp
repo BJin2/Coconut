@@ -2,6 +2,49 @@
 #include<Windows.h>
 #include<direct.h>
 
+#define DIV 1048576
+bool CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)
+{
+	MEMORYSTATUSEX status;
+	status.dwLength = sizeof(status);
+	GlobalMemoryStatusEx(&status);
+
+
+	//Printing memory info
+	printf("Total Physical Memory : %I64d MB\n", status.ullTotalPhys / DIV);
+	printf("Available Physical Memory : %I64d MB\n", status.ullAvailPhys / DIV);
+	printf("Total Virtual Memory : %I64d MB\n", status.ullTotalVirtual / DIV);
+	printf("Available Virtual Memory : %I64d MB\n", status.ullAvailVirtual / DIV);
+
+	//Check physical memory
+	if (status.ullAvailPhys < physicalNeeded)
+	{
+		printf("CheckMomory Failure : Not enough physical memory.\n");
+		return false;
+	}
+
+	//Check virtual memory
+	if (status.ullAvailVirtual < virtualNeeded)
+	{
+		printf("CheckMomory Failure : Not enough virtual memory.\n");
+		return false;
+	}
+
+	//Check if there is contiguos memory 
+	char* buff = new char[virtualNeeded];
+	if (buff)
+	{
+		delete[] buff;
+	}
+	else
+	{
+		printf("CheckMemory Failure: Not enough contiguous memory.\n");
+		return false;
+	}
+
+	return true;
+}
+
 DWORD ReadCpuSpeed()
 {
     DWORD BufSize = sizeof(DWORD);
@@ -43,9 +86,6 @@ char* readCpuArchitecture()
 	
 }
 
-#include <Windows.h>
-#include <direct.h>
-
 bool CheckStorage(const DWORDLONG diskSpaceNeeded)
 {
     int const drive = _getdrive();
@@ -83,8 +123,5 @@ bool IsOnlyInstance(LPCTSTR gameTitle)
 
 int main()
 {
-	printf("CHECK MY CPU SPEED: %d GHz\n", ReadCpuSpeed());
-	printf("CHECK MY CPU Architecture: %s\n", readCpuArchitecture());
-
 	return 0;
 }
