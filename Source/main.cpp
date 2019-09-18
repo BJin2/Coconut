@@ -37,7 +37,8 @@ char* readCpuArchitecture()
 	}
 	else
 	{
-		printf("Fail to red CPU Architecture \n");
+		printf("Fail to read CPU Architecture \n");
+		return NULL;
 	}
 	
 }
