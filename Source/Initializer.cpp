@@ -113,15 +113,8 @@ bool Initializer::IsOnlyInstance(LPCTSTR gameTitle)
 	HANDLE handle = CreateMutex(NULL, TRUE, gameTitle);
 	if (GetLastError() == ERROR_ALREADY_EXISTS)
 	{
-		//HWND hWnd = FindWindow(gameTitle, NULL);
-		//if (hWnd != NULL) {
-		//	// An instance of your game is already running.
-		//	ShowWindow(hWnd, SW_SHOWNORMAL);
-		//	SetFocus(hWnd);
-		//	SetForegroundWindow(hWnd);
-		//	SetActiveWindow(hWnd);
-		//}
-		printf("Program already running\n");
+		HWND hWnd = FindWindow(gameTitle, NULL);
+		MessageBox(hWnd, "Multiple Instances detected", NULL, MB_OK);
 		return false;
 	}
 	return true;
