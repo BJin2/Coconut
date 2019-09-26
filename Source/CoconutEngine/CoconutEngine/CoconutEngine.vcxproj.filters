@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="XMLLoader">
+      <UniqueIdentifier>{6c6f3d4a-7cb6-4363-afd4-e04277ecd53a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp">
@@ -24,17 +27,17 @@
     <ClCompile Include="..\..\Actors\SpecialAbilityComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
+      <Filter>XMLLoader</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinystr.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>XMLLoader</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxml.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>XMLLoader</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>XMLLoader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,22 +45,22 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Actors\AbilitiesInterface.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\ActorComponent.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\SpecialAbilityComponent.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Actors\Actor.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\ActorComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\SpecialAbilityComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
+      <Filter>XMLLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h">
+      <Filter>XMLLoader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

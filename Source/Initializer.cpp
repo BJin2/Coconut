@@ -1,8 +1,22 @@
+#include<iostream>
+#include<direct.h>
 #include "Initializer.h"
 
-Initializer::Initializer()
+Initializer::Initializer(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)
 {
-
+	hWnd = FindWindow(gameTitle, NULL);
+	if (IsOnlyInstance(gameTitle))
+	{
+		if (CheckStorage(neededStorage * MB))
+		{
+			if (CheckMemory(physicalNeeded * MB, virtualNeeded * MB))
+			{
+				ReadCpuSpeed();
+				ReadCpuArchitecture();
+				system("pause");
+			}
+		}
+	}
 }
 
 bool Initializer::CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)
@@ -21,14 +35,14 @@ bool Initializer::CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG vi
 	//Check physical memory
 	if (status.ullAvailPhys < physicalNeeded)
 	{
-		printf("CheckMomory Failure : Not enough physical memory.\n");
+		MessageBox(hWnd, "CheckMomory Failure : Not enough physical memory.", NULL, MB_OK);
 		return false;
 	}
 
 	//Check virtual memory
 	if (status.ullAvailVirtual < virtualNeeded)
 	{
-		printf("CheckMomory Failure : Not enough virtual memory.\n");
+		MessageBox(hWnd, "CheckMomory Failure : Not enough virtual memory.", NULL, MB_OK);
 		return false;
 	}
 
@@ -40,7 +54,7 @@ bool Initializer::CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG vi
 	}
 	else
 	{
-		printf("CheckMemory Failure: Not enough contiguous memory.\n");
+		MessageBox(hWnd, "CheckMemory Failure: Not enough contiguous memory.", NULL, MB_OK);
 		return false;
 	}
 
@@ -84,7 +98,7 @@ char* Initializer::ReadCpuArchitecture()
 	}
 	else
 	{
-		printf("Fail to read CPU Architecture \n");
+		MessageBox(hWnd, "Fail to read CPU Architecture", NULL, MB_OK);
 		return NULL;
 	}
 
@@ -100,7 +114,7 @@ bool Initializer::CheckStorage(const DWORDLONG diskSpaceNeeded)
 
 	if (diskFree.avail_clusters < neededCluster)
 	{
-		std::cout << ("CheckStorage Failure: Not enough physical storage.") << std::endl;
+		MessageBox(hWnd, "CheckStorage Failure: Not enough physical storage.", NULL, MB_OK);
 		return false;
 	}
 
@@ -113,7 +127,6 @@ bool Initializer::IsOnlyInstance(LPCTSTR gameTitle)
 	HANDLE handle = CreateMutex(NULL, TRUE, gameTitle);
 	if (GetLastError() == ERROR_ALREADY_EXISTS)
 	{
-		HWND hWnd = FindWindow(gameTitle, NULL);
 		MessageBox(hWnd, "Multiple Instances detected", NULL, MB_OK);
 		return false;
 	}
