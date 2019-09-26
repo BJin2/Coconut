@@ -1,6 +1,8 @@
 #pragma once
+#include "ActorComponent.h"
 
-class IAbilities
+class IAbilities : public ActorComponent
 {
-
+public:
+	virtual void VPlaceholder() = 0;// to make this class an interface
 };
