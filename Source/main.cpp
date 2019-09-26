@@ -2,13 +2,7 @@
 
 int main()
 {
-	Initializer *init = new Initializer();
+	Initializer *init = new Initializer(TEXT("CoconutEngine-x64-Release"), 300, 0, 0);
 
-	init->IsOnlyInstance(TEXT("CoconutEngine-x64-Release"));
-	init->CheckStorage(300 * MB);
-	init->CheckMemory(0, 0);
-	init->ReadCpuSpeed();
-	init->ReadCpuArchitecture();
-	system("pause");
 	return 0;
 }

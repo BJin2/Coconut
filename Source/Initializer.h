@@ -1,14 +1,14 @@
 #pragma once
-#include<iostream>
 #include<Windows.h>
-#include<direct.h>
 
 #define MB 1048576
 
 class Initializer
 {
+private:
+	HWND hWnd;
 public:
-	Initializer();
+	Initializer(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded);
 
 	bool CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded);
 	DWORD ReadCpuSpeed();
