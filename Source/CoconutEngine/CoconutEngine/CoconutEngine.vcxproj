@@ -142,10 +142,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinystr.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\Actors\SpecialAbilityComponent.cpp" />
     <ClCompile Include="..\..\Initializer.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h" />
+    <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h" />
+    <ClInclude Include="..\..\Actors\AbilitiesInterface.h" />
+    <ClInclude Include="..\..\Actors\Actor.h" />
+    <ClInclude Include="..\..\Actors\ActorComponent.h" />
+    <ClInclude Include="..\..\Actors\SpecialAbilityComponent.h" />
     <ClInclude Include="..\..\Initializer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
