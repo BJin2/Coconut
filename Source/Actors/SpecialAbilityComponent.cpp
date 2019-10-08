@@ -11,6 +11,6 @@ const char* SpecialAbilityComponent::VGetName() const
 	return nullptr;
 }
 //Empty function for now
-void SpecialAbilityComponent::VPlaceholder()
+void SpecialAbilityComponent::VAbilityAction()
 {
 }
