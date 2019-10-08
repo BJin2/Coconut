@@ -4,5 +4,5 @@
 class IAbilities : public ActorComponent
 {
 public:
-	virtual void VPlaceholder() = 0;// to make this class an interface
+	virtual void VAbilityAction() = 0;// to make this class an interface
 };
