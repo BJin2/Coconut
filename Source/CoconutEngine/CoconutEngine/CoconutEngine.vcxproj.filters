@@ -16,15 +16,18 @@
     <Filter Include="XMLLoader">
       <UniqueIdentifier>{6c6f3d4a-7cb6-4363-afd4-e04277ecd53a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Actor">
+      <UniqueIdentifier>{c7d8aba5-7ef4-4977-a691-7025bbeb3187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{186fa5dd-cc27-4bc7-bc29-125b6210adcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{0e90c133-3717-4559-9078-abca49340792}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Initializer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\SpecialAbilityComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
@@ -39,28 +42,217 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp">
       <Filter>XMLLoader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Actors\RenderableActor.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\SpecialAbilityComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Character.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Enemy.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Floor.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\LevelManager.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Player.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Projectile.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Timer.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Wall.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Transform.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\PlayerController.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Collider.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Sprite.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Text.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Rigidbody.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\ProjectileComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\MeshRenderer.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\CharacterStatComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\CapsuleCollider.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Button.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\BoxCollider.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Initializer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\AudioEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\Game.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\GraphicEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\InputCommand.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\PhysicsEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\ResourceManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\Scene.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Initializer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\AbilitiesInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\ActorComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\SpecialAbilityComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
       <Filter>XMLLoader</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h">
       <Filter>XMLLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Actor.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\RenderableActor.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\ActorComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\SpecialAbilityComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\AbilitiesInterface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Character.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Player.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Wall.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Projectile.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Timer.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\LevelManager.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Floor.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Enemy.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Transform.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\InputInterface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\PlayerController.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\AIInterface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\PhysicsComponentInterface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Rigidbody.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Collider.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\BoxCollider.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\ProjectileComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\UIInterface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\RendererInterface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\MeshRenderer.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Text.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Sprite.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\CharacterStatComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\CapsuleCollider.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Button.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Initializer.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\AudioEngine.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Game.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\GraphicEngine.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\InputCommand.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\PhysicsEngine.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\ResourceManager.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Scene.hpp">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
