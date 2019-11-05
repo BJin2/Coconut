@@ -260,5 +260,8 @@
     <ClInclude Include="..\..\Actors\Components\UIInterface.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
+    <ClInclude Include="InputInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
