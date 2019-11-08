@@ -116,15 +116,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	HDC hdc;
 	IInput* input = new IInput();
 
-	
-
-	
-
-	
-	
-	
-	
-
 	switch (message)
 	{
 	case WM_CHAR:
