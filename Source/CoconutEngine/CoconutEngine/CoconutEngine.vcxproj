@@ -97,7 +97,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -217,11 +217,11 @@
     <ClInclude Include="..\..\Engines\Game.hpp" />
     <ClInclude Include="..\..\Engines\GraphicEngine.hpp" />
     <ClInclude Include="..\..\Engines\InputCommand.hpp" />
+    <ClInclude Include="..\..\Engines\InputInterface.h" />
     <ClInclude Include="..\..\Engines\PhysicsEngine.hpp" />
     <ClInclude Include="..\..\Engines\ResourceManager.hpp" />
     <ClInclude Include="..\..\Engines\Scene.hpp" />
     <ClInclude Include="..\..\Initializer.h" />
-    <ClInclude Include="InputInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
