@@ -2,9 +2,8 @@
 #include <windows.h>  
 #include <windowsx.h>
 #include <stdlib.h>  
-#include <string.h>  
 #include <tchar.h>  
-#include <iostream>
+#include "Engines/InputInterface.h"
 
 // Global variables  
 
@@ -115,48 +114,30 @@ int CALLBACK WinMain(
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
-
-	int curMosePosX = GET_X_LPARAM(lParam);
-	int curMosePosY = GET_Y_LPARAM(lParam);
-
-	TCHAR charText[100] = _T("");
-	_stprintf(charText, _T("WM_CHAR: %c\n"), (wchar_t)wParam);
-	TCHAR keyDownText[100] = _T("");
-	_stprintf(keyDownText, _T("WM_KEYDOWN: %c\n"), (wchar_t)wParam);
-	TCHAR keyUpText[100] = _T("");
-	_stprintf(keyUpText, _T("WM_KEYUP: %c\n"), (wchar_t)wParam);
-	TCHAR mouseDownText[100] = _T("");
-	_stprintf(mouseDownText, _T("LMouse Down x-pos: %d, LMouse Down y-pos: %d\n"), curMosePosX, curMosePosY);
-	TCHAR mouseUpText[100] = _T("");
-	_stprintf(mouseUpText, _T("LMouse UP x-pos: %d, LMouse Up y-pos: %d\n"), curMosePosX, curMosePosY);
-	TCHAR mosueMoveText[100] = _T("");	
-	_stprintf(mosueMoveText, _T("mouse x-pos: %d, mouse y-pos: %d\n"), curMosePosX, curMosePosY);
+	IInput* input = new IInput();
 
 	switch (message)
 	{
 	case WM_CHAR:
-		hdc = GetDC(hWnd);
-		TextOut(hdc, 10, 10, charText, sizeof(charText));
+		input->VOnChar(wParam, hWnd);
 		break;
 	case WM_KEYDOWN:
-		hdc = GetDC(hWnd);
-		TextOut(hdc, 10, 30, keyDownText, sizeof(keyDownText));
+		input->VOnKeyDown(wParam, hWnd);
 		break;
 	case WM_KEYUP:
-		hdc = GetDC(hWnd);
-		TextOut(hdc, 10, 50, keyUpText, sizeof(keyUpText));
+		input->VOnKeyUp(wParam, hWnd);
 		break;
 	case WM_MOUSEMOVE:
 		hdc = GetDC(hWnd);
-		TextOut(hdc, 10, 70, mosueMoveText, sizeof(mosueMoveText));
+		input->VOnPointerMove(lParam, hWnd);
 		break;
 	case WM_LBUTTONDOWN:
 		hdc = GetDC(hWnd);
-		TextOut(hdc, 10, 90, mouseDownText, sizeof(mosueMoveText));
+		input->VOnPointerButtonDown(lParam, hWnd);
 		break;
 	case WM_LBUTTONUP:
 		hdc = GetDC(hWnd);
-		TextOut(hdc, 10, 110, mouseUpText, sizeof(mosueMoveText));
+		input->VOnPointerButtonUp(lParam, hWnd);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
