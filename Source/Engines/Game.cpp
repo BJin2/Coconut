@@ -7,7 +7,7 @@ Game::Game(HWND _hWnd)
 	Game::hWnd = _hWnd;
 
 	Actor* test = new Actor();
-	std::string name = "C:/Users/bomja/Documents/Project/Assignment/Coconut/Source/Lua/test.lua";
+	std::string name = "../../Lua/test.lua";
 	test->AddComponent(name);
 	actors.push_back(test);
 }
