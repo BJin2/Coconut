@@ -25,3 +25,8 @@ void Game::Update(float delta)
 		//actor.Update(delta);
 	}
 }
+
+HWND Game::GetHWND()
+{
+	return hWnd;
+}
