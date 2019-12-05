@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Component">
       <UniqueIdentifier>{4a443fb3-de16-4171-b991-839ba75932b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lua Scripts">
+      <UniqueIdentifier>{43900291-ee4e-4b0c-8eb5-006fd3b408c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\main.cpp">
@@ -138,11 +141,11 @@
     <ClCompile Include="..\..\Actors\Components\Transform.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Actors\Components\ActorComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Actors\Actor.cpp">
       <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +209,6 @@
     <ClInclude Include="..\..\Actors\Components\AbilitiesInterface.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Actors\Components\ActorComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Actors\Components\AIInterface.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
@@ -269,5 +269,16 @@
     <ClInclude Include="..\..\Engines\Game.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\ScriptComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\ActorComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Lua\test.lua">
+      <Filter>Lua Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -6,27 +6,6 @@
 #include "Engines/InputInterface.h"
 #include "Engines/Game.h"
 
-extern "C"
-{
-#include "..//Libs/Lua535/include/lua.h"
-#include "..//Libs/Lua535/include/lauxlib.h"
-#include "..//Libs/Lua535/include/lualib.h"
-}
-
-#ifdef _WIN32
-#pragma comment(lib, "..//..//..//Libs/Lua535/liblua53.a")
-#endif
-
-bool CheckLua(lua_State* L, int r)
-{
-	if (r != LUA_OK)
-	{
-		std::string errormsg = lua_tostring(L, -1);
-		std::cout << errormsg << std::endl;
-		return false;
-	}
-	return true;
-}
 
 // Global variables  
 Game* gGame;
@@ -94,26 +73,23 @@ int CALLBACK WinMain(
 	}
 	
 	gGame = new Game(hWnd);
-	
-	//need to create lua state to do anything with lua
-	lua_State* L = luaL_newstate();
-	luaL_openlibs(L);
-
+	gGame->Start();
 	ShowWindow(hWnd,nCmdShow);
 	UpdateWindow(hWnd);
-	gGame->Start();
+	
 	// Main message loop:  
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
 		gGame->Update(0.0f);
 	}
 
 	delete gGame;
-	lua_close(L);
 	return (int)msg.wParam;
 }
 

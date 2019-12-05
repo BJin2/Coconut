@@ -1,18 +1,17 @@
 #include "../Engines/Game.h"
 #include "Actor.h"
 #include "Components/ActorComponent.h"
+#include "Components/ScriptComponent.h"
 
-void Actor::Start()
+void Actor::VStart()
 {
-	HWND hWnd = Game::hWnd;
-	MessageBox(hWnd, "Actor Initialized", NULL, MB_OK);
 	for (auto comp : actorComponent)
 	{
-		comp->VInit();
+		comp->VStart();
 	}
 }
 
-void Actor::Update(float dt)
+void Actor::VUpdate(float dt)
 {
 	for (auto comp : actorComponent)
 	{
@@ -20,9 +19,16 @@ void Actor::Update(float dt)
 	}
 }
 
-template<typename T, typename... Args>
-void Actor::AddComponent(Args ... args)
+//template<typename T, typename... Args>
+//void Actor::AddComponent(Args ... args)
+//{
+//	T* component = new T(std::forward<Args>(args) ...);
+//	actorComponent.push_back(component);
+//}
+
+
+void Actor::AddComponent(string fileName)
 {
-	T* component(std::forward<Args>(args) ...);
+	ScriptComponent* component = new ScriptComponent(fileName);
 	actorComponent.push_back(component);
 }
