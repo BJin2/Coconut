@@ -1,13 +1,8 @@
 #include "Game.h"
 
-Game* Game::GetInstance()
+Game::Game(HWND _hWnd)
 {
-	return instance;
-}
-
-Game::Game()
-{
-	instance = this;
+	Game::hWnd = _hWnd;
 }
 
 void Game::Start()
@@ -26,7 +21,3 @@ void Game::Update(float delta)
 	}
 }
 
-HWND Game::GetHWND()
-{
-	return hWnd;
-}

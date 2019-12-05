@@ -4,6 +4,7 @@
 #include <stdlib.h>  
 #include <tchar.h>  
 #include "Engines/InputInterface.h"
+#include "Engines/Game.h"
 
 extern "C"
 {
@@ -28,6 +29,8 @@ bool CheckLua(lua_State* L, int r)
 }
 
 // Global variables  
+Game* gGame;
+HWND Game::hWnd = 0;
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
@@ -44,8 +47,7 @@ int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
 	_In_ HINSTANCE hPrevInstance,
 	_In_ LPSTR     lpCmdLine,
-	_In_ int       nCmdShow
-)
+	_In_ int       nCmdShow)
 {
 	WNDCLASSEX wcex;
 
@@ -62,7 +64,6 @@ int CALLBACK WinMain(
 	wcex.lpszClassName = szWindowClass;
 	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 
-
 	if (!RegisterClassEx(&wcex))
 	{
 		MessageBox(NULL,
@@ -75,27 +76,12 @@ int CALLBACK WinMain(
 
 	hInst = hInstance; // Store instance handle in our global variable  
 
-	// The parameters to CreateWindow explained:  
-	// szWindowClass: the name of the application  
-	// szTitle: the text that appears in the title bar  
-	// WS_OVERLAPPEDWINDOW: the type of window to create  
-	// CW_USEDEFAULT, CW_USEDEFAULT: initial position (x, y)  
-	// 500, 100: initial size (width, length)  
-	// NULL: the parent of this window  
-	// NULL: this application does not have a menu bar  
-	// hInstance: the first parameter from WinMain  
-	// NULL: not used in this application  
 	HWND hWnd = CreateWindow(
-		szWindowClass,
-		szTitle,
+		szWindowClass, szTitle,
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		512, 512,
-		NULL,
-		NULL,
-		hInstance,
-		NULL
-	);
+		NULL,NULL,hInstance,NULL);
 
 	if (!hWnd)
 	{
@@ -106,40 +92,37 @@ int CALLBACK WinMain(
 
 		return 1;
 	}
-
+	
+	gGame = new Game(hWnd);
+	
 	//need to create lua state to do anything with lua
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
 
-	// The parameters to ShowWindow explained:  
-	// hWnd: the value returned from CreateWindow  
-	// nCmdShow: the fourth parameter from WinMain  
-	ShowWindow(hWnd,
-		nCmdShow);
+	ShowWindow(hWnd,nCmdShow);
 	UpdateWindow(hWnd);
 
 	// Main message loop:  
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			gGame->Update(0.0f);
+		}
 	}
 
+	delete gGame;
 	lua_close(L);
 	return (int)msg.wParam;
 }
 
 
-//  
-//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)  
-//  
-//  PURPOSE:  Processes messages for the main window.  
-//  
-//  WM_PAINT    - Paint the main window  
-//  WM_DESTROY  - post a quit message and return  
-//  
-//  
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;

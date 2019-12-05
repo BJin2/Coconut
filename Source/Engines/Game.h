@@ -5,14 +5,11 @@
 class Game
 {
 private:
-	std::vector<Actor> actors;
-	static Game* instance;
-	HWND hWnd;
+	std::vector<Actor*> actors;
 
 public:
-	static Game* GetInstance();
-	Game();
+	Game(HWND _hWnd);
 	void Start();
 	void Update(float delta);
-	HWND GetHWND();
+	static HWND hWnd;
 };
