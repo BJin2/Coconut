@@ -2,8 +2,8 @@
 #include <memory>
 #include <functional>
 #include <string>
-#include "..\\Actor.h"
 #include "..\\..\\..\\Libs\tinyxml\tinyxml.h"
+#include "..\\Actor.h"
 
 typedef std::shared_ptr<Actor> StrongActorPtr;
 typedef int ComponentId;//TODO ask Galal about specific type
