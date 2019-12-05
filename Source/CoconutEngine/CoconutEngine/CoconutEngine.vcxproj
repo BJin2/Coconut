@@ -146,7 +146,9 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxml.cpp" />
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\Actors\Actor.cpp" />
     <ClCompile Include="..\..\Actors\Character.cpp" />
+    <ClCompile Include="..\..\Actors\Components\ActorComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\AIInterface.cpp" />
     <ClCompile Include="..\..\Actors\Components\BoxCollider.cpp" />
     <ClCompile Include="..\..\Actors\Components\Button.cpp" />

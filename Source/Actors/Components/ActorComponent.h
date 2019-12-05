@@ -2,8 +2,8 @@
 #include <memory>
 #include <functional>
 #include <string>
-#include "..\\Actor.h"
 #include "..\\..\\..\\Libs\tinyxml\tinyxml.h"
+#include "..\\Actor.h"
 
 typedef std::shared_ptr<Actor> StrongActorPtr;
 typedef int ComponentId;//TODO ask Galal about specific type
@@ -17,6 +17,7 @@ public:
 	virtual ~ActorComponent(void) { m_pOwner.reset(); }
 	// These functions are meant to be overridden by the implBementation classes of the components.
 	virtual bool VInit(TiXmlElement* pData) = 0;
+	virtual bool VInit();
 	virtual void VPostInit(void) { }
 	virtual void VUpdate(int deltaMs) { }
 	// This function should be overridden by the interface class.

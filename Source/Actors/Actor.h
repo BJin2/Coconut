@@ -1,14 +1,16 @@
 #pragma once
-#include "..\Actors\Components\ActorComponent.h"
 #include <vector>
 
+class ActorComponent;
 using namespace std;
+
 class Actor
 {
 private:
-	vector<ActorComponent> actorComp;
+	vector<ActorComponent*> actorComponent;
 
 public:
-	template<class T>
-	void AddComponent();
+	template<typename T, typename... Args> void AddComponent(Args ... args);
+	virtual void Update(float dt);
+	virtual void Start();
 };
