@@ -5,6 +5,28 @@
 #include <tchar.h>  
 #include "Engines/InputInterface.h"
 
+extern "C"
+{
+#include "..//Libs/Lua535/include/lua.h"
+#include "..//Libs/Lua535/include/lauxlib.h"
+#include "..//Libs/Lua535/include/lualib.h"
+}
+
+#ifdef _WIN32
+#pragma comment(lib, "..//..//..//Libs/Lua535/liblua53.a")
+#endif
+
+bool CheckLua(lua_State* L, int r)
+{
+	if (r != LUA_OK)
+	{
+		std::string errormsg = lua_tostring(L, -1);
+		std::cout << errormsg << std::endl;
+		return false;
+	}
+	return true;
+}
+
 // Global variables  
 
 // The main window class name.  
@@ -39,6 +61,7 @@ int CALLBACK WinMain(
 	wcex.lpszMenuName = NULL;
 	wcex.lpszClassName = szWindowClass;
 	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
+
 
 	if (!RegisterClassEx(&wcex))
 	{
@@ -84,6 +107,10 @@ int CALLBACK WinMain(
 		return 1;
 	}
 
+	//need to create lua state to do anything with lua
+	lua_State* L = luaL_newstate();
+	luaL_openlibs(L);
+
 	// The parameters to ShowWindow explained:  
 	// hWnd: the value returned from CreateWindow  
 	// nCmdShow: the fourth parameter from WinMain  
@@ -99,8 +126,10 @@ int CALLBACK WinMain(
 		DispatchMessage(&msg);
 	}
 
+	lua_close(L);
 	return (int)msg.wParam;
 }
+
 
 //  
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)  
