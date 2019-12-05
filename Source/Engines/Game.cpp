@@ -9,7 +9,7 @@ void Game::Start()
 {
 	for (auto actor : actors)
 	{
-		//actor.Start();
+		actor->Start();
 	}
 }
 
@@ -17,7 +17,7 @@ void Game::Update(float delta)
 {
 	for (auto actor : actors)
 	{
-		//actor.Update(delta);
+		actor->Update(delta);
 	}
 }
 

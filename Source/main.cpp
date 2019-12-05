@@ -101,20 +101,15 @@ int CALLBACK WinMain(
 
 	ShowWindow(hWnd,nCmdShow);
 	UpdateWindow(hWnd);
-
+	gGame->Start();
 	// Main message loop:  
 	MSG msg;
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-		else
-		{
-			gGame->Update(0.0f);
-		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+
+		gGame->Update(0.0f);
 	}
 
 	delete gGame;

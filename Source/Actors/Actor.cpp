@@ -1,8 +1,11 @@
+#include "../Engines/Game.h"
 #include "Actor.h"
 #include "Components/ActorComponent.h"
 
 void Actor::Start()
 {
+	HWND hWnd = Game::hWnd;
+	MessageBox(hWnd, "Actor Initialized", NULL, MB_OK);
 	for (auto comp : actorComponent)
 	{
 		comp->VInit();
