@@ -147,7 +147,6 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\Actors\Actor.cpp" />
-    <ClCompile Include="..\..\Actors\Character.cpp" />
     <ClCompile Include="..\..\Actors\Components\AIInterface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -194,29 +193,20 @@
     <ClCompile Include="..\..\Actors\Components\Transform.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\Actors\Enemy.cpp" />
-    <ClCompile Include="..\..\Actors\Floor.cpp" />
-    <ClCompile Include="..\..\Actors\LevelManager.cpp" />
-    <ClCompile Include="..\..\Actors\Player.cpp" />
-    <ClCompile Include="..\..\Actors\Projectile.cpp" />
-    <ClCompile Include="..\..\Actors\RenderableActor.cpp" />
-    <ClCompile Include="..\..\Actors\Timer.cpp" />
-    <ClCompile Include="..\..\Actors\Wall.cpp" />
     <ClCompile Include="..\..\Engines\AudioEngine.cpp" />
     <ClCompile Include="..\..\Engines\Game.cpp" />
     <ClCompile Include="..\..\Engines\GraphicEngine.cpp" />
+    <ClCompile Include="..\..\Engines\Initializer.cpp" />
     <ClCompile Include="..\..\Engines\InputCommand.cpp" />
     <ClCompile Include="..\..\Engines\PhysicsEngine.cpp" />
     <ClCompile Include="..\..\Engines\ResourceManager.cpp" />
     <ClCompile Include="..\..\Engines\Scene.cpp" />
-    <ClCompile Include="..\..\Initializer.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h" />
     <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h" />
     <ClInclude Include="..\..\Actors\Actor.h" />
-    <ClInclude Include="..\..\Actors\Character.h" />
     <ClInclude Include="..\..\Actors\Components\AbilitiesInterface.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -276,23 +266,15 @@
     <ClInclude Include="..\..\Actors\Components\UIInterface.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\Actors\Enemy.h" />
-    <ClInclude Include="..\..\Actors\Floor.h" />
-    <ClInclude Include="..\..\Actors\LevelManager.h" />
-    <ClInclude Include="..\..\Actors\Player.h" />
-    <ClInclude Include="..\..\Actors\Projectile.h" />
-    <ClInclude Include="..\..\Actors\RenderableActor.h" />
-    <ClInclude Include="..\..\Actors\Timer.h" />
-    <ClInclude Include="..\..\Actors\Wall.h" />
     <ClInclude Include="..\..\Engines\AudioEngine.hpp" />
     <ClInclude Include="..\..\Engines\Game.h" />
     <ClInclude Include="..\..\Engines\GraphicEngine.hpp" />
+    <ClInclude Include="..\..\Engines\Initializer.h" />
     <ClInclude Include="..\..\Engines\InputCommand.hpp" />
     <ClInclude Include="..\..\Engines\InputInterface.h" />
     <ClInclude Include="..\..\Engines\PhysicsEngine.hpp" />
     <ClInclude Include="..\..\Engines\ResourceManager.hpp" />
-    <ClInclude Include="..\..\Engines\Scene.hpp" />
-    <ClInclude Include="..\..\Initializer.h" />
+    <ClInclude Include="..\..\Engines\Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Lua\test.lua" />

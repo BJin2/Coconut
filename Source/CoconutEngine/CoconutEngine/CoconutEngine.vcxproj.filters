@@ -45,36 +45,6 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp">
       <Filter>XMLLoader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Actors\RenderableActor.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Character.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Enemy.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Floor.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\LevelManager.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Player.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Projectile.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Timer.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Wall.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Initializer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Engines\AudioEngine.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -147,6 +117,9 @@
     <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Engines\Initializer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -157,36 +130,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Actors\Actor.h">
       <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\RenderableActor.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Character.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Player.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Wall.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Projectile.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Timer.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\LevelManager.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Floor.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Enemy.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Initializer.h">
-      <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\AudioEngine.hpp">
       <Filter>Source Files\Engine</Filter>
@@ -201,9 +144,6 @@
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\ResourceManager.hpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Engines\Scene.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Actors\Components\AbilitiesInterface.h">
@@ -274,6 +214,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Actors\Components\ActorComponent.h">
       <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Scene.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Initializer.h">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
