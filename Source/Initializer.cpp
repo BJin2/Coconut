@@ -2,7 +2,7 @@
 #include<direct.h>
 #include "Initializer.h"
 
-Initializer::Initializer(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)
+bool Initializer::CheckRequirements(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)
 {
 	hWnd = FindWindow(gameTitle, NULL);
 	if (IsOnlyInstance(gameTitle))
@@ -13,10 +13,11 @@ Initializer::Initializer(LPCTSTR gameTitle, const DWORDLONG neededStorage, const
 			{
 				ReadCpuSpeed();
 				ReadCpuArchitecture();
-				system("pause");
+				return true;
 			}
 		}
 	}
+	return false;
 }
 
 bool Initializer::CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)

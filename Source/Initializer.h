@@ -8,8 +8,7 @@ class Initializer
 private:
 	HWND hWnd;
 public:
-	Initializer(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded);
-
+	bool CheckRequirements(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded);
 	bool CheckMemory(const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded);
 	DWORD ReadCpuSpeed();
 	char* ReadCpuArchitecture();
