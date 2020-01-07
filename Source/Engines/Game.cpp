@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include "Initializer.h"
 #include "Game.h"
+#include "Initializer.h"
 #include "InputInterface.h"
 
 
@@ -18,6 +18,7 @@ void Game::Start()
 
 	CreateEngineWindow(nullptr, szTitle, SW_SHOW);
 	gameState = GameState::Playing;
+	scene->Start();
 	Update();
 }
 
@@ -29,6 +30,9 @@ void Game::Initialize()
 		gameState = GameState::ShowingSplash;
 	}
 	delete initializer;
+
+	scene = new Scene();
+	scene->Initialize();
 }
 
 void Game::Update()
@@ -42,6 +46,7 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		scene->Update(0.0f);
 	}
 }
 

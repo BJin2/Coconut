@@ -6,8 +6,9 @@ class Scene
 {
 private:
 	std::vector<Actor*> actors;
-	void Initialize();
+	
 public:
+	void Initialize();
 	void Start();
 	void Update(float delta);
 };
