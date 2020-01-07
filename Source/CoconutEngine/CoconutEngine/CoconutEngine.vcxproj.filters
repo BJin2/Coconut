@@ -45,9 +45,6 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp">
       <Filter>XMLLoader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Initializer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Engines\AudioEngine.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -120,6 +117,9 @@
     <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Engines\Initializer.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -130,9 +130,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Actors\Actor.h">
       <Filter>Source Files\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Initializer.h">
-      <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\AudioEngine.hpp">
       <Filter>Source Files\Engine</Filter>
@@ -219,6 +216,9 @@
       <Filter>Source Files\Component</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\Scene.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Initializer.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

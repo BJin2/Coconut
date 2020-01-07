@@ -1,7 +1,8 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include "Initializer.h"
 #include "Game.h"
 #include "InputInterface.h"
-#include "../Actors/Actor.h"
-#include "../Actors/Components/ScriptComponent.h"
+
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
@@ -9,26 +10,28 @@ static TCHAR szWindowClass[] = _T("win32app");
 // The string that appears in the application's title bar.  
 static TCHAR szTitle[] = _T("Coconut Engine");
 
-// Forward declarations of functions included in this code module:  
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-
-Game::Game()
-{
-	Actor* test = new Actor();
-	std::string name = "../../Lua/test.lua";
-	test->AddComponent(name);
-	actors.push_back(test);
-}
 
 void Game::Start()
 {
-	for (auto actor : actors)
-	{
-		actor->VStart();
-	}
+	if (gameState == GameState::Uninitialized)
+		return;
+
+	CreateEngineWindow(nullptr, szTitle, SW_SHOW);
+	gameState = GameState::Playing;
+	Update();
 }
 
-void Game::Update(float delta)
+void Game::Initialize()
+{
+	Initializer* initializer = new Initializer();
+	if (initializer->CheckRequirements(szTitle, 1000, 1000, 1000))
+	{
+		gameState = GameState::ShowingSplash;
+	}
+	delete initializer;
+}
+
+void Game::Update()
 {
 	// Main message loop:  
 	MSG msg = { 0 };
@@ -39,27 +42,19 @@ void Game::Update(float delta)
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		for (auto actor : actors)
-		{
-			actor->VUpdate(delta);
-		}
 	}
 }
 
-bool Game::CreateEngineWindow(
-	_In_ HINSTANCE hInstance,
-	_In_ HINSTANCE hPrevInstance,
-	_In_ LPSTR     lpCmdLine,
-	_In_ int       nCmdShow)
+bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	hInst = hInstance;
+	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc = WndProc;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInst;
-	wcex.hIcon = LoadIcon(hInst, MAKEINTRESOURCE(IDI_APPLICATION));
+	wcex.hInstance = hInstance;
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 	wcex.lpszMenuName = NULL;
@@ -82,7 +77,7 @@ bool Game::CreateEngineWindow(
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT,
 		512, 512,
-		NULL, NULL, hInst, NULL);
+		NULL, NULL, hInstance, NULL);
 
 	if (!hWnd)
 	{
@@ -98,8 +93,7 @@ bool Game::CreateEngineWindow(
 	UpdateWindow(hWnd);
 }
 
-
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	IInput* input = new IInput();

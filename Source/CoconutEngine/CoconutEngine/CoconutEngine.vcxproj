@@ -196,11 +196,11 @@
     <ClCompile Include="..\..\Engines\AudioEngine.cpp" />
     <ClCompile Include="..\..\Engines\Game.cpp" />
     <ClCompile Include="..\..\Engines\GraphicEngine.cpp" />
+    <ClCompile Include="..\..\Engines\Initializer.cpp" />
     <ClCompile Include="..\..\Engines\InputCommand.cpp" />
     <ClCompile Include="..\..\Engines\PhysicsEngine.cpp" />
     <ClCompile Include="..\..\Engines\ResourceManager.cpp" />
     <ClCompile Include="..\..\Engines\Scene.cpp" />
-    <ClCompile Include="..\..\Initializer.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -269,12 +269,12 @@
     <ClInclude Include="..\..\Engines\AudioEngine.hpp" />
     <ClInclude Include="..\..\Engines\Game.h" />
     <ClInclude Include="..\..\Engines\GraphicEngine.hpp" />
+    <ClInclude Include="..\..\Engines\Initializer.h" />
     <ClInclude Include="..\..\Engines\InputCommand.hpp" />
     <ClInclude Include="..\..\Engines\InputInterface.h" />
     <ClInclude Include="..\..\Engines\PhysicsEngine.hpp" />
     <ClInclude Include="..\..\Engines\ResourceManager.hpp" />
     <ClInclude Include="..\..\Engines\Scene.h" />
-    <ClInclude Include="..\..\Initializer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Lua\test.lua" />
