@@ -4,7 +4,6 @@
 #include "InputInterface.h"
 #include <SFML/Graphics.hpp>
 
-
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
 
@@ -118,7 +117,7 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 		return 1;
 	}
 
-	//Game::SFMLView = SFMLView1;
+	Game::SFMLView = SFMLView1;
 	sf::RenderWindow SFMLWindow(SFMLView1);
 }
 
