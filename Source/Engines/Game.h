@@ -3,7 +3,7 @@
 #define NOMINMAX
 #include <windows.h>  
 #include <windowsx.h>
-#include <stdlib.h>  
+#include <stdlib.h>
 #include <tchar.h>
 #include "Scene.h"
 

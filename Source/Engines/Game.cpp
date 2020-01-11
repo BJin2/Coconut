@@ -4,6 +4,7 @@
 #include "InputInterface.h"
 #include <SFML/Graphics.hpp>
 
+
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
 
@@ -47,7 +48,20 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		
+		//if (!sfmlWin)
+		//{
+		//	sf::CircleShape shape(100.f);
+		//	sf::Event event;
+		//	while (sfmlWin->pollEvent(event))
+		//	{
+		//		if (event.type == sf::Event::Closed)
+		//			sfmlWin->close();
+		//	}
+
+		//	sfmlWin->clear();
+		//	sfmlWin->draw(shape);
+		//	sfmlWin->display();
+		//}
 
 
 		scene->Update(0.0f);
@@ -118,7 +132,7 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 	}
 
 	Game::SFMLView = SFMLView1;
-	sf::RenderWindow SFMLWindow(SFMLView1);
+	sf::RenderWindow* sfmlWin = new sf::RenderWindow(SFMLView1);
 }
 
 LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
