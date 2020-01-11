@@ -2,6 +2,7 @@
 #include "../Actors/Actor.h"
 #include "../Actors/Components/ScriptComponent.h"
 
+
 void Scene::Initialize()
 {
 	Actor* test = new Actor();
