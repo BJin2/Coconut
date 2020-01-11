@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Initializer.h"
 #include "InputInterface.h"
+#include <SFML/Graphics.hpp>
 
 
 // The main window class name.  
@@ -39,6 +40,7 @@ void Game::Update()
 {
 	// Main message loop:  
 	MSG msg = { 0 };
+
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -46,6 +48,9 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+		
+
+
 		scene->Update(0.0f);
 	}
 }
@@ -96,6 +101,25 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 	Game::hWnd = hWnd;
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+
+	HWND SFMLView1 = CreateWindow(
+		szWindowClass, szTitle,
+		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_BORDER,
+		20, 250, 300, 200,
+		hWnd, NULL, hInstance, NULL);
+
+	if (!SFMLView1)
+	{
+		MessageBox(NULL,
+			_T("Call to CreateWindow(SFMLVIEW) failed!"),
+			_T("Coconut Engine"),
+			NULL);
+
+		return 1;
+	}
+
+	//Game::SFMLView = SFMLView1;
+	sf::RenderWindow SFMLWindow(SFMLView1);
 }
 
 LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
