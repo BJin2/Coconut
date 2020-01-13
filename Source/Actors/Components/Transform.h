@@ -22,12 +22,14 @@ private:
 	float4x4 m_localTransformMatrix;
 
 	Transform* m_parent = nullptr;
+	std::vector<Transform*> m_children;
 public:
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 
 #pragma region Getters
 	Transform* GetParent();
+	Transform* GetChild(int index);
 #pragma region Global
 	float3 GetPosition();
 	float3 GetScale();
@@ -47,6 +49,7 @@ public:
 
 #pragma region Setters
 	void SetParent(Transform* _parent);
+	void AddChild(Transform* _child);
 #pragma region Global
 	void SetPosition(const float3& _position);
 	void SetPosition(float _x, float _y, float _z);

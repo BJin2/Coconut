@@ -27,6 +27,10 @@ Transform* Transform::GetParent()
 {
 	return m_parent;
 }
+Transform* Transform::GetChild(int index)
+{
+	return m_children[index];
+}
 #pragma region Global
 float3 Transform::GetPosition()
 {
@@ -84,6 +88,10 @@ float4x4 Transform::GetRotationMatrix()
 void Transform::SetParent(Transform* _parent)
 {
 	m_parent = _parent;
+}
+void Transform::AddChild(Transform* _child)
+{
+	m_children.push_back(_child);
 }
 #pragma region Global
 void Transform::SetPosition(const float3& _position)
