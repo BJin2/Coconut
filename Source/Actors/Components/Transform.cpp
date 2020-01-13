@@ -82,13 +82,11 @@ float4 Transform::GetOrientation()
 }
 float3 Transform::GetRotation()
 {
-	//TODO calculate euler value and return it.
-	float4 orientation = GetOrientation();
-	return temp;
+	return QuaternionToEuler(GetOrientation());
 }
 float4x4 Transform::GetTransform()
 {
-	xmmatrix mat = XMLoadFloat4x4(&GetLocalTransformMatrix());
+	xmmatrix mat = XMLoadFloat4x4(&m_localTransformMatrix);
 	Transform* p = GetParent();
 	while (p)
 	{
@@ -115,8 +113,7 @@ float4 Transform::GetLocalOrientation()
 }
 float3 Transform::GetLocalRotation()
 {
-	//TODO implement vector -> quaternion
-	return float3();
+	return QuaternionToEuler(GetLocalOrientation());
 }
 float4x4 Transform::GetLocalTransform()
 {
@@ -316,6 +313,25 @@ void Transform::SetLocalRotation(const xmvector& _rotation)
 	XMStoreFloat3(&temp, _rotation);
 	SetLocalRotation(temp);
 }
+
 #pragma endregion
 #pragma endregion
 
+float3 Transform::QuaternionToEuler(float4 q)
+{
+	float sinr_cosp = 2 * (q.w * q.x + q.y * q.z);
+	float cosr_cosp = 1 - 2 * (q.x * q.x + q.y * q.y);
+	float x = atan2(sinr_cosp, cosr_cosp);
+	
+	float y;
+	float sinp = 2 * (q.w * q.y - q.z * q.x);
+	if (abs(sinp) >= 1)
+		y = copysign(XM_PIDIV2, sinp);
+	else
+		y = asin(sinp);
+	float siny_cosp = 2 * (q.w * q.z + q.x * q.y);
+	float cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z);
+	float z = atan2(siny_cosp, cosy_cosp);
+	
+	return float3(x, y, z);
+}

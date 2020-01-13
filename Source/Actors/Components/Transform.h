@@ -90,4 +90,5 @@ public:
 #pragma endregion
 #pragma endregion
 
+	float3 QuaternionToEuler(float4 q);
 };
