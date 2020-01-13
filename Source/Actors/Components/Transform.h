@@ -33,8 +33,11 @@ public:
 	float3 GetScale();
 	float4 GetOrientation();
 	float3 GetRotation();
-	float4x4 GetRotationMatrix();
 	float4x4 GetTransform();
+	float4x4 GetRotationMatrix();
+	float4x4 GetScaleMatrix();
+	float4x4 GetTranslationMatrix();
+
 #pragma endregion
 #pragma region Local
 	float3 GetLocalPosition();

@@ -77,6 +77,14 @@ float4x4 Transform::GetRotationMatrix()
 {
 	return m_rotationMatrix;
 }
+float4x4 Transform::GetScaleMatrix()
+{
+	return m_scaleMatrix;
+}
+float4x4 Transform::GetTranslationMatrix()
+{
+	return m_translationMatrix;
+}
 #pragma endregion
 #pragma endregion
 
@@ -88,8 +96,22 @@ void Transform::SetParent(Transform* _parent)
 #pragma region Global
 void Transform::SetPosition(const float3& _position)
 {
-	m_position = _position;
-	//TODO update local position
+	xmvector position = XMLoadFloat3(&_position);
+	xmmatrix mat = XMMatrixScalingFromVector(position);
+
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetTranslationMatrix());
+		p = GetParent();
+	}
+	XMFLOAT4X4 tmp;
+	XMStoreFloat4x4(&tmp, mat);
+	float x = tmp.m[3][0];
+	float y = tmp.m[3][1];
+	float z = tmp.m[3][2];
+
+	SetPosition(x, y, z);
 }
 void Transform::SetPosition(float _x, float _y, float _z)
 {
@@ -97,12 +119,28 @@ void Transform::SetPosition(float _x, float _y, float _z)
 }
 void Transform::SetPosition(const xmvector& _position)
 {
-	XMStoreFloat3(&m_position, _position);
+	float3 temp;
+	XMStoreFloat3(&temp, _position);
+	SetPosition(temp);
 }
 void Transform::SetScale(const float3& _scale)
 {
-	m_scale = _scale;
-	//TODO update local scale
+	xmvector scale = XMLoadFloat3(&_scale);
+	xmmatrix mat = XMMatrixScalingFromVector(scale);
+
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetScaleMatrix());
+		p = GetParent();
+	}
+	XMFLOAT4X4 tmp;
+	XMStoreFloat4x4(&tmp, mat);
+	float x = tmp.m[0][0];
+	float y = tmp.m[1][1];
+	float z = tmp.m[2][2];
+
+	SetScale(x, y, z);
 }
 void Transform::SetScale(float _x, float _y, float _z)
 {
@@ -110,7 +148,9 @@ void Transform::SetScale(float _x, float _y, float _z)
 }
 void Transform::SetScale(const xmvector& _scale)
 {
-	XMStoreFloat3(&m_scale, _scale);
+	float3 temp;
+	XMStoreFloat3(&temp, _scale);
+	SetScale(temp);
 }
 void Transform::SetOrientation(const float4& _orientation)
 {
