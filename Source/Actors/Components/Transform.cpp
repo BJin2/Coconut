@@ -34,7 +34,7 @@ Transform* Transform::GetChild(int index)
 #pragma region Global
 float3 Transform::GetPosition()
 {
-	xmmatrix mat = XMLoadFloat4x4(&GetTranslationMatrix());
+	xmmatrix mat = XMLoadFloat4x4(&m_translationMatrix);
 	Transform* p = GetParent();
 	while (p)
 	{
@@ -51,7 +51,7 @@ float3 Transform::GetPosition()
 }
 float3 Transform::GetScale()
 {
-	xmmatrix mat = XMLoadFloat4x4(&GetScaleMatrix());
+	xmmatrix mat = XMLoadFloat4x4(&m_scaleMatrix);
 	Transform* p = GetParent();
 	while (p)
 	{
@@ -68,7 +68,7 @@ float3 Transform::GetScale()
 }
 float4 Transform::GetOrientation()
 {
-	xmmatrix mat = XMLoadFloat4x4(&GetRotationMatrix());
+	xmmatrix mat = XMLoadFloat4x4(&m_rotationMatrix);
 	Transform* p = GetParent();
 	while (p)
 	{
