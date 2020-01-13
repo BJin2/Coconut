@@ -73,6 +73,10 @@ float4x4 Transform::GetLocalTransform()
 {
 	return m_localTransformMatrix;
 }
+float4x4 Transform::GetRotationMatrix()
+{
+	return m_rotationMatrix;
+}
 #pragma endregion
 #pragma endregion
 
@@ -112,8 +116,20 @@ void Transform::SetScale(const xmvector& _scale)
 }
 void Transform::SetOrientation(const float4& _orientation)
 {
-	m_orientation = _orientation;
-	//TODO update local orientation
+	xmvector quat = XMLoadFloat4(&_orientation);
+	xmmatrix mat = XMMatrixRotationQuaternion(quat);
+
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetRotationMatrix());
+		p = GetParent();
+	}
+	
+	quat = XMQuaternionRotationMatrix(mat);
+	float4 temp;
+	XMStoreFloat4(&temp, quat);
+	SetLocalOrientation(temp);
 }
 void Transform::SetOrientation(float _x, float _y, float _z, float _w)
 {

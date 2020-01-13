@@ -22,7 +22,6 @@ private:
 	float4x4 m_localTransformMatrix;
 
 	Transform* m_parent = nullptr;
-
 public:
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
@@ -34,6 +33,7 @@ public:
 	float3 GetScale();
 	float4 GetOrientation();
 	float3 GetRotation();
+	float4x4 GetRotationMatrix();
 	float4x4 GetTransform();
 #pragma endregion
 #pragma region Local
