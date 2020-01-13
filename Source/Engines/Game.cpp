@@ -118,7 +118,7 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 	HWND SFMLView1 = CreateWindow(
 		szWindowClass, szTitle,
 		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_BORDER,
-		20, 250, 300, 200,
+		CW_USEDEFAULT, CW_USEDEFAULT, 512, 512,
 		hWnd, NULL, hInstance, NULL);
 
 	if (!SFMLView1)
