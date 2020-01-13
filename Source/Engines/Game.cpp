@@ -26,10 +26,26 @@ void Game::Start()
 void Game::Initialize()
 {
 
-	sf::RenderWindow window(sf::VideoMode(512, 512), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(367, 253), "Splash Screen");
 
-	window.clear();
-	window.display();
+	if (window.isOpen())
+	{
+		sf::Texture splashScreenTexture;
+		sf::Sprite splashScreenSprite;
+
+		if (!splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.png"))
+		{
+			// error...
+		}
+		else
+		{
+			window.clear();
+			splashScreenTexture.create(367, 253);
+			splashScreenSprite.setTexture(splashScreenTexture);
+			//window.draw(splashScreenSprite);
+			window.display();
+		}
+	}
 
 	Initializer* initializer = new Initializer();
 	if (initializer->CheckRequirements(szTitle, 1000, 1000, 1000))
@@ -40,6 +56,7 @@ void Game::Initialize()
 
 	scene = new Scene();
 	scene->Initialize();
+	window.close();
 }
 
 void Game::Update()

@@ -18,6 +18,7 @@ public:
 		int       nCmdShow);
 
 	static HWND hWnd;
+	static HWND SFMLView;
 private:
 	static void Update();
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
