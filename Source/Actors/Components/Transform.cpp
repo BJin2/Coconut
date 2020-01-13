@@ -34,25 +34,70 @@ Transform* Transform::GetChild(int index)
 #pragma region Global
 float3 Transform::GetPosition()
 {
-	return m_position;
+	xmmatrix mat = XMLoadFloat4x4(&GetTranslationMatrix());
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetTranslationMatrix());
+		p = GetParent();
+	}
+	XMFLOAT4X4 tmp;
+	XMStoreFloat4x4(&tmp, mat);
+	float x = tmp.m[3][0];
+	float y = tmp.m[3][1];
+	float z = tmp.m[3][2];
+
+	return float3(x,y,z);
 }
 float3 Transform::GetScale()
 {
-	return m_scale;
+	xmmatrix mat = XMLoadFloat4x4(&GetScaleMatrix());
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetScaleMatrix());
+		p = GetParent();
+	}
+	XMFLOAT4X4 tmp;
+	XMStoreFloat4x4(&tmp, mat);
+	float x = tmp.m[0][0];
+	float y = tmp.m[1][1];
+	float z = tmp.m[2][2];
+
+	return float3(x,y,z);
 }
 float4 Transform::GetOrientation()
 {
-	return m_orientation;
+	xmmatrix mat = XMLoadFloat4x4(&GetRotationMatrix());
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetRotationMatrix());
+		p = GetParent();
+	}
+	xmvector quat = XMQuaternionRotationMatrix(mat);
+	float4 temp;
+	XMStoreFloat4(&temp, quat);
+	return temp;
 }
 float3 Transform::GetRotation()
 {
-	//TODO implement  quaternion -> vector
-
-	return float3();
+	//TODO calculate euler value and return it.
+	float4 orientation = GetOrientation();
+	return temp;
 }
 float4x4 Transform::GetTransform()
 {
-	return m_transformMatrix;
+	xmmatrix mat = XMLoadFloat4x4(&GetLocalTransformMatrix());
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= XMLoadFloat4x4(&p->GetLocalTransformMatrix());
+		p = GetParent();
+	}
+	float4x4 temp;
+	XMStoreFloat4x4(&temp, mat);
+	return temp;
 }
 #pragma endregion
 #pragma region Local
@@ -88,6 +133,10 @@ float4x4 Transform::GetScaleMatrix()
 float4x4 Transform::GetTranslationMatrix()
 {
 	return m_translationMatrix;
+}
+float4x4 Transform::GetLocalTransformMatrix()
+{
+	return m_localTransformMatrix;
 }
 #pragma endregion
 #pragma endregion
