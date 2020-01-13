@@ -11,9 +11,22 @@ void Transform::VStart()
 
 void Transform::VUpdate(float dt)
 {
+	xmmatrix scale = XMMatrixScalingFromVector(XMLoadFloat3(&m_localScale));
+	XMStoreFloat4x4(&m_scaleMatrix, scale);
+	xmmatrix translation = XMMatrixTranslationFromVector(XMLoadFloat3(&m_localPosition));
+	XMStoreFloat4x4(&m_translationMatrix, translation);
+	xmmatrix rotation = XMMatrixRotationQuaternion(XMLoadFloat4(&m_localOrientation));
+	XMStoreFloat4x4(&m_rotationMatrix, rotation);
+
+	xmmatrix transform = scale * translation * rotation;
+	XMStoreFloat4x4(&m_localTransformMatrix, transform);
 }
 
 #pragma region Getters
+Transform* Transform::GetParent()
+{
+	return m_parent;
+}
 #pragma region Global
 float3 Transform::GetPosition()
 {
@@ -29,10 +42,11 @@ float4 Transform::GetOrientation()
 }
 float3 Transform::GetRotation()
 {
-	//TODO implement vector -> quaternion
+	//TODO implement  quaternion -> vector
+
 	return float3();
 }
-matrix4 Transform::GetTransform()
+float4x4 Transform::GetTransform()
 {
 	return m_transformMatrix;
 }
@@ -55,7 +69,7 @@ float3 Transform::GetLocalRotation()
 	//TODO implement vector -> quaternion
 	return float3();
 }
-matrix4 Transform::GetLocalTransform()
+float4x4 Transform::GetLocalTransform()
 {
 	return m_localTransformMatrix;
 }
@@ -63,6 +77,10 @@ matrix4 Transform::GetLocalTransform()
 #pragma endregion
 
 #pragma region Setters
+void Transform::SetParent(Transform* _parent)
+{
+	m_parent = _parent;
+}
 #pragma region Global
 void Transform::SetPosition(const float3& _position)
 {
@@ -108,6 +126,8 @@ void Transform::SetOrientation(const xmvector& _orientation)
 void Transform::SetRotation(const float3& _rotation)
 {
 	//TODO float3 -> quaternion
+	xmvector quat = XMQuaternionRotationRollPitchYawFromVector(XMLoadFloat3(&_rotation));
+	SetOrientation(quat);
 }
 void Transform::SetRotation(float _x, float _y, float _z)
 {
@@ -124,7 +144,6 @@ void Transform::SetRotation(const xmvector& _rotation)
 void Transform::SetLocalPosition(const float3& _position)
 {
 	m_localPosition = _position;
-	//update global position
 }
 void Transform::SetLocalPosition(float _x, float _y, float _z)
 {

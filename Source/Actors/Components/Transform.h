@@ -5,48 +5,48 @@
 typedef DirectX::XMFLOAT3 float3;
 typedef DirectX::XMFLOAT4 float4;
 typedef DirectX::XMVECTOR xmvector;
-typedef DirectX::XMFLOAT4X4 matrix4;
+typedef DirectX::XMFLOAT4X4 float4x4;
 typedef DirectX::XMMATRIX xmmatrix;
 
 class Transform : public ActorComponent
 {
 private:
-	float3 m_position;
-	float3 m_scale;
-	float4 m_orientation;
-	
 	float3 m_localPosition;
 	float3 m_localScale;
 	float4 m_localOrientation;
 
-	matrix4 m_translationMatrix;
-	matrix4 m_scaleMatrix;
-	matrix4 m_rotationMatrix;
+	float4x4 m_translationMatrix;
+	float4x4 m_scaleMatrix;
+	float4x4 m_rotationMatrix;
 
-	matrix4 m_transformMatrix;
-	matrix4 m_localTransformMatrix;
+	float4x4 m_localTransformMatrix;
+
+	Transform* m_parent = nullptr;
+
 public:
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 
 #pragma region Getters
+	Transform* GetParent();
 #pragma region Global
 	float3 GetPosition();
 	float3 GetScale();
 	float4 GetOrientation();
 	float3 GetRotation();
-	matrix4 GetTransform();
+	float4x4 GetTransform();
 #pragma endregion
 #pragma region Local
 	float3 GetLocalPosition();
 	float3 GetLocalScale();
 	float4 GetLocalOrientation();
 	float3 GetLocalRotation();
-	matrix4 GetLocalTransform();
+	float4x4 GetLocalTransform();
 #pragma endregion
 #pragma endregion
 
 #pragma region Setters
+	void SetParent(Transform* _parent);
 #pragma region Global
 	void SetPosition(const float3& _position);
 	void SetPosition(float _x, float _y, float _z);
