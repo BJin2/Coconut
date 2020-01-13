@@ -254,7 +254,8 @@ void Transform::SetLocalOrientation(const xmvector& _orientation)
 }
 void Transform::SetLocalRotation(const float3& _rotation)
 {
-	//TODO float3 to quaternion
+	xmvector quat = XMQuaternionRotationRollPitchYawFromVector(XMLoadFloat3(&_rotation));
+	SetLocalOrientation(quat);
 }
 void Transform::SetLocalRotation(float _x, float _y, float _z)
 {
