@@ -39,6 +39,7 @@ public:
 	float4x4 GetRotationMatrix();
 	float4x4 GetScaleMatrix();
 	float4x4 GetTranslationMatrix();
+	float4x4 GetLocalTransformMatrix();
 
 #pragma endregion
 #pragma region Local
