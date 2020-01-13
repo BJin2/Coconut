@@ -25,6 +25,12 @@ void Game::Start()
 
 void Game::Initialize()
 {
+
+	sf::RenderWindow window(sf::VideoMode(512, 512), "SFML works!");
+
+	window.clear();
+	window.display();
+
 	Initializer* initializer = new Initializer();
 	if (initializer->CheckRequirements(szTitle, 1000, 1000, 1000))
 	{
@@ -48,21 +54,6 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		//if (!sfmlWin)
-		//{
-		//	sf::CircleShape shape(100.f);
-		//	sf::Event event;
-		//	while (sfmlWin->pollEvent(event))
-		//	{
-		//		if (event.type == sf::Event::Closed)
-		//			sfmlWin->close();
-		//	}
-
-		//	sfmlWin->clear();
-		//	sfmlWin->draw(shape);
-		//	sfmlWin->display();
-		//}
-
 
 		scene->Update(0.0f);
 	}
@@ -114,25 +105,6 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 	Game::hWnd = hWnd;
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
-
-	HWND SFMLView1 = CreateWindow(
-		szWindowClass, szTitle,
-		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_BORDER,
-		CW_USEDEFAULT, CW_USEDEFAULT, 512, 512,
-		hWnd, NULL, hInstance, NULL);
-
-	if (!SFMLView1)
-	{
-		MessageBox(NULL,
-			_T("Call to CreateWindow(SFMLVIEW) failed!"),
-			_T("Coconut Engine"),
-			NULL);
-
-		return 1;
-	}
-
-	Game::SFMLView = SFMLView1;
-	sf::RenderWindow* sfmlWin = new sf::RenderWindow(SFMLView1);
 }
 
 LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
