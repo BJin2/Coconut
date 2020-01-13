@@ -102,7 +102,9 @@ void Transform::SetPosition(const float3& _position)
 	Transform* p = GetParent();
 	while (p)
 	{
-		mat *= XMLoadFloat4x4(&p->GetTranslationMatrix());
+		xmmatrix parentPosition = XMLoadFloat4x4(&p->GetTranslationMatrix());
+		xmvector det = XMMatrixDeterminant(parentPosition);
+		mat *= XMMatrixInverse(&det, parentPosition);
 		p = GetParent();
 	}
 	XMFLOAT4X4 tmp;
@@ -131,7 +133,9 @@ void Transform::SetScale(const float3& _scale)
 	Transform* p = GetParent();
 	while (p)
 	{
-		mat *= XMLoadFloat4x4(&p->GetScaleMatrix());
+		xmmatrix parentScale = XMLoadFloat4x4(&p->GetScaleMatrix());
+		xmvector det = XMMatrixDeterminant(parentScale);
+		mat *= XMMatrixInverse(&det, parentScale);
 		p = GetParent();
 	}
 	XMFLOAT4X4 tmp;
@@ -160,7 +164,9 @@ void Transform::SetOrientation(const float4& _orientation)
 	Transform* p = GetParent();
 	while (p)
 	{
-		mat *= XMLoadFloat4x4(&p->GetRotationMatrix());
+		xmmatrix parentRotation = XMLoadFloat4x4(&p->GetRotationMatrix());
+		xmvector det = XMMatrixDeterminant(parentRotation);
+		mat *= XMMatrixInverse(&det, parentRotation);
 		p = GetParent();
 	}
 	
