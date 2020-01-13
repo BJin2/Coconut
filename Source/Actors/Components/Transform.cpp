@@ -106,6 +106,8 @@ void Transform::SetScale(float _x, float _y, float _z)
 }
 void Transform::SetScale(const xmvector& _scale)
 {
+	float3 temp;
+	XMStoreFloat3(&temp, _scale);
 	XMStoreFloat3(&m_scale, _scale);
 }
 void Transform::SetOrientation(const float4& _orientation)
@@ -158,7 +160,6 @@ void Transform::SetLocalPosition(const xmvector& _position)
 void Transform::SetLocalScale(const float3& _scale)
 {
 	m_localScale = _scale;
-	//TODO update global scale
 }
 void Transform::SetLocalScale(float _x, float _y, float _z)
 {
