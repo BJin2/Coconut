@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Initializer.h"
 #include "InputInterface.h"
+#include <SFML/Graphics.hpp>
 
 
 // The main window class name.  
@@ -24,6 +25,28 @@ void Game::Start()
 
 void Game::Initialize()
 {
+
+	sf::RenderWindow window(sf::VideoMode(367, 253), "Splash Screen");
+
+	if (window.isOpen())
+	{
+		sf::Texture splashScreenTexture;
+		sf::Sprite splashScreenSprite;
+
+		if (!splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.png"))
+		{
+			// error...
+		}
+		else
+		{
+			window.clear();
+			splashScreenTexture.create(367, 253);
+			splashScreenSprite.setTexture(splashScreenTexture);
+			//window.draw(splashScreenSprite);
+			window.display();
+		}
+	}
+
 	Initializer* initializer = new Initializer();
 	if (initializer->CheckRequirements(szTitle, 1000, 1000, 1000))
 	{
@@ -33,12 +56,14 @@ void Game::Initialize()
 
 	scene = new Scene();
 	scene->Initialize();
+	window.close();
 }
 
 void Game::Update()
 {
 	// Main message loop:  
 	MSG msg = { 0 };
+
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -46,6 +71,7 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
+
 		scene->Update(0.0f);
 	}
 }
