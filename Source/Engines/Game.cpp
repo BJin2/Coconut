@@ -26,7 +26,7 @@ void Game::Start()
 void Game::Initialize()
 {
 
-	sf::RenderWindow window(sf::VideoMode(367, 253), "Splash Screen");
+	sf::RenderWindow window(sf::VideoMode(367, 253), "Splash Screen", sf::Style::Close);
 
 	if (window.isOpen())
 	{
@@ -42,7 +42,7 @@ void Game::Initialize()
 			window.clear();
 			splashScreenTexture.create(367, 253);
 			splashScreenSprite.setTexture(splashScreenTexture);
-			//window.draw(splashScreenSprite);
+			window.draw(splashScreenSprite);
 			window.display();
 		}
 	}
