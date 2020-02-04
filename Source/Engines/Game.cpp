@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include "Game.h"
 #include "Initializer.h"
 #include "InputInterface.h"
@@ -42,7 +43,7 @@ void Game::Initialize()
 			window.clear();
 			splashScreenTexture.create(367, 253);
 			splashScreenSprite.setTexture(splashScreenTexture);
-			window.draw(splashScreenSprite);
+			//window.draw(splashScreenSprite);
 			window.display();
 		}
 	}
