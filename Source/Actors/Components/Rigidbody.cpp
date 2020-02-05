@@ -12,6 +12,8 @@ Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 
 void Rigidbody::Stop()
 {
+	m_currentVelocity = new Vector2(0, 0);
+	totalFroces = new Vector2(0, 0);
 }
 
 bool Rigidbody::IsGrounded()
@@ -25,6 +27,16 @@ void Rigidbody::SetAABB()
 
 void Rigidbody::Integrate(float dT)
 {
+	Vector2* acceleration = new Vector2();
+
+	if (m_obeysGravity && !IsGrounded())
+	{
+		acceleration = m_gravity;
+	}
+	else
+	{
+		if (abs(m_currentVelocity->y) < 0.05f) m_currentVelocity->y = 0;
+	}
 }
 
 void Rigidbody::GetMass()
@@ -38,5 +50,5 @@ float Rigidbody::GetBounciness()
 
 Vector2 Rigidbody::GetCurrentVelocity()
 {
-	return m_currentVelocity;
+	return *m_currentVelocity;
 }
