@@ -201,6 +201,7 @@
     <ClCompile Include="..\..\Engines\PhysicsEngine.cpp" />
     <ClCompile Include="..\..\Engines\ResourceManager.cpp" />
     <ClCompile Include="..\..\Engines\Scene.cpp" />
+    <ClCompile Include="..\..\Engines\Utils.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -275,6 +276,7 @@
     <ClInclude Include="..\..\Engines\PhysicsEngine.hpp" />
     <ClInclude Include="..\..\Engines\ResourceManager.hpp" />
     <ClInclude Include="..\..\Engines\Scene.h" />
+    <ClInclude Include="..\..\Engines\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Lua\test.lua" />
