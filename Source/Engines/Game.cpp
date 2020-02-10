@@ -2,7 +2,7 @@
 
 #include "Game.h"
 #include "Initializer.h"
-#include "InputInterface.h"
+#include "InputInterface.h"	
 #include <SFML/Graphics.hpp>
 
 
@@ -27,25 +27,32 @@ void Game::Start()
 void Game::Initialize()
 {
 
-	sf::RenderWindow window(sf::VideoMode(367, 253), "Splash Screen", sf::Style::Close);
+	sf::RenderWindow window(sf::VideoMode(640, 480), "Splash Screen", sf::Style::None);
+	window.setActive(true);
 
 	if (window.isOpen())
 	{
 		sf::Texture splashScreenTexture;
 		sf::Sprite splashScreenSprite;
 
-		if (!splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.png"))
+		window.clear();
+		//splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.PNG")
+		if (splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.PNG"))
 		{
-			// error...
+			splashScreenSprite.setTexture(splashScreenTexture);
+			splashScreenSprite.setTextureRect(sf::IntRect(0, 0, 640, 480));
+		}
+
+		if (splashScreenSprite.getTexture() != NULL)
+		{
+			window.draw(splashScreenSprite);
 		}
 		else
-		{
-			window.clear();
-			splashScreenTexture.create(367, 253);
-			splashScreenSprite.setTexture(splashScreenTexture);
-			//window.draw(splashScreenSprite);
-			window.display();
+		{		
+			window.clear(sf::Color(255, 0, 0, 255));
 		}
+		window.display();
+
 	}
 
 	Initializer* initializer = new Initializer();

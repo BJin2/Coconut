@@ -5,6 +5,6 @@ class SpecialAbilityComponent : public IAbilities
 {
 public:
 	//bool VInit(TiXmlElement* pData) override;
-	const char* VGetName() const override;
+	const char* VGetName() override;
 	void VAbilityAction() override;
 };
