@@ -1,10 +1,14 @@
 #pragma once
+#include <DirectXMath.h>
+#include <SFML/Graphics/Transform.hpp>
 
-class Vector2
+typedef sf::Vector2f Vector2;
+typedef sf::Transform Matrix;
+
+namespace Vector2Math
 {
-public:
-	Vector2();
-	Vector2(float _x, float _y) : x(_x), y(_y) {}
-	float x;
-	float y;
-};
+	float Magnitude(Vector2 _a);
+	float Dot(Vector2 _a, Vector2 _b);
+	Vector2 PositionFromMatrix(const Matrix&);
+	Vector2 ScaleFromMatrix(const Matrix&);
+}

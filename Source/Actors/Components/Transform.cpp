@@ -32,39 +32,35 @@ Transform* Transform::GetChild(int index)
 	return m_children[index];
 }
 #pragma region Global
-float3 Transform::GetPosition()
+Vector2 Transform::GetPosition()
 {
-	xmmatrix mat = XMLoadFloat4x4(&m_translationMatrix);
+	Matrix mat = m_translationMatrix;
 	Transform* p = GetParent();
 	while (p)
 	{
-		mat *= XMLoadFloat4x4(&p->GetTranslationMatrix());
+		mat *= p->GetTranslationMatrix();
 		p = GetParent();
 	}
-	XMFLOAT4X4 tmp;
-	XMStoreFloat4x4(&tmp, mat);
-	float x = tmp.m[3][0];
-	float y = tmp.m[3][1];
-	float z = tmp.m[3][2];
+	auto temp = mat.getMatrix();
+	float x = temp[0];
+	float y = temp[4];
 
-	return float3(x,y,z);
+	return Vector2(x,y);
 }
-float3 Transform::GetScale()
+Vector2 Transform::GetScale()
 {
-	xmmatrix mat = XMLoadFloat4x4(&m_scaleMatrix);
+	Matrix mat = m_scaleMatrix;
 	Transform* p = GetParent();
 	while (p)
 	{
-		mat *= XMLoadFloat4x4(&p->GetScaleMatrix());
+		mat *= p->GetScaleMatrix();
 		p = GetParent();
 	}
-	XMFLOAT4X4 tmp;
-	XMStoreFloat4x4(&tmp, mat);
-	float x = tmp.m[0][0];
-	float y = tmp.m[1][1];
-	float z = tmp.m[2][2];
+	auto temp = mat.getMatrix();
+	float x = temp[0];
+	float y = temp[4];
 
-	return float3(x,y,z);
+	return Vector2(x, y);
 }
 float4 Transform::GetOrientation()
 {
@@ -99,39 +95,35 @@ float4x4 Transform::GetTransform()
 }
 #pragma endregion
 #pragma region Local
-float3 Transform::GetLocalPosition()
+Vector2 Transform::GetLocalPosition()
 {
 	return m_localPosition;
 }
-float3 Transform::GetLocalScale()
+Vector2 Transform::GetLocalScale()
 {
 	return m_localScale;
 }
-float4 Transform::GetLocalOrientation()
+float Transform::GetLocalRotation()
 {
-	return m_localOrientation;
+	return angle;
 }
-float3 Transform::GetLocalRotation()
-{
-	return QuaternionToEuler(GetLocalOrientation());
-}
-float4x4 Transform::GetLocalTransform()
+Matrix Transform::GetLocalTransform()
 {
 	return m_localTransformMatrix;
 }
-float4x4 Transform::GetRotationMatrix()
+Matrix Transform::GetRotationMatrix()
 {
 	return m_rotationMatrix;
 }
-float4x4 Transform::GetScaleMatrix()
+Matrix Transform::GetScaleMatrix()
 {
 	return m_scaleMatrix;
 }
-float4x4 Transform::GetTranslationMatrix()
+Matrix Transform::GetTranslationMatrix()
 {
 	return m_translationMatrix;
 }
-float4x4 Transform::GetLocalTransformMatrix()
+Matrix Transform::GetLocalTransformMatrix()
 {
 	return m_localTransformMatrix;
 }
@@ -256,82 +248,31 @@ void Transform::SetRotation(const xmvector& _rotation)
 }
 #pragma endregion
 #pragma region Local
-void Transform::SetLocalPosition(const float3& _position)
+void Transform::SetLocalPosition(const Vector2& _position)
 {
 	m_localPosition = _position;
 }
-void Transform::SetLocalPosition(float _x, float _y, float _z)
+
+void Transform::SetLocalPosition(float _x, float _y)
 {
-	SetLocalPosition(float3(_x, _y, _z));
+	m_localPosition = Vector2(_x, _y);
 }
-void Transform::SetLocalPosition(const xmvector& _position)
-{
-	float3 temp;
-	XMStoreFloat3(&temp, _position);
-	SetLocalPosition(temp);
-}
-void Transform::SetLocalScale(const float3& _scale)
+
+void Transform::SetLocalScale(const Vector2& _scale)
 {
 	m_localScale = _scale;
 }
-void Transform::SetLocalScale(float _x, float _y, float _z)
+
+void Transform::SetLocalScale(float _x, float _y)
 {
-	SetLocalScale(float3(_x, _y, _z));
-}
-void Transform::SetLocalScale(const xmvector& _scale)
-{
-	float3 temp;
-	XMStoreFloat3(&temp, _scale);
-	SetLocalScale(temp);
-}
-void Transform::SetLocalOrientation(const float4& _orientation)
-{
-	m_localOrientation = _orientation;
-}
-void Transform::SetLocalOrientation(float _x, float _y, float _z, float _w)
-{
-	SetLocalOrientation(float4(_x, _y, _z, _w));
-}
-void Transform::SetLocalOrientation(const xmvector& _orientation)
-{
-	float4 temp;
-	XMStoreFloat4(&temp, _orientation);
-	SetLocalOrientation(temp);
-}
-void Transform::SetLocalRotation(const float3& _rotation)
-{
-	xmvector quat = XMQuaternionRotationRollPitchYawFromVector(XMLoadFloat3(&_rotation));
-	SetLocalOrientation(quat);
-}
-void Transform::SetLocalRotation(float _x, float _y, float _z)
-{
-	SetLocalRotation(float3(_x, _y, _z));
-}
-void Transform::SetLocalRotation(const xmvector& _rotation)
-{
-	float3 temp;
-	XMStoreFloat3(&temp, _rotation);
-	SetLocalRotation(temp);
+	m_localScale = Vector2(_x, _y);
 }
 
+void Transform::SetRotation(float _angle)
+{
+	angle = _angle;
+}
 #pragma endregion
 #pragma endregion
 
-float3 Transform::QuaternionToEuler(float4 q)
-{
-	float sinr_cosp = 2 * (q.w * q.x + q.y * q.z);
-	float cosr_cosp = 1 - 2 * (q.x * q.x + q.y * q.y);
-	float x = atan2(sinr_cosp, cosr_cosp);
-	
-	float y;
-	float sinp = 2 * (q.w * q.y - q.z * q.x);
-	if (abs(sinp) >= 1)
-		y = copysign(XM_PIDIV2, sinp);
-	else
-		y = asin(sinp);
-	float siny_cosp = 2 * (q.w * q.z + q.x * q.y);
-	float cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z);
-	float z = atan2(siny_cosp, cosy_cosp);
-	
-	return float3(x, y, z);
-}
+
