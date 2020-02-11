@@ -4,12 +4,14 @@
 #include "InputInterface.h"
 
 
+
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
 
 // The string that appears in the application's title bar.  
 static TCHAR szTitle[] = _T("Coconut Engine");
 
+auto timePerFrame = std::chrono::seconds(1 / 60);
 
 void Game::Start()
 {
@@ -18,6 +20,7 @@ void Game::Start()
 
 	CreateEngineWindow(nullptr, szTitle, SW_SHOW);
 	gameState = GameState::Playing;
+	time->Start();
 	scene->Start();
 	Update();
 }
@@ -37,8 +40,10 @@ void Game::Initialize()
 
 void Game::Update()
 {
-	// Main message loop:  
 	MSG msg = { 0 };
+
+	float timeSinceLastUpdate = 0;
+
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -46,7 +51,18 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		scene->Update(0.0f);
+
+		float dt = time->GetDeltaTime();
+		timeSinceLastUpdate += dt;
+		while (timeSinceLastUpdate > timePerFrame.count())
+		{
+			timeSinceLastUpdate -= timePerFrame.count();
+
+			//Fixed Update
+			scene->Update(timePerFrame.count());
+		}
+		time->Update();
+
 	}
 }
 

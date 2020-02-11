@@ -120,6 +120,9 @@
     <ClCompile Include="..\..\Engines\Initializer.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Engines\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -219,6 +222,9 @@
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\Initializer.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Time.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

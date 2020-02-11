@@ -4,7 +4,10 @@
 #include <windowsx.h>
 #include <stdlib.h>  
 #include <tchar.h>
+#include <chrono>
+#include <ctime>
 #include "Scene.h"
+#include "Time.h"
 
 class Game
 {
@@ -23,4 +26,5 @@ private:
 	enum GameState {Uninitialized, ShowingSplash, Playing, Exiting};
 	static GameState gameState;
 	static Scene* scene;
+	static Time* time;
 };
