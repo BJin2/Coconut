@@ -42,8 +42,6 @@ void Game::Update()
 {
 	MSG msg = { 0 };
 
-	float timeSinceLastUpdate = 0;
-
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -55,10 +53,10 @@ void Game::Update()
 		time->Update();
 
 		float dt = time->GetDeltaTime();
-		timeSinceLastUpdate += dt;
-		while (timeSinceLastUpdate > timePerFrame.count())
+		time->SetTimeSinceLastUpdate(dt);
+		while (time->GetTimeSinceLastUpdate() > timePerFrame.count())
 		{
-			timeSinceLastUpdate -= timePerFrame.count();
+			time->SetTimeSinceLastUpdate(-timePerFrame.count());
 
 			//Fixed Update
 			scene->Update(timePerFrame.count());

@@ -18,3 +18,13 @@ float Time::GetDeltaTime()
 	return deltaTime;
 }
 
+float Time::GetTimeSinceLastUpdate()
+{
+	return timeSinceLastUpdate;
+}
+
+void Time::SetTimeSinceLastUpdate(float dt)
+{
+	timeSinceLastUpdate += dt;
+}
+
