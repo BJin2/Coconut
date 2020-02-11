@@ -6,7 +6,7 @@
 //	return false;
 //}
 //Empty function for now
-const char* SpecialAbilityComponent::VGetName() const
+const char* SpecialAbilityComponent::VGetName()
 {
 	return nullptr;
 }

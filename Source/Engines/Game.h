@@ -1,8 +1,9 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
+#define NOMINMAX
 #include <windows.h>  
 #include <windowsx.h>
-#include <stdlib.h>  
+#include <stdlib.h>
 #include <tchar.h>
 #include "Scene.h"
 
@@ -17,6 +18,7 @@ public:
 		int       nCmdShow);
 
 	static HWND hWnd;
+	static HWND SFMLView;
 private:
 	static void Update();
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
