@@ -37,7 +37,7 @@ void Game::Initialize()
 
 		window.clear();
 		//splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.PNG")
-		if (splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.PNG"))
+		if (splashScreenTexture.loadFromFile("../../../Assets/Textures/CoconutEngineLogo.png"))
 		{
 			splashScreenSprite.setTexture(splashScreenTexture);
 			splashScreenSprite.setTextureRect(sf::IntRect(0, 0, 640, 480));
