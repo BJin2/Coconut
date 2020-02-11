@@ -52,6 +52,8 @@ void Game::Update()
 			DispatchMessage(&msg);
 		}
 
+		time->Update();
+
 		float dt = time->GetDeltaTime();
 		timeSinceLastUpdate += dt;
 		while (timeSinceLastUpdate > timePerFrame.count())
@@ -61,7 +63,6 @@ void Game::Update()
 			//Fixed Update
 			scene->Update(timePerFrame.count());
 		}
-		time->Update();
 
 	}
 }
