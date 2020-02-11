@@ -123,6 +123,9 @@
     <ClCompile Include="..\..\Engines\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Engines\Vector.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -225,6 +228,9 @@
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\Utils.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Vector.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,12 +1,6 @@
 #pragma once
-#include <DirectXMath.h>
+#include "../../Engines/Vector.h"
 #include "ActorComponent.h"
-
-typedef DirectX::XMFLOAT3 float3;
-typedef DirectX::XMFLOAT4 float4;
-typedef DirectX::XMVECTOR xmvector;
-typedef DirectX::XMFLOAT4X4 float4x4;
-typedef DirectX::XMMATRIX xmmatrix;
 
 class Transform : public ActorComponent
 {
