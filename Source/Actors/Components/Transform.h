@@ -7,7 +7,7 @@ class Transform : public ActorComponent
 private:
 	Vector2 m_localPosition;
 	Vector2 m_localScale;
-	float angle;
+	float m_localAngle;
 	Matrix m_localTransformMatrix;
 	Matrix m_translationMatrix;
 	Matrix m_scaleMatrix;
@@ -59,6 +59,8 @@ public:
 
 	void SetLocalScale(const Vector2& _scale);
 	void SetLocalScale(float _x, float _y);
+
+	void SetLocalRotation(float _angle);
 #pragma endregion
 #pragma endregion
 };

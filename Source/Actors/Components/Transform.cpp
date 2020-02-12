@@ -1,25 +1,31 @@
 #include "Transform.h"
-#include <DirectXPackedVector.h>
-
-using namespace DirectX;
 
 //XMVECTOR T = XMLoadFloat3(&float3);
 //XMStoreFloat3(&float3)
+
+//Vector2 a = Vector2(2, 2);
+//Matrix translate = Matrix::Identity;
+//translate = translate.translate(a);
+//a = Vector2Math::PositionFromMatrix(translate);
+//printf("%f", a.x);
+//printf(", %f", a.y);
+//printf("\n");
+
 void Transform::VStart()
 {
 }
 
 void Transform::VUpdate(float dt)
 {
-	xmmatrix scale = XMMatrixScalingFromVector(XMLoadFloat3(&m_localScale));
-	XMStoreFloat4x4(&m_scaleMatrix, scale);
-	xmmatrix translation = XMMatrixTranslationFromVector(XMLoadFloat3(&m_localPosition));
-	XMStoreFloat4x4(&m_translationMatrix, translation);
-	xmmatrix rotation = XMMatrixRotationQuaternion(XMLoadFloat4(&m_localOrientation));
-	XMStoreFloat4x4(&m_rotationMatrix, rotation);
+	Matrix scale = Matrix::Identity;
+	scale = scale.scale(m_localScale);
 
-	xmmatrix transform = scale * translation * rotation;
-	XMStoreFloat4x4(&m_localTransformMatrix, transform);
+	Matrix translation = Matrix::Identity;
+	translation = translation.translate(m_localPosition);
+	Matrix rotation = Matrix::Identity;
+	rotation = rotation.rotate(m_localAngle);
+
+	Matrix transform = scale * translation * rotation;
 }
 
 #pragma region Getters
@@ -41,11 +47,7 @@ Vector2 Transform::GetPosition()
 		mat *= p->GetTranslationMatrix();
 		p = GetParent();
 	}
-	auto temp = mat.getMatrix();
-	float x = temp[0];
-	float y = temp[4];
-
-	return Vector2(x,y);
+	return Vector2Math::PositionFromMatrix(mat);
 }
 Vector2 Transform::GetScale()
 {
@@ -56,42 +58,30 @@ Vector2 Transform::GetScale()
 		mat *= p->GetScaleMatrix();
 		p = GetParent();
 	}
+	return Vector2Math::ScaleFromMatrix(mat);
+}
+float Transform::GetRotation()
+{
+	Matrix mat = m_rotationMatrix;
+	Transform* p = GetParent();
+	while (p)
+	{
+		mat *= p->GetRotationMatrix();
+		p = GetParent();
+	}
 	auto temp = mat.getMatrix();
-	float x = temp[0];
-	float y = temp[4];
-
-	return Vector2(x, y);
+	return acos(temp[0]);
 }
-float4 Transform::GetOrientation()
+Matrix Transform::GetTransform()
 {
-	xmmatrix mat = XMLoadFloat4x4(&m_rotationMatrix);
+	Matrix mat = m_localTransformMatrix;
 	Transform* p = GetParent();
 	while (p)
 	{
-		mat *= XMLoadFloat4x4(&p->GetRotationMatrix());
+		mat *= p->GetLocalTransformMatrix();
 		p = GetParent();
 	}
-	xmvector quat = XMQuaternionRotationMatrix(mat);
-	float4 temp;
-	XMStoreFloat4(&temp, quat);
-	return temp;
-}
-float3 Transform::GetRotation()
-{
-	return QuaternionToEuler(GetOrientation());
-}
-float4x4 Transform::GetTransform()
-{
-	xmmatrix mat = XMLoadFloat4x4(&m_localTransformMatrix);
-	Transform* p = GetParent();
-	while (p)
-	{
-		mat *= XMLoadFloat4x4(&p->GetLocalTransformMatrix());
-		p = GetParent();
-	}
-	float4x4 temp;
-	XMStoreFloat4x4(&temp, mat);
-	return temp;
+	return mat;
 }
 #pragma endregion
 #pragma region Local
@@ -105,7 +95,7 @@ Vector2 Transform::GetLocalScale()
 }
 float Transform::GetLocalRotation()
 {
-	return angle;
+	return m_localAngle;
 }
 Matrix Transform::GetLocalTransform()
 {
@@ -140,112 +130,58 @@ void Transform::AddChild(Transform* _child)
 	m_children.push_back(_child);
 }
 #pragma region Global
-void Transform::SetPosition(const float3& _position)
+void Transform::SetPosition(const Vector2& _position)
 {
-	xmvector position = XMLoadFloat3(&_position);
-	xmmatrix mat = XMMatrixTranslationFromVector(position);
+	Matrix mat = Matrix::Identity;
+	mat = mat.translate(_position);
 
 	Transform* p = GetParent();
 	while (p)
 	{
-		xmmatrix parentPosition = XMLoadFloat4x4(&p->GetTranslationMatrix());
-		xmvector det = XMMatrixDeterminant(parentPosition);
-		mat *= XMMatrixInverse(&det, parentPosition);
+		Matrix inverseParentTranslation = (p->GetTranslationMatrix()).getInverse();
+		mat *= inverseParentTranslation;
 		p = GetParent();
 	}
-	XMFLOAT4X4 tmp;
-	XMStoreFloat4x4(&tmp, mat);
-	float x = tmp.m[3][0];
-	float y = tmp.m[3][1];
-	float z = tmp.m[3][2];
 
-	SetLocalPosition(x, y, z);
+	SetLocalPosition(Vector2Math::PositionFromMatrix(mat));
 }
-void Transform::SetPosition(float _x, float _y, float _z)
+void Transform::SetPosition(float _x, float _y)
 {
-	SetPosition(float3(_x, _y, _z));
+	SetPosition(Vector2(_x, _y));
 }
-void Transform::SetPosition(const xmvector& _position)
+
+void Transform::SetScale(const Vector2& _scale)
 {
-	float3 temp;
-	XMStoreFloat3(&temp, _position);
-	SetPosition(temp);
-}
-void Transform::SetScale(const float3& _scale)
-{
-	xmvector scale = XMLoadFloat3(&_scale);
-	xmmatrix mat = XMMatrixScalingFromVector(scale);
+	Matrix mat = Matrix::Identity;
+	mat = mat.scale(_scale);
 
 	Transform* p = GetParent();
 	while (p)
 	{
-		xmmatrix parentScale = XMLoadFloat4x4(&p->GetScaleMatrix());
-		xmvector det = XMMatrixDeterminant(parentScale);
-		mat *= XMMatrixInverse(&det, parentScale);
+		Matrix inverseParentScale = (p->GetScaleMatrix()).getInverse();
+		mat *= inverseParentScale;
 		p = GetParent();
 	}
-	XMFLOAT4X4 tmp;
-	XMStoreFloat4x4(&tmp, mat);
-	float x = tmp.m[0][0];
-	float y = tmp.m[1][1];
-	float z = tmp.m[2][2];
 
-	SetLocalScale(x, y, z);
+	SetLocalScale(Vector2Math::ScaleFromMatrix(mat));
 }
-void Transform::SetScale(float _x, float _y, float _z)
+void Transform::SetScale(float _x, float _y)
 {
-	SetScale(float3(_x, _y, _z));
+	SetScale(Vector2(_x, _y));
 }
-void Transform::SetScale(const xmvector& _scale)
+void Transform::SetRotation(float _angle)
 {
-	float3 temp;
-	XMStoreFloat3(&temp, _scale);
-	SetScale(temp);
-}
-void Transform::SetOrientation(const float4& _orientation)
-{
-	xmvector quat = XMLoadFloat4(&_orientation);
-	xmmatrix mat = XMMatrixRotationQuaternion(quat);
-
+	Matrix mat = Matrix::Identity;
+	mat = mat.rotate(_angle);
 	Transform* p = GetParent();
 	while (p)
 	{
-		xmmatrix parentRotation = XMLoadFloat4x4(&p->GetRotationMatrix());
-		xmvector det = XMMatrixDeterminant(parentRotation);
-		mat *= XMMatrixInverse(&det, parentRotation);
+		Matrix inverseParentRotation = (p->GetRotationMatrix()).getInverse();
+		mat *= inverseParentRotation;
 		p = GetParent();
 	}
-	
-	quat = XMQuaternionRotationMatrix(mat);
-	float4 temp;
-	XMStoreFloat4(&temp, quat);
-	SetLocalOrientation(temp);
 }
-void Transform::SetOrientation(float _x, float _y, float _z, float _w)
-{
-	SetOrientation(float4(_x, _y, _z, _w));
-}
-void Transform::SetOrientation(const xmvector& _orientation)
-{
-	float4 temp;
-	XMStoreFloat4(&temp, _orientation);
-	SetOrientation(temp);
-}
-void Transform::SetRotation(const float3& _rotation)
-{
-	xmvector quat = XMQuaternionRotationRollPitchYawFromVector(XMLoadFloat3(&_rotation));
-	SetOrientation(quat);
-}
-void Transform::SetRotation(float _x, float _y, float _z)
-{
-	SetRotation(float3(_x, _y, _z));
-}
-void Transform::SetRotation(const xmvector& _rotation)
-{
-	float3 temp;
-	XMStoreFloat3(&temp, _rotation);
-	SetRotation(temp);
-}
+
 #pragma endregion
 #pragma region Local
 void Transform::SetLocalPosition(const Vector2& _position)
@@ -268,9 +204,9 @@ void Transform::SetLocalScale(float _x, float _y)
 	m_localScale = Vector2(_x, _y);
 }
 
-void Transform::SetRotation(float _angle)
+void Transform::SetLocalRotation(float _angle)
 {
-	angle = _angle;
+	m_localAngle = _angle;
 }
 #pragma endregion
 #pragma endregion

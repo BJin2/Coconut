@@ -1,5 +1,4 @@
 #pragma once
-#include <DirectXMath.h>
 #include <SFML/Graphics/Transform.hpp>
 
 typedef sf::Vector2f Vector2;
