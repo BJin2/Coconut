@@ -13,19 +13,28 @@
 
 void Transform::VStart()
 {
+	m_localPosition = Vector2(0.0f, 0.0f);
+	m_localScale = Vector2(1.0f, 1.0f);
+	m_localAngle = 0.0f;
+
+	m_translationMatrix = Matrix::Identity;
+	m_scaleMatrix = Matrix::Identity;
+	m_rotationMatrix = Matrix::Identity;
+	m_localTransformMatrix = Matrix::Identity;
 }
 
 void Transform::VUpdate(float dt)
 {
-	Matrix scale = Matrix::Identity;
-	scale = scale.scale(m_localScale);
+	m_scaleMatrix = Matrix::Identity;
+	m_scaleMatrix.scale(m_localScale);
 
-	Matrix translation = Matrix::Identity;
-	translation = translation.translate(m_localPosition);
-	Matrix rotation = Matrix::Identity;
-	rotation = rotation.rotate(m_localAngle);
+	m_translationMatrix = Matrix::Identity;
+	m_translationMatrix = m_translationMatrix.translate(m_localPosition);
 
-	Matrix transform = scale * translation * rotation;
+	m_rotationMatrix = Matrix::Identity;
+	m_rotationMatrix = m_rotationMatrix.rotate(m_localAngle);
+
+	m_localTransformMatrix = Matrix::Identity * m_scaleMatrix * m_translationMatrix * m_rotationMatrix;
 }
 
 #pragma region Getters

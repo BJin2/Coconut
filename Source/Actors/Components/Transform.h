@@ -8,7 +8,9 @@ private:
 	Vector2 m_localPosition;
 	Vector2 m_localScale;
 	float m_localAngle;
+
 	Matrix m_localTransformMatrix;
+
 	Matrix m_translationMatrix;
 	Matrix m_scaleMatrix;
 	Matrix m_rotationMatrix;
