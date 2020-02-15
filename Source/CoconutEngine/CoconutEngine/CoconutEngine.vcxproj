@@ -163,6 +163,7 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\Actors\Actor.cpp" />
+    <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -199,6 +200,7 @@
     <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h" />
     <ClInclude Include="..\..\Actors\Actor.h" />
     <ClInclude Include="..\..\Actors\Components\ActorComponent.h" />
+    <ClInclude Include="..\..\Actors\Components\RendererComponent.h" />
     <ClInclude Include="..\..\Actors\Components\Rigidbody.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

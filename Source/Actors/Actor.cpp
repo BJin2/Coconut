@@ -27,8 +27,9 @@ void Actor::VUpdate(float dt)
 //}
 
 
-void Actor::AddComponent(string fileName)
+void Actor::AddComponent(std::string fileName)
 {
 	ScriptComponent* component = new ScriptComponent(fileName);
+	component->SetOwner(this);
 	actorComponent.push_back(component);
 }

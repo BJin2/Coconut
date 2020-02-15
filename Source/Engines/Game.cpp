@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Initializer.h"
 #include "InputInterface.h"	
-#include <SFML/Graphics.hpp>
+#include "GraphicEngine.hpp"
 
 
 // The main window class name.  
@@ -11,7 +11,6 @@ static TCHAR szWindowClass[] = _T("win32app");
 
 // The string that appears in the application's title bar.  
 static TCHAR szTitle[] = _T("Coconut Engine");
-
 
 void Game::Start()
 {
@@ -56,7 +55,7 @@ void Game::Initialize()
 	}
 
 	Initializer* initializer = new Initializer();
-	if (initializer->CheckRequirements(szTitle, 1000, 1000, 1000))
+	if (initializer->CheckRequirements(szTitle, 800, 800, 800))
 	{
 		gameState = GameState::ShowingSplash;
 	}
@@ -81,6 +80,7 @@ void Game::Update()
 		}
 
 		scene->Update(0.0f);
+		GraphicEngine::Instance()->Render();
 	}
 }
 

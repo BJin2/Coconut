@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "../Actors/Actor.h"
 #include "../Actors/Components/ScriptComponent.h"
+#include "../Actors/Components/RendererComponent.h"
 
 
 void Scene::Initialize()
@@ -8,6 +9,7 @@ void Scene::Initialize()
 	Actor* test = new Actor();
 	std::string name = "../../Lua/test.lua";
 	test->AddComponent(name);
+	test->AddComponent<RendererComponent>();
 	actors.push_back(test);
 }
 

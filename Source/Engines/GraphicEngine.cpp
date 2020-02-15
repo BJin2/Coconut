@@ -7,4 +7,45 @@
 //
 
 #include "GraphicEngine.hpp"
+#include "Scene.h"
+#include "../Actors/Components/RendererComponent.h"
 
+GraphicEngine* GraphicEngine::instance;
+
+GraphicEngine::GraphicEngine()
+{
+	m_pGameScreen = new sf::RenderWindow(sf::VideoMode(640, 480), "Game Screen", sf::Style::None);
+	m_pGameScreen->setActive(true);
+}
+
+GraphicEngine::~GraphicEngine()
+{
+	delete m_pGameScreen;
+	delete instance;
+}
+
+GraphicEngine* GraphicEngine::Instance()
+{
+	if (instance)
+		return instance;
+
+	return instance = new GraphicEngine();
+}
+
+void GraphicEngine::Render()
+{
+	if (m_pGameScreen->isOpen())
+	{
+		m_pGameScreen->clear(sf::Color(255, 255, 255, 255));
+		for (auto rItem : m_pRenderTarget)
+		{
+			m_pGameScreen->draw(rItem->GetRect());
+		}
+		m_pGameScreen->display();
+	}
+}
+
+void GraphicEngine::RegisterRenderTarget(RendererComponent* rItem)
+{
+	m_pRenderTarget.push_back(rItem);
+}

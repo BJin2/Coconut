@@ -84,6 +84,9 @@
     <ClCompile Include="..\..\Engines\Utils.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Engines\Utils.h">
       <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\RendererComponent.h">
+      <Filter>Source Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
