@@ -41,7 +41,7 @@ void GraphicEngine::Render()
 		for (auto rItem : m_pRenderTarget)
 		{
 			sf::Transform state = rItem->GetOwner()->transform->GetTransform();
-			m_pGameScreen->draw(rItem->GetRect(), state);
+			m_pGameScreen->draw(*rItem->GetShape(), state);
 		}
 		m_pGameScreen->display();
 	}
