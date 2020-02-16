@@ -24,7 +24,7 @@ public:
 	void AddComponent();
 
 	template<typename T>
-	T GetComponent();
+	T* GetComponent();
 };
 
 
@@ -45,13 +45,13 @@ inline void Actor::AddComponent()
 }
 
 template<typename T>
-inline T Actor::GetComponent()
+inline T* Actor::GetComponent()
 {
 	for (auto comp : actorComponent)
 	{
-		if (typeid(comp) == typeid(T))
+		if (typeid(*comp) == typeid(T))
 		{
-			return comp;
+			return dynamic_cast<T*>(comp);
 		}
 	}
 	return nullptr;
