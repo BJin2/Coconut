@@ -4,7 +4,7 @@
 
 class Time
 {
-	float last_tick_time;
+	ULONGLONG last_tick_time;
 	float deltaTime;
 	float timeSinceLastUpdate;
 public:

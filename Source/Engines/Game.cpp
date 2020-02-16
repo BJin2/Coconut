@@ -16,7 +16,7 @@ static TCHAR szWindowClass[] = _T("win32app");
 // The string that appears in the application's title bar.  
 static TCHAR szTitle[] = _T("Coconut Engine");
 
-auto timePerFrame = std::chrono::seconds(1 / 60);
+auto timePerFrame = (1 / 60.0f);
 
 void Game::Start()
 {
@@ -84,15 +84,15 @@ void Game::Update()
 		}
 
 		time->Update();
+		scene->Update(timePerFrame);
 
-		float dt = time->GetDeltaTime();
-		time->SetTimeSinceLastUpdate(dt);
-		while (time->GetTimeSinceLastUpdate() > timePerFrame.count())
+		time->SetTimeSinceLastUpdate(time->GetDeltaTime());
+		while (time->GetTimeSinceLastUpdate() > timePerFrame)
 		{
-			time->SetTimeSinceLastUpdate(-timePerFrame.count());
+			time->SetTimeSinceLastUpdate(-timePerFrame);
 
 			//Fixed Update
-			scene->Update(timePerFrame.count());
+			//TODO physics engine fixed update
 		}
 		GraphicEngine::Instance()->Render();
 	}

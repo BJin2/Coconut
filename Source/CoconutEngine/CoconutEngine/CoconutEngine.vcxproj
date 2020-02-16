@@ -164,36 +164,19 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\Actors\Actor.cpp" />
     <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp" />
-    <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp" />
     <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp" />
-    <ClCompile Include="..\..\Actors\Components\Transform.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\Transform.cpp" />
     <ClCompile Include="..\..\Engines\AudioEngine.cpp" />
     <ClCompile Include="..\..\Engines\Game.cpp" />
     <ClCompile Include="..\..\Engines\GraphicEngine.cpp" />
-    <ClCompile Include="..\..\Engines\Initializer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\Engines\Initializer.cpp" />
     <ClCompile Include="..\..\Engines\InputCommand.cpp" />
-    <ClCompile Include="..\..\Engines\PhysicsEngine.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\Engines\PhysicsEngine.cpp" />
     <ClCompile Include="..\..\Engines\ResourceManager.cpp" />
     <ClCompile Include="..\..\Engines\Scene.cpp" />
-    <ClCompile Include="..\..\Engines\Utils.cpp" />
     <ClCompile Include="..\..\Engines\Time.cpp" />
+    <ClCompile Include="..\..\Engines\Utils.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -202,37 +185,20 @@
     <ClInclude Include="..\..\Actors\Actor.h" />
     <ClInclude Include="..\..\Actors\Components\ActorComponent.h" />
     <ClInclude Include="..\..\Actors\Components\RendererComponent.h" />
-    <ClInclude Include="..\..\Actors\Components\Rigidbody.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\Rigidbody.h" />
     <ClInclude Include="..\..\Actors\Components\ScriptComponent.h" />
-    <ClInclude Include="..\..\Actors\Components\Transform.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\Transform.h" />
     <ClInclude Include="..\..\Engines\AudioEngine.hpp" />
     <ClInclude Include="..\..\Engines\Game.h" />
     <ClInclude Include="..\..\Engines\GraphicEngine.hpp" />
-    <ClInclude Include="..\..\Engines\Initializer.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\..\Engines\Initializer.h" />
     <ClInclude Include="..\..\Engines\InputCommand.hpp" />
     <ClInclude Include="..\..\Engines\InputInterface.h" />
-    <ClInclude Include="..\..\Engines\PhysicsEngine.hpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="..\..\Engines\PhysicsEngine.hpp" />
     <ClInclude Include="..\..\Engines\ResourceManager.hpp" />
     <ClInclude Include="..\..\Engines\Scene.h" />
-    <ClInclude Include="..\..\Engines\Utils.h" />
     <ClInclude Include="..\..\Engines\Time.h" />
+    <ClInclude Include="..\..\Engines\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Lua\test.lua" />

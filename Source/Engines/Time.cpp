@@ -2,14 +2,15 @@
 
 void Time::Start()
 {
-	last_tick_time = 0;
+	last_tick_time = GetTickCount64();
 	deltaTime = 0;
+	timeSinceLastUpdate = 0;
 }
 
 void Time::Update()
 {
-	float tick_time = GetTickCount64();
-	deltaTime = tick_time - last_tick_time;
+	ULONGLONG tick_time = GetTickCount64();
+	deltaTime = (tick_time - last_tick_time)/100000.0f;
 	last_tick_time = tick_time;
 }
 

@@ -30,9 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
       <Filter>XMLLoader</Filter>
     </ClCompile>
@@ -45,6 +42,9 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp">
       <Filter>XMLLoader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Engines\AudioEngine.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
@@ -52,6 +52,9 @@
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Engines\GraphicEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\Initializer.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Engines\InputCommand.cpp">
@@ -66,29 +69,26 @@
     <ClCompile Include="..\..\Engines\Scene.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Components\Transform.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Actor.cpp">
-      <Filter>Source Files\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp">
-      <Filter>Source Files\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Engines\Initializer.cpp">
+    <ClCompile Include="..\..\Engines\Time.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Engines\Utils.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Actors\Actor.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Engines\Time.cpp">
-      <Filter>Source Files\Engine</Filter>
+    <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\Transform.cpp">
+      <Filter>Source Files\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,16 +98,22 @@
     <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h">
       <Filter>XMLLoader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Actors\Actor.h">
-      <Filter>Source Files\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Engines\AudioEngine.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Game.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\GraphicEngine.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Engines\Initializer.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Engines\InputCommand.hpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\InputInterface.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\PhysicsEngine.hpp">
@@ -116,38 +122,32 @@
     <ClInclude Include="..\..\Engines\ResourceManager.hpp">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Actors\Components\Rigidbody.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Components\Transform.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Engines\InputInterface.h">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Engines\Game.h">
-      <Filter>Source Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Components\ScriptComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Actors\Components\ActorComponent.h">
-      <Filter>Source Files\Component</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Engines\Scene.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Engines\Initializer.h">
+    <ClInclude Include="..\..\Engines\Time.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Engines\Utils.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Actors\Actor.h">
+      <Filter>Source Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\ActorComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Actors\Components\RendererComponent.h">
       <Filter>Source Files\Component</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Engines\Time.h">
-      <Filter>Source Files\Engine</Filter>
+    <ClInclude Include="..\..\Actors\Components\Rigidbody.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\ScriptComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\Transform.h">
+      <Filter>Source Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
