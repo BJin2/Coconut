@@ -22,7 +22,7 @@ void Scene::Start()
 	}
 }
 
-void Scene::Update(double delta)
+void Scene::Update(float delta)
 {
 	for (auto actor : actors)
 	{

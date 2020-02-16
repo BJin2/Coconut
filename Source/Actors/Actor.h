@@ -30,7 +30,7 @@ public:
 
 //Template function definition
 template<typename T>
-void Actor::AddComponent()
+inline void Actor::AddComponent()
 {
 	try
 	{
@@ -45,7 +45,7 @@ void Actor::AddComponent()
 }
 
 template<typename T>
-T Actor::GetComponent()
+inline T Actor::GetComponent()
 {
 	for (auto comp : actorComponent)
 	{

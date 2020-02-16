@@ -1,5 +1,4 @@
-#ifndef PhysicsEngine_hpp
-#define PhysicsEngine_hpp
+#pragma once
 #include "..\Actors\Components\Rigidbody.h"
 #include "..\Engines\Utils.h"
 #include <map>
@@ -13,9 +12,8 @@ class PhysicsEngine
 public:
 	struct CollisionPair
 	{
-		CollisionPair();
-		Rigidbody &rigidBodyA;
-		Rigidbody &rigidBodyB;
+		Rigidbody* rigidBodyA;
+		Rigidbody* rigidBodyB;
 	};
 
 	struct CollisionInfo
@@ -24,9 +22,9 @@ public:
 		float penetration;
 	};
 
-	void AddRigidBody(Rigidbody &_rigidBody);
+	void AddRigidBody(Rigidbody* _rigidBody);
 	void IntegrateBodies(float dT);
-	bool IsGrounded(Rigidbody &_rigidBody);
+	bool IsGrounded(Rigidbody* _rigidBody);
 	void CheckCollision();
 	void ResolveCollisions();
 	void PositionalCorrection();
@@ -38,11 +36,9 @@ public:
 private:
 	float m_groundedTol;
 	map<CollisionPair, CollisionInfo> m_collisions;
-	vector<Rigidbody> m_rigidBodies;
+	vector<Rigidbody*> m_rigidBodies;
 };
 
-
-#endif /* PhysicsEngine_hpp */
 
 template<typename T>
 inline std::vector<T> PhysicsEngine::slice(std::vector<T> const& v, int m, int n)

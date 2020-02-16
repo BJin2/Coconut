@@ -93,8 +93,8 @@ void Game::Update()
 
 			//Fixed Update
 			scene->Update(timePerFrame.count());
-			GraphicEngine::Instance()->Render();
 		}
+		GraphicEngine::Instance()->Render();
 	}
 }
 

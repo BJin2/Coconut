@@ -10,6 +10,6 @@ private:
 public:
 	void Initialize();
 	void Start();
-	void Update(double delta);
+	void Update(float delta);
 	Actor* AddActor();
 };

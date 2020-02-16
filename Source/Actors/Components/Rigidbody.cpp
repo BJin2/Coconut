@@ -10,6 +10,14 @@ Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 	m_grounded = false;
 }
 
+void Rigidbody::VStart()
+{
+}
+
+void Rigidbody::VUpdate(float delta)
+{
+}
+
 void Rigidbody::Stop()
 {
 	m_currentVelocity = new Vector2(0, 0);

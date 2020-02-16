@@ -1,9 +1,9 @@
 #pragma once
-#include "PhysicsComponentInterface.h"
+#include "ActorComponent.h"
 #include "..\..\Engines\Utils.h"
 #include <stdlib.h>
 
-class Rigidbody : public IPhysicsComponent
+class Rigidbody : public ActorComponent
 {
 private:
 	float m_mass;
@@ -23,9 +23,10 @@ public:
 		Vector2 bLeft;
 		Vector2 tRight;
 		Vector2 center;
-	};
+	} aabb;
 
-	AABB aabb;
+	virtual void VStart() override;
+	virtual void VUpdate(float delta) override;
 
 	void Stop();
 	bool IsGrounded();
