@@ -2,6 +2,7 @@
 #include "../Actors/Actor.h"
 #include "../Actors/Components/RendererComponent.h"
 #include "../Actors/Components/Transform.h"
+#include "../../Engines/InputCommand.hpp"
 
 class RenderComponent;
 
@@ -27,6 +28,24 @@ void Scene::Update(float delta)
 	for (auto actor : actors)
 	{
 		actor->VUpdate(delta);
+	}
+
+	//Input and translation testing
+	if (InputCommand::GetKeyDown(InputCommand::Key::D))
+	{
+		actors[0]->transform->Translate(Vector2(1, 0), 3 * delta);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::A))
+	{
+		actors[0]->transform->Translate(Vector2(-1, 0), 3 * delta);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::W))
+	{
+		actors[0]->transform->Translate(Vector2(0, 1), 3 * delta);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::S))
+	{
+		actors[0]->transform->Translate(Vector2(0, -1), 3 * delta);
 	}
 }
 

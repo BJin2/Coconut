@@ -21,7 +21,7 @@ public:
 	Transform();
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
-
+	void Translate(Vector2 dir, float speed);
 #pragma region Getters
 	Transform* GetParent();
 	Transform* GetChild(int index);

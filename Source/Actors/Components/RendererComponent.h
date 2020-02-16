@@ -13,8 +13,6 @@ public:
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 
-	void Translate(sf::Vector2f dir, float speed);
-
 	void SetShape(sf::Shape *s);
 	void SetColor(int r, int g, int b);
 	void SetColor(sf::Color color);

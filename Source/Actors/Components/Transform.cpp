@@ -43,6 +43,11 @@ void Transform::VUpdate(float dt)
 	m_localTransformMatrix = Matrix::Identity * m_scaleMatrix * m_translationMatrix * m_rotationMatrix;
 }
 
+void Transform::Translate(Vector2 dir, float speed)
+{
+	SetLocalPosition(m_localPosition.x + (dir.x * speed), m_localPosition.y - (dir.y * speed));
+}
+
 #pragma region Getters
 Transform* Transform::GetParent()
 {
