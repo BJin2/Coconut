@@ -1,7 +1,5 @@
 #include "Engines/Game.h"
-HWND Game::hWnd = 0;
-Game::GameState Game::gameState = Game::GameState::Uninitialized;
-Scene* Game::scene = nullptr;
+
 //int CALLBACK WinMain(
 //	_In_ HINSTANCE hInstance,
 //	_In_ HINSTANCE hPrevInstance,

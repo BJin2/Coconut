@@ -34,4 +34,5 @@ Actor* Scene::AddActor()
 {
 	Actor* actor = new Actor();
 	actors.push_back(actor);
+	return actor;
 }

@@ -5,7 +5,10 @@
 #include "InputInterface.h"	
 #include "GraphicEngine.hpp"
 
-
+HWND Game::hWnd = 0;
+Game::GameState Game::gameState = Game::GameState::Uninitialized;
+Scene* Game::scene;
+Time* Game::time;
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
@@ -29,8 +32,7 @@ void Game::Start()
 
 void Game::Initialize()
 {
-
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Splash Screen", sf::Style::None);
+	sf::RenderWindow window(sf::VideoMode(370, 270), "Splash Screen", sf::Style::None);
 	window.setActive(true);
 
 	if (window.isOpen())
@@ -43,7 +45,7 @@ void Game::Initialize()
 		if (splashScreenTexture.loadFromFile("../../../Assets/Textures/CoconutEngineLogo.png"))
 		{
 			splashScreenSprite.setTexture(splashScreenTexture);
-			splashScreenSprite.setTextureRect(sf::IntRect(0, 0, 640, 480));
+			splashScreenSprite.setTextureRect(sf::IntRect(0, 0, 370, 270));
 		}
 
 		if (splashScreenSprite.getTexture() != NULL)
@@ -55,7 +57,6 @@ void Game::Initialize()
 			window.clear(sf::Color(255, 0, 0, 255));
 		}
 		window.display();
-
 	}
 
 	Initializer* initializer = new Initializer();
@@ -64,7 +65,7 @@ void Game::Initialize()
 		gameState = GameState::ShowingSplash;
 	}
 	delete initializer;
-
+	time = new Time();
 	scene = new Scene();
 	scene->Initialize();
 	window.close();
