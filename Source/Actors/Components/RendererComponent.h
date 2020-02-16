@@ -7,7 +7,7 @@ class RendererComponent : public ActorComponent
 {
 private:
 	sf::Shape* shape;
-	sf::Texture texture;
+	sf::Texture *texture;
 	sf::Vector2f size;
 public:
 	virtual void VStart() override;

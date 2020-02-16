@@ -33,10 +33,10 @@ void RendererComponent::SetColor(sf::Color color)
 
 void RendererComponent::SetTexture(std::string textureFile)
 {
-	if (!texture.loadFromFile(textureFile))
+	if (texture->loadFromFile(textureFile))
 	{
-		sf::Uint8* pixels = new sf::Uint8[size.x * size.y * 4];
-		texture.update(pixels);
+		shape->setTexture(texture);
+		shape->setTextureRect(sf::IntRect(shape->getPosition().x, shape->getPosition().y, size.x, size.y));
 	}
 }
 
