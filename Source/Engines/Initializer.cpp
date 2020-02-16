@@ -1,5 +1,6 @@
 #include<iostream>
 #include<direct.h>
+#include <DirectXMath.h>
 #include "Initializer.h"
 
 bool Initializer::CheckRequirements(LPCTSTR gameTitle, const DWORDLONG neededStorage, const DWORDLONG physicalNeeded, const DWORDLONG virtualNeeded)
@@ -13,7 +14,10 @@ bool Initializer::CheckRequirements(LPCTSTR gameTitle, const DWORDLONG neededSto
 			{
 				ReadCpuSpeed();
 				ReadCpuArchitecture();
-				return true;
+				if (DirectX::XMVerifyCPUSupport())
+				{
+					return true;
+				}
 			}
 		}
 	}

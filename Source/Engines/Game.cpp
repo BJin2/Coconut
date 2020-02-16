@@ -1,8 +1,14 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include "Game.h"
 #include "Initializer.h"
-#include "InputInterface.h"
+#include "InputInterface.h"	
+#include "GraphicEngine.hpp"
 
+HWND Game::hWnd = 0;
+Game::GameState Game::gameState = Game::GameState::Uninitialized;
+Scene* Game::scene;
+Time* Game::time;
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
@@ -10,6 +16,7 @@ static TCHAR szWindowClass[] = _T("win32app");
 // The string that appears in the application's title bar.  
 static TCHAR szTitle[] = _T("Coconut Engine");
 
+auto timePerFrame = (1 / 60.0f);
 
 void Game::Start()
 {
@@ -18,27 +25,56 @@ void Game::Start()
 
 	CreateEngineWindow(nullptr, szTitle, SW_SHOW);
 	gameState = GameState::Playing;
+	time->Start();
 	scene->Start();
 	Update();
 }
 
 void Game::Initialize()
 {
+	sf::RenderWindow window(sf::VideoMode(370, 270), "Splash Screen", sf::Style::None);
+	window.setActive(true);
+
+	if (window.isOpen())
+	{
+		sf::Texture splashScreenTexture;
+		sf::Sprite splashScreenSprite;
+
+		window.clear();
+		//splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.PNG")
+		if (splashScreenTexture.loadFromFile("../../../Assets/Textures/CoconutEngineLogo.png"))
+		{
+			splashScreenSprite.setTexture(splashScreenTexture);
+			splashScreenSprite.setTextureRect(sf::IntRect(0, 0, 370, 270));
+		}
+
+		if (splashScreenSprite.getTexture() != NULL)
+		{
+			window.draw(splashScreenSprite);
+		}
+		else
+		{		
+			window.clear(sf::Color(255, 0, 0, 255));
+		}
+		window.display();
+	}
+
 	Initializer* initializer = new Initializer();
-	if (initializer->CheckRequirements(szTitle, 1000, 1000, 1000))
+	if (initializer->CheckRequirements(szTitle, 800, 800, 800))
 	{
 		gameState = GameState::ShowingSplash;
 	}
 	delete initializer;
-
+	time = new Time();
 	scene = new Scene();
 	scene->Initialize();
+	window.close();
 }
 
 void Game::Update()
 {
-	// Main message loop:  
 	MSG msg = { 0 };
+
 	while (msg.message != WM_QUIT)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -46,7 +82,19 @@ void Game::Update()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		scene->Update(0.0f);
+
+		time->Update();
+		scene->Update(timePerFrame);
+
+		time->SetTimeSinceLastUpdate(time->GetDeltaTime());
+		while (time->GetTimeSinceLastUpdate() > timePerFrame)
+		{
+			time->SetTimeSinceLastUpdate(-timePerFrame);
+
+			//Fixed Update
+			//TODO physics engine fixed update
+		}
+		GraphicEngine::Instance()->Render();
 	}
 }
 
