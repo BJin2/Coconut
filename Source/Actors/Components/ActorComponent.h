@@ -29,4 +29,5 @@ public:
 	}
 //private:
 	void SetOwner(Actor* pOwner) { m_pOwner = pOwner; }
+	Actor* GetOwner() { return m_pOwner; }
 };

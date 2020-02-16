@@ -3,22 +3,32 @@
 #include <string>
 
 class ActorComponent;
+class Transform;
 
 class Actor
 {
 private:
 	std::vector<ActorComponent*> actorComponent;
-
+	
 public:
-	//template<typename T, typename... Args> void AddComponent(Args ... args);
-	void AddComponent(std::string fileName);
-	template<typename T>
-	void AddComponent();
-	template<typename T>
-	T GetComponent();
+	Actor();
 	virtual void VUpdate(float dt);
 	virtual void VStart();
+
+	Transform* transform;
+
+	//template<typename T, typename... Args> void AddComponent(Args ... args);
+	void AddComponent(std::string fileName);
+
+	template<typename T>
+	void AddComponent();
+
+	template<typename T>
+	T GetComponent();
 };
+
+
+//Template function definition
 template<typename T>
 void Actor::AddComponent()
 {

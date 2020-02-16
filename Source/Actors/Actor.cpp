@@ -1,7 +1,15 @@
 #include "../Engines/Game.h"
 #include "Actor.h"
 #include "Components/ActorComponent.h"
+#include "Components/Transform.h"
 #include "Components/ScriptComponent.h"
+
+Actor::Actor()
+{
+	transform = new Transform();
+	transform->SetOwner(this);
+	actorComponent.push_back(transform);
+}
 
 void Actor::VStart()
 {

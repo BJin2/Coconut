@@ -11,7 +11,7 @@
 //printf(", %f", a.y);
 //printf("\n");
 
-void Transform::VStart()
+Transform::Transform()
 {
 	m_localPosition = Vector2(0.0f, 0.0f);
 	m_localScale = Vector2(1.0f, 1.0f);
@@ -21,6 +21,11 @@ void Transform::VStart()
 	m_scaleMatrix = Matrix::Identity;
 	m_rotationMatrix = Matrix::Identity;
 	m_localTransformMatrix = Matrix::Identity;
+}
+
+void Transform::VStart()
+{
+	
 }
 
 void Transform::VUpdate(float dt)

@@ -1,8 +1,9 @@
 #include "Scene.h"
 #include "../Actors/Actor.h"
-#include "../Actors/Components/ScriptComponent.h"
 #include "../Actors/Components/RendererComponent.h"
+#include "../Actors/Components/Transform.h"
 
+class RenderComponent;
 
 void Scene::Initialize()
 {

@@ -18,6 +18,7 @@ private:
 	Transform* m_parent = nullptr;
 	std::vector<Transform*> m_children;
 public:
+	Transform();
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 

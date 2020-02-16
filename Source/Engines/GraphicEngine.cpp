@@ -8,13 +8,14 @@
 
 #include "GraphicEngine.hpp"
 #include "Scene.h"
+#include "../Actors/Components/Transform.h"
 #include "../Actors/Components/RendererComponent.h"
 
 GraphicEngine* GraphicEngine::instance;
 
 GraphicEngine::GraphicEngine()
 {
-	m_pGameScreen = new sf::RenderWindow(sf::VideoMode(640, 480), "Game Screen", sf::Style::None);
+	m_pGameScreen = new sf::RenderWindow(sf::VideoMode(640, 480), "Game Screen", sf::Style::Titlebar);
 	m_pGameScreen->setActive(true);
 }
 
@@ -39,7 +40,8 @@ void GraphicEngine::Render()
 		m_pGameScreen->clear(sf::Color(255, 255, 255, 255));
 		for (auto rItem : m_pRenderTarget)
 		{
-			m_pGameScreen->draw(rItem->GetRect());
+			sf::Transform state = rItem->GetOwner()->transform->GetTransform();
+			m_pGameScreen->draw(rItem->GetRect(), state);
 		}
 		m_pGameScreen->display();
 	}
