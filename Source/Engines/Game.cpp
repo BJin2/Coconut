@@ -6,11 +6,14 @@
 #include "GraphicEngine.hpp"
 
 
+
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
 
 // The string that appears in the application's title bar.  
 static TCHAR szTitle[] = _T("Coconut Engine");
+
+auto timePerFrame = std::chrono::seconds(1 / 60);
 
 void Game::Start()
 {
@@ -19,6 +22,7 @@ void Game::Start()
 
 	CreateEngineWindow(nullptr, szTitle, SW_SHOW);
 	gameState = GameState::Playing;
+	time->Start();
 	scene->Start();
 	Update();
 }
@@ -68,7 +72,6 @@ void Game::Initialize()
 
 void Game::Update()
 {
-	// Main message loop:  
 	MSG msg = { 0 };
 
 	while (msg.message != WM_QUIT)
@@ -79,8 +82,18 @@ void Game::Update()
 			DispatchMessage(&msg);
 		}
 
-		scene->Update(0.0f);
-		GraphicEngine::Instance()->Render();
+		time->Update();
+
+		float dt = time->GetDeltaTime();
+		time->SetTimeSinceLastUpdate(dt);
+		while (time->GetTimeSinceLastUpdate() > timePerFrame.count())
+		{
+			time->SetTimeSinceLastUpdate(-timePerFrame.count());
+
+			//Fixed Update
+			scene->Update(timePerFrame.count());
+			GraphicEngine::Instance()->Render();
+		}
 	}
 }
 
