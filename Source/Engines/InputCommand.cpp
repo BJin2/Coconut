@@ -7,3 +7,19 @@
 //
 
 #include "InputCommand.hpp"
+#include "GraphicEngine.hpp"
+
+bool InputCommand::GetKeyDown(Key key)
+{
+	return sf::Keyboard::isKeyPressed(sf::Keyboard::Key(key));
+}
+
+bool InputCommand::GetMouseLeft()
+{
+	return sf::Mouse::isButtonPressed(sf::Mouse::Left);
+}
+
+bool InputCommand::GetMouseRight()
+{
+	return sf::Mouse::isButtonPressed(sf::Mouse::Right);
+}
