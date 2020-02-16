@@ -35,6 +35,7 @@ GraphicEngine* GraphicEngine::Instance()
 
 void GraphicEngine::Render()
 {
+
 	if (m_pGameScreen->isOpen())
 	{
 		m_pGameScreen->clear(sf::Color(255, 255, 255, 255));
