@@ -247,6 +247,16 @@ public:
     ////////////////////////////////////////////////////////////
     FloatRect getGlobalBounds() const;
 
+    enum Type {
+        rectangle,
+        circle
+    };
+    void SetType(Type t) {
+        type = t;
+    }
+
+    Type GetType() { return type; }
+
 protected:
 
     ////////////////////////////////////////////////////////////
@@ -264,8 +274,8 @@ protected:
     ///
     ////////////////////////////////////////////////////////////
     void update();
-
 private:
+    Type type;
 
     ////////////////////////////////////////////////////////////
     /// \brief Draw the shape to a render target

@@ -35,14 +35,13 @@ GraphicEngine* GraphicEngine::Instance()
 
 void GraphicEngine::Render()
 {
-
 	if (m_pGameScreen->isOpen())
 	{
 		m_pGameScreen->clear(sf::Color(255, 255, 255, 255));
 		for (auto rItem : m_pRenderTarget)
 		{
 			sf::Transform state = rItem->GetOwner()->transform->GetTransform();
-			m_pGameScreen->draw(rItem->GetRect(), state);
+			m_pGameScreen->draw(*rItem->GetShape(), state);
 		}
 		m_pGameScreen->display();
 	}
