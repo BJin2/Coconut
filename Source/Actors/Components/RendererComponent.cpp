@@ -1,5 +1,6 @@
 #include "RendererComponent.h"
 #include "../../Engines/GraphicEngine.hpp"
+#include "../../Engines/InputCommand.hpp"
 
 void RendererComponent::VStart()
 {
@@ -13,7 +14,22 @@ void RendererComponent::VStart()
 
 void RendererComponent::VUpdate(float dt)
 {
-
+	if (InputCommand::GetKeyDown(InputCommand::Key::D))
+	{
+		Translate(sf::Vector2f(1, 0), 3 * dt);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::A))
+	{
+		Translate(sf::Vector2f(-1, 0), 3 * dt);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::W))
+	{
+		Translate(sf::Vector2f(0, 1), 3 * dt);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::S))
+	{
+		Translate(sf::Vector2f(0, -1), 3 * dt);
+	}
 }
 
 void RendererComponent::SetShape(sf::Shape* s)
@@ -43,4 +59,10 @@ void RendererComponent::SetTexture(std::string textureFile)
 void RendererComponent::SetSize(sf::Vector2f _size)
 {
 	size = _size;
+}
+
+void RendererComponent::Translate(sf::Vector2f dir, float speed)
+{
+	sf::Vector2f pos = shape->getPosition();
+	shape->setPosition(pos.x + (dir.x * speed), pos.y - (dir.y * speed));
 }
