@@ -11,4 +11,5 @@ public:
 	void Initialize();
 	void Start();
 	void Update(float delta);
+	Actor* AddActor();
 };

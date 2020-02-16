@@ -29,3 +29,9 @@ void Scene::Update(float delta)
 		actor->VUpdate(delta);
 	}
 }
+
+Actor* Scene::AddActor()
+{
+	Actor* actor = new Actor();
+	actors.push_back(actor);
+}
