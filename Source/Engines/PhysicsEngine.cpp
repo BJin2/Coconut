@@ -5,8 +5,9 @@
 //  Created by heaseo chung on 2019-10-19.
 //  Copyright © 2019 heaseo chung. All rights reserved.
 //
-
+#include "..\Engines\Utils.h"
 #include "PhysicsEngine.hpp"
+#include "..\Actors\Components\Rigidbody.h"
 #include "../Actors/Components/Transform.h"
 
 void PhysicsEngine::AddRigidBody(Rigidbody* _rigidBody)
@@ -42,6 +43,7 @@ bool PhysicsEngine::IsGrounded(Rigidbody* _rigidBody)
 
 void PhysicsEngine::CheckCollision()
 {
+	std::map<CollisionPair*, CollisionInfo*>::key_compare compare = m_collisions.key_comp();
 	for (int i = 0; i < m_rigidBodies.size() - 1; i++)
 	{
 		Rigidbody* bodyA =  m_rigidBodies[i];
@@ -54,6 +56,7 @@ void PhysicsEngine::CheckCollision()
 				CollisionPair* pair = new CollisionPair();
 				CollisionInfo* colInfo = new CollisionInfo();
 				pair->rigidBodyA = bodyA; pair->rigidBodyB = bodyB;
+				auto search = m_collisions.find(pair);
 
 				Vector2 distance = bodyB->GetOwner()->transform->GetPosition() - bodyA->GetOwner()->transform->GetPosition();
 				Vector2 halfSizeA = (bodyA->aabb.tRight - bodyA->aabb.bLeft) / 2.0f;
@@ -62,7 +65,7 @@ void PhysicsEngine::CheckCollision()
 
 				if (gap.x < 0 && gap.y < 0)
 				{
-					if (m_collisions.key_comp == pair)
+					if (search != m_collisions.end())
 					{
 						m_collisions.erase(pair);
 					}
@@ -85,7 +88,7 @@ void PhysicsEngine::CheckCollision()
 					}
 					m_collisions.insert(std::pair<CollisionPair*, CollisionInfo*>(pair, colInfo));
 				}
-				else if (m_collisions.key_comp == pair)
+				else if (search != m_collisions.end())
 				{
 					m_collisions.erase(pair);
 				}
@@ -125,35 +128,35 @@ void PhysicsEngine::ResolveCollisions()
 
 		if (abs(m_collisions[pair->first]->penetration > 0.01f))
 		{
-			PositionalCorrection(pair);
+			PositionalCorrection(pair->first);
 		}
 	}
 }
 
-void PhysicsEngine::PositionalCorrection(CollisionPair c)
+void PhysicsEngine::PositionalCorrection(CollisionPair* c)
 {
 	const float percent = 0.2f;
 
 	float invMassA, invMassB;
-	if (c.rigidBodyA->GetMass() == 0)
+	if (c->rigidBodyA->GetMass() == 0)
 		invMassA = 0;
 	else
-		invMassA = 1 / c.rigidBodyA->GetMass();
+		invMassA = 1 / c->rigidBodyA->GetMass();
 
-	if (c.rigidBodyB->GetMass() == 0)
+	if (c->rigidBodyB->GetMass() == 0)
 		invMassB = 0;
 	else
-		invMassB = 1 / c.rigidBodyB->GetMass();
+		invMassB = 1 / c->rigidBodyB->GetMass();
 
-	Vector2 correction = ((m_collisions[c].penetration / (invMassA + invMassB)) * percent) * -m_collisions[c].collisionNormal;
+	Vector2 correction = ((m_collisions[c]->penetration / (invMassA + invMassB)) * percent) * -m_collisions[c]->collisionNormal;
 
-	Vector2 temp = c.rigidBodyA->transform->GetPosition();
+	Vector2 temp = c->rigidBodyA->transform->GetPosition();
 	temp -= invMassA * correction;
-	c.rigidBodyA->transform->SetPosition(temp);
+	c->rigidBodyA->transform->SetPosition(temp);
 
-	temp = c.rigidBodyB->transform->GetPosition();
+	temp = c->rigidBodyB->transform->GetPosition();
 	temp += invMassB * correction;
-	c.rigidBodyB->transform->SetPosition(temp);
+	c->rigidBodyB->transform->SetPosition(temp);
 }
 
 void PhysicsEngine::UpdatePhysics(float dt)

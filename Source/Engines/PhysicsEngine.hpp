@@ -1,10 +1,12 @@
 #pragma once
-#include "..\Actors\Components\Rigidbody.h"
-#include "..\Engines\Utils.h"
 #include <map>
+#include <vector>
 #include <stdlib.h>  
 #include <algorithm> 
+
 using namespace std;
+
+class Rigidbody;
 
 class PhysicsEngine
 {
@@ -26,7 +28,7 @@ public:
 	bool IsGrounded(Rigidbody* _rigidBody);
 	void CheckCollision();
 	void ResolveCollisions();
-	void PositionalCorrection(CollisionPair c);
+	void PositionalCorrection(CollisionPair* c);
 	void UpdatePhysics(float dt);
 	void FixedUpdate();
 

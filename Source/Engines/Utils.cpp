@@ -3,17 +3,17 @@
 
 float Vector2Math::Magnitude(Vector2 _a)
 {
-	return 0.0f;
+	return sqrt((_a.x * _a.x) + (_a.y * _a.y));
 }
 
 float Vector2Math::Dot(Vector2 _a, Vector2 _b)
 {
-	return 0.0f;
+	return (_a.x * _b.x) + (_a.y * _b.y);
 }
 
-Vector2* Vector2Math::Zero()
+Vector2 Vector2Math::Zero()
 {
-	return new Vector2(0,0);
+	return Vector2(0,0);
 }
 
 Vector2 Vector2Math::PositionFromMatrix(const Matrix& mat)

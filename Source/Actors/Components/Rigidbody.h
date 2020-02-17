@@ -1,9 +1,9 @@
 #pragma once
 #include "ActorComponent.h"
-#include "..\..\Engines\Utils.h"
-#include "..\Components\Transform.h"
-#include "..\..\Engines\PhysicsEngine.hpp"
 #include <stdlib.h>
+
+class Transform;
+class PhysicsEngine;
 
 class Rigidbody : public ActorComponent
 {
@@ -11,11 +11,11 @@ private:
 	float m_mass;
 	float m_bounciness;
 	bool m_obeysGravity;
-	Vector2 *m_gravity;
-	Vector2 *m_currentVelocity;
-	Vector2 *m_maxVelocity;
+	Vector2 m_gravity;
+	Vector2 m_currentVelocity;
+	Vector2 m_maxVelocity;
 	bool m_grounded;
-	Vector2 *totalForces;
+	Vector2 totalForces;
 	
 public:
 	PhysicsEngine *engine;
