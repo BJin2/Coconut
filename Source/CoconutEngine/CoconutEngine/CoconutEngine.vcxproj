@@ -101,7 +101,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\Libs\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>winmm.lib;opengl32.lib;freetype.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-network-s-d.lib;sfml-audio-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;opengl32.lib;freetype.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-network-s-d.lib;sfml-audio-s-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -163,6 +163,7 @@
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\Actors\Actor.cpp" />
+    <ClCompile Include="..\..\Actors\Components\AudioComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp" />
     <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h" />
     <ClInclude Include="..\..\Actors\Actor.h" />
     <ClInclude Include="..\..\Actors\Components\ActorComponent.h" />
+    <ClInclude Include="..\..\Actors\Components\AudioComponent.h" />
     <ClInclude Include="..\..\Actors\Components\RendererComponent.h" />
     <ClInclude Include="..\..\Actors\Components\Rigidbody.h" />
     <ClInclude Include="..\..\Actors\Components\ScriptComponent.h" />

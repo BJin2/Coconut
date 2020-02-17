@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "../Actors/Actor.h"
 #include "../Actors/Components/RendererComponent.h"
+#include "../Actors/Components/AudioComponent.h"
 #include "../Actors/Components/Transform.h"
 #include "../../Engines/InputCommand.hpp"
 #include "Event/EventManager.h"
@@ -14,6 +15,7 @@ void Scene::Initialize()
 	std::string name = "../../Lua/test.lua";
 	test->AddComponent(name);
 	test->AddComponent<RendererComponent>();
+	test->AddComponent<AudioComponent>();
 	actors.push_back(test);
 
 	printf("Exmaple event fires");
@@ -28,6 +30,8 @@ void Scene::Start()
 	{
 		actor->VStart();
 	}
+
+	actors[0]->GetComponent<AudioComponent>()->Play();
 }
 
 void Scene::Update(float delta)
@@ -36,7 +40,6 @@ void Scene::Update(float delta)
 	{
 		actor->VUpdate(delta);
 	}
-
 	//Input and translation testing
 	if (InputCommand::GetKeyDown(InputCommand::Key::D))
 	{
