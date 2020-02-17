@@ -12,6 +12,13 @@
 
 PhysicsEngine* PhysicsEngine::instance;
 
+PhysicsEngine::PhysicsEngine()
+{
+	m_groundedTol = 0.5f;
+	m_rigidBodies.clear();
+	m_collisions.clear();
+}
+
 PhysicsEngine* PhysicsEngine::Instance()
 {
 	if (instance)
@@ -52,7 +59,9 @@ bool PhysicsEngine::IsGrounded(Rigidbody* _rigidBody)
 
 void PhysicsEngine::CheckCollision()
 {
-	std::map<CollisionPair*, CollisionInfo*>::key_compare compare = m_collisions.key_comp();
+	if (m_rigidBodies.size() == 0)
+		return;
+
 	for (int i = 0; i < m_rigidBodies.size() - 1; i++)
 	{
 		Rigidbody* bodyA =  m_rigidBodies[i];
@@ -74,9 +83,13 @@ void PhysicsEngine::CheckCollision()
 
 				if (gap.x < 0 && gap.y < 0)
 				{
-					if (search != m_collisions.end())
+					for (auto c : m_collisions)
 					{
-						m_collisions.erase(pair);
+						if (c.first->rigidBodyA == pair->rigidBodyA &&
+							c.first->rigidBodyB == pair->rigidBodyB)
+						{
+							m_collisions.erase(pair);
+						}
 					}
 
 					if (gap.x > gap.y)
@@ -97,9 +110,16 @@ void PhysicsEngine::CheckCollision()
 					}
 					m_collisions.insert(std::pair<CollisionPair*, CollisionInfo*>(pair, colInfo));
 				}
-				else if (search != m_collisions.end())
+				else
 				{
-					m_collisions.erase(pair);
+					for (auto c : m_collisions)
+					{
+						if (c.first->rigidBodyA == pair->rigidBodyA &&
+							c.first->rigidBodyB == pair->rigidBodyB)
+						{
+							m_collisions.erase(pair);
+						}
+					}
 				}
 			}
 		}

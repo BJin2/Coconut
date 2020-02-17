@@ -35,6 +35,7 @@ public:
 	void UpdatePhysics(float dt);
 
 private:
+	PhysicsEngine();
 	static PhysicsEngine* instance;
 	float m_groundedTol;
 	map<CollisionPair*, CollisionInfo*> m_collisions;
