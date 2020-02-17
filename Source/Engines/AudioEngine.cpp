@@ -7,5 +7,29 @@
 //
 
 #include "AudioEngine.hpp"
+#include "Scene.h"
 
+AudioEngine* AudioEngine::instance;
 
+AudioEngine::AudioEngine()
+{
+
+}
+
+AudioEngine::~AudioEngine()
+{
+	delete instance;
+}
+
+AudioEngine* AudioEngine::Instance()
+{
+	if (instance)
+		return instance;
+
+	return instance = new AudioEngine();
+}
+
+void AudioEngine::RegisterAudioTarget(AudioComponent* aItem)
+{
+	m_pAudioTarget.push_back(aItem);
+}
