@@ -169,6 +169,9 @@
     <ClCompile Include="..\..\Actors\Components\ScriptComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\Transform.cpp" />
     <ClCompile Include="..\..\Engines\AudioEngine.cpp" />
+    <ClCompile Include="..\..\Engines\Event\EventManager.cpp" />
+    <ClCompile Include="..\..\Engines\Event\EventMapper.cpp" />
+    <ClCompile Include="..\..\Engines\Event\EventType.cpp" />
     <ClCompile Include="..\..\Engines\Game.cpp" />
     <ClCompile Include="..\..\Engines\GraphicEngine.cpp" />
     <ClCompile Include="..\..\Engines\Initializer.cpp" />
@@ -191,6 +194,14 @@
     <ClInclude Include="..\..\Actors\Components\ScriptComponent.h" />
     <ClInclude Include="..\..\Actors\Components\Transform.h" />
     <ClInclude Include="..\..\Engines\AudioEngine.hpp" />
+    <ClInclude Include="..\..\Engines\Event\Event.h" />
+    <ClInclude Include="..\..\Engines\Event\EventHandler.h" />
+    <ClInclude Include="..\..\Engines\Event\EventManager.h" />
+    <ClInclude Include="..\..\Engines\Event\EventMapper.h" />
+    <ClInclude Include="..\..\Engines\Event\EventType.h" />
+    <ClInclude Include="..\..\Engines\Event\ExampleLoadedEvent.h" />
+    <ClInclude Include="..\..\Engines\Event\KeyEvent.h" />
+    <ClInclude Include="..\..\Engines\Event\MouseEvent.h" />
     <ClInclude Include="..\..\Engines\Game.h" />
     <ClInclude Include="..\..\Engines\GraphicEngine.hpp" />
     <ClInclude Include="..\..\Engines\Initializer.h" />
