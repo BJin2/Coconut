@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "../Actors/Actor.h"
 #include "../Actors/Components/RendererComponent.h"
+#include "../Actors/Components/AudioComponent.h"
 #include "../Actors/Components/Transform.h"
 #include "../../Engines/InputCommand.hpp"
 
@@ -12,6 +13,7 @@ void Scene::Initialize()
 	std::string name = "../../Lua/test.lua";
 	test->AddComponent(name);
 	test->AddComponent<RendererComponent>();
+	test->AddComponent<AudioComponent>();
 	actors.push_back(test);
 }
 
@@ -30,6 +32,7 @@ void Scene::Update(float delta)
 		actor->VUpdate(delta);
 	}
 
+	actors[0]->GetComponent<AudioComponent>()->Play();
 	//Input and translation testing
 	if (InputCommand::GetKeyDown(InputCommand::Key::D))
 	{
