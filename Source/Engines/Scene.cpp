@@ -23,6 +23,8 @@ void Scene::Start()
 	{
 		actor->VStart();
 	}
+
+	actors[0]->GetComponent<AudioComponent>()->Play();
 }
 
 void Scene::Update(float delta)
@@ -31,8 +33,6 @@ void Scene::Update(float delta)
 	{
 		actor->VUpdate(delta);
 	}
-
-	actors[0]->GetComponent<AudioComponent>()->Play();
 	//Input and translation testing
 	if (InputCommand::GetKeyDown(InputCommand::Key::D))
 	{
