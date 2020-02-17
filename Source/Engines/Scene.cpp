@@ -3,6 +3,8 @@
 #include "../Actors/Components/RendererComponent.h"
 #include "../Actors/Components/Transform.h"
 #include "../../Engines/InputCommand.hpp"
+#include "Event/EventManager.h"
+#include "Event/ExampleLoadedEvent.h"
 
 class RenderComponent;
 
@@ -13,6 +15,11 @@ void Scene::Initialize()
 	test->AddComponent(name);
 	test->AddComponent<RendererComponent>();
 	actors.push_back(test);
+
+	printf("Exmaple event fires");
+	ExampleLoadedEventData data;
+	data.example = "Scene Loaded";
+	EventManager::Instance()->RegisterEvent(data.type, &data);
 }
 
 void Scene::Start()

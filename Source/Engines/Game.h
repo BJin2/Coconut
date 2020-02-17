@@ -10,6 +10,8 @@
 #include "Scene.h"
 #include "Time.h"
 
+class EventMapper;
+
 class Game
 {
 public:
@@ -29,4 +31,5 @@ private:
 	static GameState gameState;
 	static Scene* scene;
 	static Time* time;
+	static EventMapper* mapper;
 };

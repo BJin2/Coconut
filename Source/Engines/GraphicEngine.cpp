@@ -51,3 +51,8 @@ void GraphicEngine::RegisterRenderTarget(RendererComponent* rItem)
 {
 	m_pRenderTarget.push_back(rItem);
 }
+
+sf::RenderWindow* GraphicEngine::GetGameScreen()
+{
+	return m_pGameScreen;
+}
