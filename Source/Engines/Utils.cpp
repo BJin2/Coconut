@@ -11,6 +11,11 @@ float Vector2Math::Dot(Vector2 _a, Vector2 _b)
 	return 0.0f;
 }
 
+Vector2* Vector2Math::Zero()
+{
+	return new Vector2(0,0);
+}
+
 Vector2 Vector2Math::PositionFromMatrix(const Matrix& mat)
 {
 	using namespace std;
@@ -37,4 +42,9 @@ Vector2 Vector2Math::ScaleFromMatrix(const Matrix& mat)
 	float y = temp[5];
 
 	return Vector2(x, y);
+}
+
+Vector2 Vector2Math::operator-(Vector2 const& a, Vector2 const &b)
+{
+	return Vector2(a.x - b.x, a.y - b.y);
 }

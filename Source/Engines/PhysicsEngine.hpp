@@ -4,7 +4,6 @@
 #include <map>
 #include <stdlib.h>  
 #include <algorithm> 
-
 using namespace std;
 
 class PhysicsEngine
@@ -23,19 +22,19 @@ public:
 	};
 
 	void AddRigidBody(Rigidbody* _rigidBody);
-	void IntegrateBodies(float dT);
+	void IntegrateBodies(float dt);
 	bool IsGrounded(Rigidbody* _rigidBody);
 	void CheckCollision();
 	void ResolveCollisions();
-	void PositionalCorrection();
-	void UpdatePhysics();
+	void PositionalCorrection(CollisionPair c);
+	void UpdatePhysics(float dt);
 	void FixedUpdate();
 
 	template<typename T>
 	std::vector<T> slice(std::vector<T> const& v, int m, int n);
 private:
 	float m_groundedTol;
-	map<CollisionPair, CollisionInfo> m_collisions;
+	map<CollisionPair*, CollisionInfo*> m_collisions;
 	vector<Rigidbody*> m_rigidBodies;
 };
 
