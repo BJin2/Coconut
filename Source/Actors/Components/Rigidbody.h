@@ -1,6 +1,7 @@
 #pragma once
 #include "ActorComponent.h"
 #include <stdlib.h>
+#include <SFML/Graphics.hpp>
 
 class Transform;
 class PhysicsEngine;

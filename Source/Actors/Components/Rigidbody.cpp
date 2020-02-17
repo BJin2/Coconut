@@ -44,6 +44,9 @@ bool Rigidbody::IsGrounded()
 
 void Rigidbody::SetAABB()
 {
+	sf::Sprite* bound = new sf::Sprite();
+	aabb.bLeft = Vector2(bound->getGlobalBounds().left, bound->getGlobalBounds().height);
+	aabb.tRight = Vector2(bound->getGlobalBounds().width, bound->getGlobalBounds().top);
 }
 
 void Rigidbody::Integrate(float dt)
