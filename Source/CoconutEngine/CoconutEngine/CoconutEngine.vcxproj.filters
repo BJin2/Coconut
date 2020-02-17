@@ -28,6 +28,9 @@
     <Filter Include="Lua Scripts">
       <UniqueIdentifier>{43900291-ee4e-4b0c-8eb5-006fd3b408c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Event">
+      <UniqueIdentifier>{3b4b8a28-7f72-4e98-9a4e-5ed2e97448ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
@@ -90,6 +93,18 @@
     <ClCompile Include="..\..\Actors\Components\Transform.cpp">
       <Filter>Source Files\Component</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Actors\Components\AudioComponent.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\Event\EventManager.cpp">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\Event\EventMapper.cpp">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engines\Event\EventType.cpp">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -148,6 +163,33 @@
     </ClInclude>
     <ClInclude Include="..\..\Actors\Components\Transform.h">
       <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Actors\Components\AudioComponent.h">
+      <Filter>Source Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\Event.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\EventHandler.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\EventManager.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\EventMapper.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\EventType.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\ExampleLoadedEvent.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\KeyEvent.h">
+      <Filter>Source Files\Engine\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\Event\MouseEvent.h">
+      <Filter>Source Files\Engine\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

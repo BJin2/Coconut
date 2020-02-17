@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include <cmath>
 
 //XMVECTOR T = XMLoadFloat3(&float3);
 //XMStoreFloat3(&float3)
@@ -42,6 +43,11 @@ void Transform::VUpdate(float dt)
 	m_localTransformMatrix = Matrix::Identity * m_scaleMatrix * m_translationMatrix * m_rotationMatrix;
 }
 
+void Transform::Translate(Vector2 dir, float speed)
+{
+	SetLocalPosition(m_localPosition.x + (dir.x * speed), m_localPosition.y - (dir.y * speed));
+}
+
 #pragma region Getters
 Transform* Transform::GetParent()
 {
@@ -59,7 +65,7 @@ Vector2 Transform::GetPosition()
 	while (p)
 	{
 		mat *= p->GetTranslationMatrix();
-		p = GetParent();
+		p = p->GetParent();
 	}
 	return Vector2Math::PositionFromMatrix(mat);
 }
@@ -70,7 +76,7 @@ Vector2 Transform::GetScale()
 	while (p)
 	{
 		mat *= p->GetScaleMatrix();
-		p = GetParent();
+		p = p->GetParent();
 	}
 	return Vector2Math::ScaleFromMatrix(mat);
 }
@@ -81,7 +87,7 @@ float Transform::GetRotation()
 	while (p)
 	{
 		mat *= p->GetRotationMatrix();
-		p = GetParent();
+		p = p->GetParent();
 	}
 	auto temp = mat.getMatrix();
 	return acos(temp[0]);
@@ -93,7 +99,7 @@ Matrix Transform::GetTransform()
 	while (p)
 	{
 		mat *= p->GetLocalTransformMatrix();
-		p = GetParent();
+		p = p->GetParent();
 	}
 	return mat;
 }
@@ -138,9 +144,16 @@ Matrix Transform::GetLocalTransformMatrix()
 void Transform::SetParent(Transform* _parent)
 {
 	m_parent = _parent;
+	m_parent->AddChild(this);
 }
 void Transform::AddChild(Transform* _child)
 {
+	auto it = std::find(m_children.begin(), m_children.end(), _child);
+	if (it != m_children.end())
+		return;
+
+	if(_child->GetParent() != this)
+		_child->SetParent(this);
 	m_children.push_back(_child);
 }
 #pragma region Global
@@ -154,7 +167,7 @@ void Transform::SetPosition(const Vector2& _position)
 	{
 		Matrix inverseParentTranslation = (p->GetTranslationMatrix()).getInverse();
 		mat *= inverseParentTranslation;
-		p = GetParent();
+		p = p->GetParent();
 	}
 
 	SetLocalPosition(Vector2Math::PositionFromMatrix(mat));
@@ -174,7 +187,7 @@ void Transform::SetScale(const Vector2& _scale)
 	{
 		Matrix inverseParentScale = (p->GetScaleMatrix()).getInverse();
 		mat *= inverseParentScale;
-		p = GetParent();
+		p = p->GetParent();
 	}
 
 	SetLocalScale(Vector2Math::ScaleFromMatrix(mat));
@@ -192,8 +205,13 @@ void Transform::SetRotation(float _angle)
 	{
 		Matrix inverseParentRotation = (p->GetRotationMatrix()).getInverse();
 		mat *= inverseParentRotation;
-		p = GetParent();
+		p = p->GetParent();
 	}
+	auto temp = mat.getMatrix();
+	printf("Radian : %f\n", acos(temp[0]));
+	float angle = Vector2Math::RadianToDegree(acos(temp[0]));
+	printf("Angle : %f\n",angle);
+	SetLocalRotation(angle);
 }
 
 #pragma endregion
@@ -201,26 +219,32 @@ void Transform::SetRotation(float _angle)
 void Transform::SetLocalPosition(const Vector2& _position)
 {
 	m_localPosition = _position;
+	m_translationMatrix = Matrix::Identity;
+	m_translationMatrix = m_translationMatrix.translate(m_localPosition);
 }
 
 void Transform::SetLocalPosition(float _x, float _y)
 {
-	m_localPosition = Vector2(_x, _y);
+	SetLocalPosition(Vector2(_x, _y));
 }
 
 void Transform::SetLocalScale(const Vector2& _scale)
 {
 	m_localScale = _scale;
+	m_scaleMatrix = Matrix::Identity;
+	m_scaleMatrix.scale(m_localScale);
 }
 
 void Transform::SetLocalScale(float _x, float _y)
 {
-	m_localScale = Vector2(_x, _y);
+	SetLocalScale(Vector2(_x, _y));
 }
 
 void Transform::SetLocalRotation(float _angle)
 {
 	m_localAngle = _angle;
+	m_rotationMatrix = Matrix::Identity;
+	m_rotationMatrix = m_rotationMatrix.rotate(m_localAngle);
 }
 #pragma endregion
 #pragma endregion

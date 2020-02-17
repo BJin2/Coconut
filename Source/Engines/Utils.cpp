@@ -44,7 +44,12 @@ Vector2 Vector2Math::ScaleFromMatrix(const Matrix& mat)
 	return Vector2(x, y);
 }
 
-Vector2 Vector2Math::operator-(Vector2 const& a, Vector2 const &b)
+float Vector2Math::DegreeToRadian(float angle)
 {
-	return Vector2(a.x - b.x, a.y - b.y);
+	return 2 * M_PI * (angle / 360.0f);
+}
+
+float Vector2Math::RadianToDegree(float radian)
+{
+	return radian * (180.0f / M_PI);
 }

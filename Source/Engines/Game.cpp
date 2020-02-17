@@ -6,10 +6,16 @@
 #include "GraphicEngine.hpp"
 #include "PhysicsEngine.hpp"
 
+//Event example
+#include "Event/EventManager.h"
+#include "Event/EventMapper.h"
+#include "Event/ExampleLoadedEvent.h"
+
 HWND Game::hWnd = 0;
 Game::GameState Game::gameState = Game::GameState::Uninitialized;
 Scene* Game::scene;
 Time* Game::time;
+EventMapper* Game::mapper;
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
@@ -66,6 +72,16 @@ void Game::Initialize()
 		gameState = GameState::ShowingSplash;
 	}
 	delete initializer;
+
+	//Event System Example
+	mapper = new EventMapper();
+	EventManager::Instance()->RegisterMapper(GraphicEngine::Instance()->GetGameScreen(), mapper);
+	mapper->SetOnEvent([](const IEvent* e)->void
+		{
+			ExampleLoadedEventData* exampleData = static_cast<ExampleLoadedEventData*>(e->GetData());
+			std::cout << exampleData->example << std::endl;
+		}, ExampleLoadedEventData::type);
+
 	time = new Time();
 	scene = new Scene();
 	scene->Initialize();

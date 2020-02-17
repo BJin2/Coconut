@@ -1,4 +1,6 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <SFML/Graphics/Transform.hpp>
 
 typedef sf::Vector2f Vector2;
@@ -11,6 +13,6 @@ namespace Vector2Math
 	Vector2 Zero();
 	Vector2 PositionFromMatrix(const Matrix&);
 	Vector2 ScaleFromMatrix(const Matrix&);
-
-	Vector2 operator - (Vector2 const& a, Vector2 const& b);
+	float DegreeToRadian(float angle);
+	float RadianToDegree(float radian);
 }
