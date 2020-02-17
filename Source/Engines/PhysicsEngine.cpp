@@ -10,6 +10,15 @@
 #include "..\Actors\Components\Rigidbody.h"
 #include "../Actors/Components/Transform.h"
 
+PhysicsEngine* PhysicsEngine::instance;
+
+PhysicsEngine* PhysicsEngine::Instance()
+{
+	if (instance)
+		return instance;
+	return instance = new PhysicsEngine();
+}
+
 void PhysicsEngine::AddRigidBody(Rigidbody* _rigidBody)
 {
 	m_rigidBodies.push_back(_rigidBody);

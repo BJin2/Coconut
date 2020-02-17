@@ -11,7 +11,7 @@ Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 	m_gravity = Vector2(0, -9.8f);
 	m_maxVelocity = Vector2(10.0f, 10.0f);
 	transform = this->GetOwner()->transform;
-	engine = new PhysicsEngine();
+	engine = PhysicsEngine::Instance();
 	m_grounded = false;
 }
 

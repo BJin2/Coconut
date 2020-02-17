@@ -11,6 +11,8 @@ class Rigidbody;
 class PhysicsEngine
 {
 public:
+	static PhysicsEngine* Instance();
+
 	struct CollisionPair
 	{
 		Rigidbody* rigidBodyA;
@@ -32,6 +34,7 @@ public:
 	void UpdatePhysics(float dt);
 
 private:
+	static PhysicsEngine* instance;
 	float m_groundedTol;
 	map<CollisionPair*, CollisionInfo*> m_collisions;
 	vector<Rigidbody*> m_rigidBodies;
