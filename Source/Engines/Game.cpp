@@ -4,6 +4,7 @@
 #include "Initializer.h"
 #include "InputInterface.h"	
 #include "GraphicEngine.hpp"
+#include "PhysicsEngine.hpp"
 
 //Event example
 #include "Event/EventManager.h"
@@ -108,7 +109,7 @@ void Game::Update()
 			time->SetTimeSinceLastUpdate(-timePerFrame);
 
 			//Fixed Update
-			//TODO physics engine fixed update
+			PhysicsEngine::Instance()->UpdatePhysics(timePerFrame);
 		}
 		GraphicEngine::Instance()->Render();
 	}

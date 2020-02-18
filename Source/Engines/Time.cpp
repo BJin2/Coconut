@@ -10,7 +10,7 @@ void Time::Start()
 void Time::Update()
 {
 	ULONGLONG tick_time = GetTickCount64();
-	deltaTime = (tick_time - last_tick_time)/100000.0f;
+	deltaTime = (tick_time - last_tick_time)/1000.0f;
 	last_tick_time = tick_time;
 }
 

@@ -27,8 +27,9 @@ void ScriptComponent::VStart()
 			// int lua_pcall (lua_State *L, int nargs, int nresults, int msgh);
 			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
 			{
-				HWND hWnd = Game::hWnd;
-				MessageBox(hWnd, ((std::string)lua_tostring(pL, -1)).c_str(), NULL, MB_OK);
+				printf("Lua start");
+				/*HWND hWnd = Game::hWnd;
+				MessageBox(hWnd, ((std::string)lua_tostring(pL, -1)).c_str(), NULL, MB_OK);*/
 				//std::cout << "Lua file name: " << name << " and Start function returns : [ "
 				//	<< (std::string)lua_tostring(pL, -1) << " ] " << std::endl;
 			}

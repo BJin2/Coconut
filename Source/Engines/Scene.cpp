@@ -3,24 +3,66 @@
 #include "../Actors/Components/RendererComponent.h"
 #include "../Actors/Components/AudioComponent.h"
 #include "../Actors/Components/Transform.h"
+#include "../Actors/Components/Rigidbody.h"
 #include "../../Engines/InputCommand.hpp"
+
 #include "Event/EventManager.h"
 #include "Event/ExampleLoadedEvent.h"
+#include "GraphicEngine.hpp"
 
 class RenderComponent;
 
 void Scene::Initialize()
 {
-	Actor* test = new Actor();
 	std::string name = "../../Lua/test.lua";
-	test->AddComponent(name);
-	test->AddComponent<RendererComponent>();
-	test->AddComponent<AudioComponent>();
-	actors.push_back(test);
 
-	printf("Exmaple event fires");
+	//*/
+	Actor* first = new Actor();
+	first->AddComponent(name);
+	first->AddComponent<RendererComponent>();
+	first->AddComponent<Rigidbody>();
+	Rigidbody* firstRigidbody = first->GetComponent<Rigidbody>();
+	firstRigidbody->SetRigidbodySettings(2.0f, 0.8f, false);
+	firstRigidbody->SetCurrentVelocity(Vector2(30, 0));
+	first->transform->SetPosition(50, 50);
+	first->AddComponent<AudioComponent>();
+
+	Actor* second = new Actor();
+	second->AddComponent<RendererComponent>();
+	second->AddComponent<Rigidbody>();
+	Rigidbody* secondRigidbody = second->GetComponent<Rigidbody>();
+	secondRigidbody->SetCurrentVelocity(Vector2(-30, 0));
+	second->transform->SetPosition(250, 50);
+	
+	actors.push_back(first);
+	actors.push_back(second);
+	/*/
+	Actor* third = new Actor();
+	third->AddComponent(name);
+	third->AddComponent<RendererComponent>();
+	third->AddComponent<Rigidbody>();
+	third->AddComponent<AudioComponent>();
+	Rigidbody* thirdRigidbody = third->GetComponent<Rigidbody>();
+	thirdRigidbody->SetRigidbodySettings(0.0f, 0.8f, false);
+	third->transform->SetPosition(450, 100);
+
+
+	Actor* fourth = new Actor();
+	fourth->AddComponent<RendererComponent>();
+	fourth->AddComponent<Rigidbody>();
+	Rigidbody* fourthRigidbody = fourth->GetComponent<Rigidbody>();
+	fourthRigidbody->SetRigidbodySettings(1.0f, 0.8f, false);
+	fourthRigidbody->SetCurrentVelocity(Vector2(0, -30));
+	fourth->transform->SetPosition(450, 250);
+
+	actors.push_back(third);
+	actors.push_back(fourth);
+	//*/
+
+
 	ExampleLoadedEventData data;
 	data.example = "Scene Loaded";
+	data.target = GraphicEngine::Instance()->GetGameScreen();
 	EventManager::Instance()->RegisterEvent(data.type, &data);
 }
 
@@ -32,6 +74,11 @@ void Scene::Start()
 	}
 
 	actors[0]->GetComponent<AudioComponent>()->Play();
+	sf::Color colors[2] = { sf::Color::Red, sf::Color::Blue};
+	for (int i = 0; i < 2; i++)
+	{
+		actors[i]->GetComponent<RendererComponent>()->SetColor(colors[i]);
+	}
 }
 
 void Scene::Update(float delta)

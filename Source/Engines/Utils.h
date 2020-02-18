@@ -10,6 +10,7 @@ namespace Vector2Math
 {
 	float Magnitude(Vector2 _a);
 	float Dot(Vector2 _a, Vector2 _b);
+	Vector2 Zero();
 	Vector2 PositionFromMatrix(const Matrix&);
 	Vector2 ScaleFromMatrix(const Matrix&);
 	float DegreeToRadian(float angle);
