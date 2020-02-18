@@ -1,16 +1,16 @@
 #include "..\..\Engines\Utils.h"
-#include "Rigidbody.h"
 #include "..\..\Engines\PhysicsEngine.hpp"
-#include "..\Components\Transform.h"
+#include "Rigidbody.h"
+#include "Transform.h"
+#include "RendererComponent.h"
 
 Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 {
 	m_mass = _mass;
 	m_bounciness = _bounciness;
 	m_obeysGravity = _obeysGravity;
-	m_gravity = Vector2(0, -9.8f);
+	m_gravity = Vector2(0, 9.8f);
 	m_maxVelocity = Vector2(10.0f, 10.0f);
-	transform = this->GetOwner()->transform;
 	engine = PhysicsEngine::Instance();
 	m_grounded = false;
 }
@@ -44,9 +44,9 @@ bool Rigidbody::IsGrounded()
 
 void Rigidbody::SetAABB()
 {
-	sf::Sprite* bound = new sf::Sprite();
-	aabb.bLeft = Vector2(bound->getGlobalBounds().left, bound->getGlobalBounds().height);
-	aabb.tRight = Vector2(bound->getGlobalBounds().width, bound->getGlobalBounds().top);
+	sf::Shape* shape = GetOwner()->GetComponent<RendererComponent>()->GetShape();
+	aabb.bLeft = sf::Vector2f(shape->getGlobalBounds().left, shape->getGlobalBounds().top-shape->getGlobalBounds().height);
+	aabb.tRight = Vector2(shape->getGlobalBounds().left+shape->getGlobalBounds().width, shape->getGlobalBounds().top);
 }
 
 void Rigidbody::Integrate(float dt)
@@ -68,10 +68,10 @@ void Rigidbody::Integrate(float dt)
 
 	m_currentVelocity += acceleration * dt;
 
-	Vector2 temp = transform->GetPosition();
+	Vector2 temp = GetOwner()->transform->GetPosition();
 	temp += m_currentVelocity * dt;
 
-	transform->SetPosition(temp);
+	GetOwner()->transform->SetPosition(temp);
 	SetAABB();
 
 	totalForces = Vector2Math::Zero();
@@ -85,6 +85,13 @@ float Rigidbody::GetMass()
 float Rigidbody::GetBounciness()
 {
 	return m_bounciness;
+}
+
+void Rigidbody::SetRigidbodySettings(float _mass, float _bounciness, bool _obeysGravity)
+{
+	m_mass = _mass;
+	m_bounciness = _bounciness;
+	m_obeysGravity = _obeysGravity;
 }
 
 void Rigidbody::SetCurrentVelocity(Vector2 v)

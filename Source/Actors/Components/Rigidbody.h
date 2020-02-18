@@ -20,9 +20,8 @@ private:
 	
 public:
 	PhysicsEngine *engine;
-	Transform *transform;
 
-	Rigidbody(float _mass = 1, float _bounciness = 1, bool _obeysGravity = true);
+	Rigidbody(float _mass = 1, float _bounciness = 0.8f, bool _obeysGravity = false);
 
 	struct AABB
 	{
@@ -41,6 +40,7 @@ public:
 	void Integrate(float dt);
 	float GetMass();
 	float GetBounciness();
+	void SetRigidbodySettings(float _mass = 1, float _bounciness = 0.8f, bool _obeysGravity = false);
 	void SetCurrentVelocity(Vector2 v);
 	Vector2 GetCurrentVelocity();
 };

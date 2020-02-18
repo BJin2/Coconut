@@ -150,10 +150,8 @@ void PhysicsEngine::ResolveCollisions()
 
 		Vector2 impulse = j * m_collisions[pair->first]->collisionNormal;
 
-		if (pair->first->rigidBodyA->GetMass() != 0)
-			pair->first->rigidBodyA->SetCurrentVelocity(-1 / pair->first->rigidBodyA->GetMass() * impulse);
-		if (pair->first->rigidBodyB->GetMass() != 0)
-			pair->first->rigidBodyB->SetCurrentVelocity(1 / pair->first->rigidBodyA->GetMass() * impulse);
+		pair->first->rigidBodyA->SetCurrentVelocity(-impulse*invMassA);
+		pair->first->rigidBodyB->SetCurrentVelocity(impulse * invMassB);
 
 		if (abs(m_collisions[pair->first]->penetration > 0.01f))
 		{
@@ -179,13 +177,13 @@ void PhysicsEngine::PositionalCorrection(CollisionPair* c)
 
 	Vector2 correction = ((m_collisions[c]->penetration / (invMassA + invMassB)) * percent) * -m_collisions[c]->collisionNormal;
 
-	Vector2 temp = c->rigidBodyA->transform->GetPosition();
+	Vector2 temp = c->rigidBodyA->GetOwner()->transform->GetPosition();
 	temp -= invMassA * correction;
-	c->rigidBodyA->transform->SetPosition(temp);
+	c->rigidBodyA->GetOwner()->transform->SetPosition(temp);
 
-	temp = c->rigidBodyB->transform->GetPosition();
+	temp = c->rigidBodyB->GetOwner()->transform->GetPosition();
 	temp += invMassB * correction;
-	c->rigidBodyB->transform->SetPosition(temp);
+	c->rigidBodyB->GetOwner()->transform->SetPosition(temp);
 }
 
 void PhysicsEngine::UpdatePhysics(float dt)
