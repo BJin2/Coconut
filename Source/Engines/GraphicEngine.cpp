@@ -21,8 +21,8 @@ GraphicEngine::GraphicEngine()
 
 GraphicEngine::~GraphicEngine()
 {
+	m_pRenderTarget.clear();
 	delete m_pGameScreen;
-	delete instance;
 }
 
 GraphicEngine* GraphicEngine::Instance()

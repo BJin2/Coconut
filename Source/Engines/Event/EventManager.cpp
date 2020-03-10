@@ -5,6 +5,13 @@
 
 EventManager* EventManager::instance;
 
+EventManager::~EventManager()
+{
+	m_registeredEventMapper.clear();
+	if (mainEvent)
+		delete mainEvent;
+}
+
 EventManager* EventManager::Instance()
 {
 	if (instance)

@@ -12,6 +12,14 @@
 
 class RenderComponent;
 
+Scene::~Scene()
+{
+	for (auto actor : actors)
+	{
+		delete actor;
+	}
+}
+
 void Scene::Initialize()
 {
 	std::string name = "../../Lua/test.lua";

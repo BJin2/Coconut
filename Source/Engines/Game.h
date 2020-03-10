@@ -32,4 +32,5 @@ private:
 	static Scene* scene;
 	static Time* time;
 	static EventMapper* mapper;
+	static void Clear();
 };

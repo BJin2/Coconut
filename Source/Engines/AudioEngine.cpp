@@ -18,7 +18,7 @@ AudioEngine::AudioEngine()
 
 AudioEngine::~AudioEngine()
 {
-	delete instance;
+	m_pAudioTarget.clear();
 }
 
 AudioEngine* AudioEngine::Instance()

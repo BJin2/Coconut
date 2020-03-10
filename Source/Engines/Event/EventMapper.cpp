@@ -3,6 +3,16 @@
 #include "Event.h"
 #include "EventHandler.h"
 
+EventMapper::~EventMapper()
+{
+	for (auto e : m_registeredHandler)
+	{
+		if (e.second)
+			delete e.second;
+	}
+	m_registeredHandler.clear();
+}
+
 void EventMapper::SetOnEvent(void(*passedPointer)(const IEvent* e), EventType t)
 {
 	auto it = m_registeredHandler.find(t);

@@ -12,6 +12,7 @@ class Rigidbody;
 class PhysicsEngine
 {
 public:
+	~PhysicsEngine();
 	static PhysicsEngine* Instance();
 
 	struct CollisionPair

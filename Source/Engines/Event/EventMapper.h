@@ -16,6 +16,7 @@ private:
 	std::unordered_map<EventType, EventHandler*> m_registeredHandler;
 
 public:
+	~EventMapper();
 	void SetOnEvent(void(* passedPointer)(const IEvent* e), EventType t);
 	bool HandleEvent(EventType t, IEvent* data);
 	void CleanMapper();

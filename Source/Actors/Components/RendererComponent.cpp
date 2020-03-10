@@ -1,14 +1,25 @@
 #include "RendererComponent.h"
 #include "../../Engines/GraphicEngine.hpp"
 
-void RendererComponent::VStart()
+RendererComponent::RendererComponent()
 {
 	GraphicEngine::Instance()->RegisterRenderTarget(this);
 	size = sf::Vector2f(100, 100);
 	SetShape(new sf::RectangleShape(sf::Vector2f(size.x, size.y)));
-	shape->setOrigin(size.x/2.0f, size.y/2.0f);
+	shape->setOrigin(size.x / 2.0f, size.y / 2.0f);
 	//shape->setPosition(shape->getOrigin().x, shape->getOrigin().y);
 	SetColor(sf::Color::Black);
+}
+
+RendererComponent::~RendererComponent()
+{
+	delete shape;
+	delete texture;
+}
+
+void RendererComponent::VStart()
+{
+	
 }
 
 void RendererComponent::VUpdate(float dt)

@@ -12,6 +12,7 @@ private:
 	
 public:
 	Actor();
+	~Actor();
 	virtual void VUpdate(float dt);
 	virtual void VStart();
 

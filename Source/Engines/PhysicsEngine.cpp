@@ -19,6 +19,19 @@ PhysicsEngine::PhysicsEngine()
 	m_collisions.clear();
 }
 
+PhysicsEngine::~PhysicsEngine()
+{
+	m_rigidBodies.clear();
+	for (auto c : m_collisions)
+	{
+		if (c.first)
+			delete c.first;
+		if (c.second)
+			delete c.second;
+	}
+	m_collisions.clear();
+}
+
 PhysicsEngine* PhysicsEngine::Instance()
 {
 	if (instance)
@@ -120,6 +133,8 @@ void PhysicsEngine::CheckCollision()
 							m_collisions.erase(pair);
 						}
 					}
+					delete pair;
+					delete colInfo;
 				}
 			}
 		}

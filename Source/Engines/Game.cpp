@@ -5,6 +5,7 @@
 #include "InputInterface.h"	
 #include "GraphicEngine.hpp"
 #include "PhysicsEngine.hpp"
+#include "AudioEngine.hpp"
 
 //Event example
 #include "Event/EventManager.h"
@@ -25,6 +26,18 @@ static TCHAR szTitle[] = _T("Coconut Engine");
 
 auto timePerFrame = (1 / 60.0f);
 
+void Game::Clear()
+{
+	printf("Deleting");
+	delete scene;
+	delete mapper;
+	delete time;
+	delete PhysicsEngine::Instance();
+	delete GraphicEngine::Instance();
+	delete AudioEngine::Instance();
+	delete EventManager::Instance();
+}
+
 void Game::Start()
 {
 	if (gameState == GameState::Uninitialized)
@@ -39,15 +52,15 @@ void Game::Start()
 
 void Game::Initialize()
 {
-	sf::RenderWindow window(sf::VideoMode(370, 270), "Splash Screen", sf::Style::None);
-	window.setActive(true);
+	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(370, 270), "Splash Screen", sf::Style::None);
+	window->setActive(true);
 
-	if (window.isOpen())
+	if (window->isOpen())
 	{
 		sf::Texture splashScreenTexture;
 		sf::Sprite splashScreenSprite;
 
-		window.clear();
+		window->clear();
 		//splashScreenTexture.loadFromFile("..\..\Assets\Textures\CoconutEngineLogo.PNG")
 		if (splashScreenTexture.loadFromFile("../../../Assets/Textures/CoconutEngineLogo.png"))
 		{
@@ -57,13 +70,13 @@ void Game::Initialize()
 
 		if (splashScreenSprite.getTexture() != NULL)
 		{
-			window.draw(splashScreenSprite);
+			window->draw(splashScreenSprite);
 		}
 		else
 		{		
-			window.clear(sf::Color(255, 0, 0, 255));
+			window->clear(sf::Color(255, 0, 0, 255));
 		}
-		window.display();
+		window->display();
 	}
 
 	Initializer* initializer = new Initializer();
@@ -85,7 +98,7 @@ void Game::Initialize()
 	time = new Time();
 	scene = new Scene();
 	scene->Initialize();
-	window.close();
+	delete window;
 }
 
 void Game::Update()
@@ -113,6 +126,7 @@ void Game::Update()
 		}
 		GraphicEngine::Instance()->Render();
 	}
+	Clear();
 }
 
 bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -166,30 +180,30 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
-	IInput* input = new IInput();
+	IInput input;
 
 	switch (message)
 	{
 	case WM_CHAR:
-		input->VOnChar(wParam, hWnd);
+		input.VOnChar(wParam, hWnd);
 		break;
 	case WM_KEYDOWN:
-		input->VOnKeyDown(wParam, hWnd);
+		input.VOnKeyDown(wParam, hWnd);
 		break;
 	case WM_KEYUP:
-		input->VOnKeyUp(wParam, hWnd);
+		input.VOnKeyUp(wParam, hWnd);
 		break;
 	case WM_MOUSEMOVE:
 		hdc = GetDC(hWnd);
-		input->VOnPointerMove(lParam, hWnd);
+		input.VOnPointerMove(lParam, hWnd);
 		break;
 	case WM_LBUTTONDOWN:
 		hdc = GetDC(hWnd);
-		input->VOnPointerButtonDown(lParam, hWnd);
+		input.VOnPointerButtonDown(lParam, hWnd);
 		break;
 	case WM_LBUTTONUP:
 		hdc = GetDC(hWnd);
-		input->VOnPointerButtonUp(lParam, hWnd);
+		input.VOnPointerButtonUp(lParam, hWnd);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);

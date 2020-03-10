@@ -11,6 +11,14 @@ Actor::Actor()
 	actorComponent.push_back(transform);
 }
 
+Actor::~Actor()
+{
+	for (auto comp : actorComponent)
+	{
+		delete comp;
+	}
+}
+
 void Actor::VStart()
 {
 	for (auto comp : actorComponent)

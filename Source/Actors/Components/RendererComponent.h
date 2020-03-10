@@ -10,6 +10,8 @@ private:
 	sf::Texture *texture;
 	sf::Vector2f size;
 public:
+	RendererComponent();
+	~RendererComponent();
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 
