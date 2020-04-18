@@ -105,6 +105,9 @@
     <ClCompile Include="..\..\Engines\Event\EventType.cpp">
       <Filter>Source Files\Engine\Event</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Engines\ScriptManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Libs\tinyxml\tinystr.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Engines\ScriptManager.h">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
