@@ -12,11 +12,13 @@ private:
 	
 public:
 	Actor();
+	Actor(std::string _name);
 	~Actor();
 	virtual void VUpdate(float dt);
 	virtual void VStart();
 
 	Transform* transform;
+	std::string name;
 
 	//template<typename T, typename... Args> void AddComponent(Args ... args);
 	void AddComponent(std::string fileName);

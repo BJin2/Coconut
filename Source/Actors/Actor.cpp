@@ -4,8 +4,16 @@
 #include "Components/Transform.h"
 #include "Components/ScriptComponent.h"
 
+Actor::Actor(std::string _name) : name(_name)
+{
+	transform = new Transform();
+	transform->SetOwner(this);
+	actorComponent.push_back(transform);
+}
+
 Actor::Actor()
 {
+	name = "Actor";
 	transform = new Transform();
 	transform->SetOwner(this);
 	actorComponent.push_back(transform);

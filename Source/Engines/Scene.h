@@ -13,4 +13,6 @@ public:
 	void Start();
 	void Update(float delta);
 	Actor* AddActor();
+	Actor* AddActor(std::string name);
+	Actor* Find(std::string name);
 };
