@@ -6,6 +6,7 @@
 #include "GraphicEngine.hpp"
 #include "PhysicsEngine.hpp"
 #include "AudioEngine.hpp"
+#include "../CoconutEngine/CoconutEngine/resource.h"
 
 //Event example
 #include "Event/EventManager.h"
@@ -141,7 +142,7 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = NULL;
+	wcex.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);
 	wcex.lpszClassName = szWindowClass;
 	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_APPLICATION));
 
@@ -184,6 +185,17 @@ LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 
 	switch (message)
 	{
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case ID_FILE_SAVE:
+			//TODO call save function here
+			break;
+		case ID_FILE_LOAD:
+			//TODO call load function here
+			break;
+		}
+		break;
 	case WM_CHAR:
 		input.VOnChar(wParam, hWnd);
 		break;

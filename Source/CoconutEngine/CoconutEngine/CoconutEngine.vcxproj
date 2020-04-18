@@ -212,9 +212,13 @@
     <ClInclude Include="..\..\Engines\Scene.h" />
     <ClInclude Include="..\..\Engines\Time.h" />
     <ClInclude Include="..\..\Engines\Utils.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Lua\test.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Menu.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

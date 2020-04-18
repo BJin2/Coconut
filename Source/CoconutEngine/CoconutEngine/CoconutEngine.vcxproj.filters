@@ -191,10 +191,18 @@
     <ClInclude Include="..\..\Engines\Event\MouseEvent.h">
       <Filter>Source Files\Engine\Event</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Lua\test.lua">
       <Filter>Lua Scripts</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Menu.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
