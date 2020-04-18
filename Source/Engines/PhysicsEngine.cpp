@@ -70,15 +70,29 @@ bool PhysicsEngine::IsGrounded(Rigidbody* _rigidBody)
 	return false;
 }
 
+bool TestAABBOverlap(Rigidbody* a, Rigidbody* b)
+{
+	float d1x = b->aabb.bLeft.x - a->aabb.tRight.x;
+	float d1y = b->aabb.bLeft.y - a->aabb.tRight.y;
+	float d2x = a->aabb.bLeft.x - b->aabb.tRight.x;
+	float d2y = a->aabb.bLeft.y - b->aabb.tRight.y;
+	if (d1x > 0.0f || d1y > 0.0f)
+		return false;
+	if (d2x > 0.0f || d2y > 0.0f)
+		return false;
+	return true;
+}
+
 void PhysicsEngine::CheckCollision()
 {
 	if (m_rigidBodies.size() == 0)
 		return;
 
-	for (int i = 0; i < m_rigidBodies.size() - 1; i++)
+	for (int i = 0; i < m_rigidBodies.size(); i++)
 	{
 		Rigidbody* bodyA =  m_rigidBodies[i];
-		for (int j = i; j < m_rigidBodies.size() - i; j++)
+
+		for (int j = 0; j < m_rigidBodies.size(); j++)
 		{
 			Rigidbody* bodyB = m_rigidBodies[j];
 

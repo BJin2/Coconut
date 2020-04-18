@@ -27,23 +27,44 @@ void Scene::Initialize()
 	//*/
 	Actor* first = new Actor();
 	first->AddComponent(name);
+	first->AddComponent<AudioComponent>();
+
 	first->AddComponent<RendererComponent>();
 	first->AddComponent<Rigidbody>();
 	Rigidbody* firstRigidbody = first->GetComponent<Rigidbody>();
 	firstRigidbody->SetRigidbodySettings(2.0f, 0.8f, false);
-	firstRigidbody->SetCurrentVelocity(Vector2(30, 0));
-	first->transform->SetPosition(50, 50);
-	first->AddComponent<AudioComponent>();
+	firstRigidbody->SetCurrentVelocity(Vector2(60, 0));
+	first->transform->SetPosition(100, 50);
 
-	Actor* second = new Actor();
-	second->AddComponent<RendererComponent>();
-	second->AddComponent<Rigidbody>();
-	Rigidbody* secondRigidbody = second->GetComponent<Rigidbody>();
-	secondRigidbody->SetCurrentVelocity(Vector2(-30, 0));
-	second->transform->SetPosition(250, 50);
+	//Actor* second = new Actor();
+	//second->AddComponent(name);
+	//second->AddComponent<AudioComponent>();
+	//second->AddComponent<RendererComponent>();
+	//second->AddComponent<Rigidbody>();
+	//Rigidbody* secondRigidbody = second->GetComponent<Rigidbody>();
+	//secondRigidbody->SetCurrentVelocity(Vector2(-30, 0));
+	//second->transform->SetPosition(200, 50);
+
+	Actor* third = new Actor();
+	third->AddComponent<RendererComponent>();
+	third->AddComponent<Rigidbody>();
+	Rigidbody* thirdRigidbody = third->GetComponent<Rigidbody>();
+	thirdRigidbody->SetRigidbodySettings(2.0f, 0.8f, false);
+	thirdRigidbody->SetCurrentVelocity(Vector2(-10, 0));
+	third->transform->SetPosition(250, 50);
+
+	Actor* fourth = new Actor();
+	fourth->AddComponent<RendererComponent>();
+	fourth->AddComponent<Rigidbody>();
+	Rigidbody* fourthRigidbody = fourth->GetComponent<Rigidbody>();
+	fourthRigidbody->SetRigidbodySettings(2.0f, 0.8f, false);
+	fourthRigidbody->SetCurrentVelocity(Vector2(-50, 0));
+	fourth->transform->SetPosition(600, 50);
 	
 	actors.push_back(first);
-	actors.push_back(second);
+	//actors.push_back(second);
+	actors.push_back(third);
+	actors.push_back(fourth);
 	/*/
 	Actor* third = new Actor();
 	third->AddComponent(name);
@@ -82,8 +103,8 @@ void Scene::Start()
 	}
 
 	actors[0]->GetComponent<AudioComponent>()->Play();
-	sf::Color colors[2] = { sf::Color::Red, sf::Color::Blue};
-	for (int i = 0; i < 2; i++)
+	sf::Color colors[4] = { sf::Color::Red, sf::Color::Blue, sf::Color::Cyan, sf::Color::Magenta};
+	for (int i = 0; i < 3; i++)
 	{
 		actors[i]->GetComponent<RendererComponent>()->SetColor(colors[i]);
 	}
