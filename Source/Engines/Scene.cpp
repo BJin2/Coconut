@@ -25,7 +25,6 @@ void Scene::Initialize()
 	std::string name = "../../Lua/test.lua";
 
 	Actor* player = AddActor("player");
-	player->AddComponent<AudioComponent>();
 	player->AddComponent<RendererComponent>();
 	player->AddComponent<Rigidbody>();
 	Rigidbody* cachedPlayerRigidBody = player->GetComponent<Rigidbody>();
@@ -33,7 +32,8 @@ void Scene::Initialize()
 	cachedPlayerRigidBody->SetCurrentVelocity(Vector2(0, 0));
 	player->transform->SetPosition(50, 50);
 
-
+	Actor* bgm = AddActor("bgm");
+	bgm->AddComponent<AudioComponent>();
 
 	ExampleLoadedEventData data;
 	data.example = "Scene Loaded";
@@ -48,7 +48,7 @@ void Scene::Start()
 		actor->VStart();
 	}
 
-	Find("player")->GetComponent<AudioComponent>()->Play();
+	Find("bgm")->GetComponent<AudioComponent>()->Play();
 	sf::Color colors[4] = { sf::Color::Red, sf::Color::Blue, sf::Color::Cyan, sf::Color::Magenta};
 	Find("player")->GetComponent<RendererComponent>()->SetColor(colors[0]);
 }
