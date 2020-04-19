@@ -175,6 +175,7 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 	}
 }
 #pragma endregion
+
 #pragma region LOAD
 XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
 {
