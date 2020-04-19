@@ -16,6 +16,20 @@ ScriptComponent::~ScriptComponent()
 	lua_close(pL);
 }
 
+void ScriptComponent::VInitialize()
+{
+	if (isFileAvailable)
+	{
+		lua_getglobal(pL, "Initialize");
+		if (lua_isfunction(pL, -1))
+		{
+			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
+			{
+			}
+		}
+	}
+}
+
 void ScriptComponent::VStart()
 {
 	if (isFileAvailable)
@@ -27,7 +41,7 @@ void ScriptComponent::VStart()
 			// int lua_pcall (lua_State *L, int nargs, int nresults, int msgh);
 			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
 			{
-				printf("Lua start");
+				//printf("Lua start");
 				/*HWND hWnd = Game::hWnd;
 				MessageBox(hWnd, ((std::string)lua_tostring(pL, -1)).c_str(), NULL, MB_OK);*/
 				//std::cout << "Lua file name: " << name << " and Start function returns : [ "
@@ -46,10 +60,10 @@ void ScriptComponent::VUpdate(float dt)
 		{
 			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
 			{
-				HWND hWnd = Game::hWnd;
+			/*	HWND hWnd = Game::hWnd;
 				HDC hdc = GetDC(hWnd);
 				LPCSTR message = ((std::string)lua_tostring(pL, -1)).c_str();
-				TextOut(hdc, 10, 200, ((std::string)lua_tostring(pL, -1)).c_str(), strlen(message));
+				TextOut(hdc, 10, 200, ((std::string)lua_tostring(pL, -1)).c_str(), strlen(message));*/
 				/*std::cout << "Lua file name: " << name << " and Update function returns: [ "
 					<< (std::string)lua_tostring(pL, -1) << " ] " << std::endl;*/
 			}

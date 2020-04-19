@@ -6,6 +6,7 @@
 #include "GraphicEngine.hpp"
 #include "PhysicsEngine.hpp"
 #include "AudioEngine.hpp"
+#include "ScriptManager.hpp"
 #include "../CoconutEngine/CoconutEngine/resource.h"
 
 //Event example
@@ -37,6 +38,7 @@ void Game::Clear()
 	delete GraphicEngine::Instance();
 	delete AudioEngine::Instance();
 	delete EventManager::Instance();
+	delete ScriptManager::Instance();
 }
 
 void Game::Start()
@@ -48,6 +50,7 @@ void Game::Start()
 	gameState = GameState::Playing;
 	time->Start();
 	scene->Start();
+	ScriptManager::Instance()->Start();
 	Update();
 }
 
@@ -99,6 +102,8 @@ void Game::Initialize()
 	time = new Time();
 	scene = new Scene();
 	scene->Initialize();
+	ScriptManager::Instance()->SetScene(scene);
+	ScriptManager::Instance()->Initialize();
 	delete window;
 }
 
@@ -124,6 +129,7 @@ void Game::Update()
 
 			//Fixed Update
 			PhysicsEngine::Instance()->UpdatePhysics(timePerFrame);
+			ScriptManager::Instance()->Update(timePerFrame);
 		}
 		GraphicEngine::Instance()->Render();
 	}

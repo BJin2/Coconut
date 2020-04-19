@@ -22,6 +22,7 @@ public:
 	ScriptComponent(std::string _name);
 	virtual ~ScriptComponent();
 
+	virtual void VInitialize() override;
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 private:

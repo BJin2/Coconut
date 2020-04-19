@@ -14,6 +14,7 @@ public:
 	Actor();
 	Actor(std::string _name);
 	~Actor();
+	virtual void VInitialize();
 	virtual void VUpdate(float dt);
 	virtual void VStart();
 

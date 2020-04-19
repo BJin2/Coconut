@@ -188,6 +188,7 @@
     <ClCompile Include="..\..\Engines\ResourceManager.cpp" />
     <ClCompile Include="..\..\Engines\Scene.cpp" />
     <ClCompile Include="..\..\Engines\SceneManager.cpp" />
+    <ClCompile Include="..\..\Engines\ScriptManager.cpp" />
     <ClCompile Include="..\..\Engines\Time.cpp" />
     <ClCompile Include="..\..\Engines\Utils.cpp" />
     <ClCompile Include="..\..\Engines\XMLCompiler.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\..\Engines\ResourceManager.hpp" />
     <ClInclude Include="..\..\Engines\Scene.h" />
     <ClInclude Include="..\..\Engines\SceneManager.h" />
+    <ClInclude Include="..\..\Engines\ScriptManager.hpp" />
     <ClInclude Include="..\..\Engines\Time.h" />
     <ClInclude Include="..\..\Engines\Utils.h" />
     <ClInclude Include="..\..\Engines\XMLCompiler.h" />
