@@ -16,6 +16,11 @@ Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 	m_grounded = false;
 }
 
+void Rigidbody::VInitialize()
+{
+
+}
+
 void Rigidbody::VStart()
 {
 	SetAABB();

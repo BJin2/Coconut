@@ -16,6 +16,11 @@ RendererComponent::~RendererComponent()
 	delete texture;
 }
 
+void RendererComponent::VInitialize()
+{
+
+}
+
 void RendererComponent::VStart()
 {
 	

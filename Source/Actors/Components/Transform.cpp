@@ -24,6 +24,11 @@ Transform::Transform()
 	m_localTransformMatrix = Matrix::Identity;
 }
 
+void Transform::VInitialize()
+{
+
+}
+
 void Transform::VStart()
 {
 	

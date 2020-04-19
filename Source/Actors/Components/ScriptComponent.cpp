@@ -2,6 +2,9 @@
 #include <iostream>
 #include <Windows.h>
 #include "../../Engines/Game.h"
+#include "../../Actors/Actor.h"
+#include "../../Actors/Components/Transform.h"
+#include "../../Engines/ScriptManager.hpp"
 
 ScriptComponent::ScriptComponent(std::string _name)
 {
@@ -25,6 +28,7 @@ void ScriptComponent::VInitialize()
 		{
 			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
 			{
+
 			}
 		}
 	}
@@ -81,4 +85,22 @@ bool ScriptComponent::CheckLua(int r)
 		return false;
 	}
 	return true;
+}
+
+void ScriptComponent::SetPosition(std::string name, float x, float y)
+{
+	if (ScriptManager::Instance() != nullptr && ScriptManager::Instance()->GetScene() != nullptr)
+	{
+		for (auto actor : ScriptManager::Instance()->GetScene()->GetActor())
+		{
+			if (actor->name == name)
+			{
+				actor->transform->SetPosition(x, y);
+				
+
+
+				break;
+			}
+		}
+	}
 }

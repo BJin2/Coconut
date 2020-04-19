@@ -19,6 +19,7 @@ private:
 	std::vector<Transform*> m_children;
 public:
 	Transform();
+	virtual void VInitialize() override;
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 	void Translate(Vector2 dir, float speed);

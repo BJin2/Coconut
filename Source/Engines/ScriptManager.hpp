@@ -15,6 +15,7 @@ public:
 	void Update(float delta);
 
 	void SetScene(Scene* s);
+	Scene* GetScene();
 
 	Actor* AddActor();
 

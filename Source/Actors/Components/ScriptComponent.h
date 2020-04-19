@@ -1,5 +1,5 @@
 #pragma once
-#include<string>
+#include <string>
 #include "ActorComponent.h"
 
 extern "C"
@@ -18,6 +18,7 @@ class ScriptComponent : public ActorComponent
 protected:
 	lua_State* pL;
 	std::string name;
+
 public:
 	ScriptComponent(std::string _name);
 	virtual ~ScriptComponent();
@@ -25,7 +26,11 @@ public:
 	virtual void VInitialize() override;
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
+
+	Actor* actor;
 private:
 	bool CheckLua(int r);
 	bool isFileAvailable;
+
+	void SetPosition(std::string name, float x, float y);
 };

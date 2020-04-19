@@ -30,6 +30,7 @@ public:
 		Vector2 center;
 	} aabb;
 
+	virtual void VInitialize() override;
 	virtual void VStart() override;
 	virtual void VUpdate(float delta) override;
 

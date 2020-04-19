@@ -12,6 +12,7 @@ private:
 public:
 	RendererComponent();
 	~RendererComponent();
+	virtual void VInitialize() override;
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 

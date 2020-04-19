@@ -44,3 +44,8 @@ void ScriptManager::SetScene(Scene* s)
 {
 	pScene = s;
 }
+
+Scene* ScriptManager::GetScene()
+{
+	return pScene;
+}
