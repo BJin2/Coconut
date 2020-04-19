@@ -96,9 +96,6 @@ void ScriptComponent::SetPosition(std::string name, float x, float y)
 			if (actor->name == name)
 			{
 				actor->transform->SetPosition(x, y);
-				
-
-
 				break;
 			}
 		}
