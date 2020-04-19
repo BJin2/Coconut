@@ -35,6 +35,13 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 	{
 		XMLElement* newtrasform = doc->NewElement("Transform");
 
+		//Name
+		char* n = new char[a->name.size() + 1];
+		XMLElement* name = doc->NewElement("Name");
+		name->SetText(n);
+		name->InsertEndChild(name);
+		newtrasform->InsertEndChild(name);
+
 		//Postion
 		float px, py;
 		px = transform->GetPosition().x;
@@ -50,14 +57,14 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 		posElement->SetText(py);
 		posElement->InsertEndChild(posElement);
 
-		//Scale
 		newtrasform->InsertEndChild(position);
 
+		//Scale
 		float sx, sy;
 		sx = a->transform->GetScale().x;
 		sy = a->transform->GetScale().y;
 
-		XMLElement* scale = doc->NewElement("scale");
+		XMLElement* scale = doc->NewElement("Scale");
 
 		XMLElement* scaleElement = doc->NewElement("x");
 		scaleElement->SetText(sx);
@@ -73,7 +80,7 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 		float r;
 		r = a->transform->GetRotation();
 
-		XMLElement* rotation = doc->NewElement("rotation");
+		XMLElement* rotation = doc->NewElement("Rotation");
 		rotation->SetText(r);
 		newtrasform->InsertEndChild(rotation);
 
@@ -94,7 +101,7 @@ void XMLCompiler::SaveRenderProterties(Actor* a, XMLDocument* doc, XMLElement* e
 		sx = render->GetSize().x;
 		sy = render->GetSize().y;
 
-		XMLElement* size = doc->NewElement("size");
+		XMLElement* size = doc->NewElement("Size");
 		XMLElement* sizeElement = doc->NewElement("x");
 		sizeElement->SetText(sx);
 		size->InsertEndChild(sizeElement);
@@ -110,7 +117,7 @@ void XMLCompiler::SaveRenderProterties(Actor* a, XMLDocument* doc, XMLElement* e
 		float b = render->GetColor().b;
 		float a = render->GetColor().a;
 
-		XMLElement* color = doc->NewElement("color");
+		XMLElement* color = doc->NewElement("Color");
 
 		XMLElement* colorElement = doc->NewElement("r");
 		colorElement->SetText(r);
@@ -145,7 +152,7 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 		float m;
 		m = rb->GetMass();
 
-		XMLElement* mass = doc->NewElement("mass");
+		XMLElement* mass = doc->NewElement("Mass");
 		mass->SetText(mass);
 		newRb->InsertEndChild(mass);
 
@@ -154,7 +161,7 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 		vx = rb->GetCurrentVelocity().x;
 		vy = rb->GetCurrentVelocity().y;
 
-		XMLElement* velocity = doc->NewElement("velocity");
+		XMLElement* velocity = doc->NewElement("Velocity");
 		XMLElement* velocityElement = doc->NewElement("x");
 		velocityElement->SetText(vx);
 		velocity->InsertEndChild(velocityElement);
@@ -217,23 +224,29 @@ void XMLCompiler::LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e)
 
 	while (property != nullptr)
 	{
+		const char* n = new char[50];
 		switch (*property->Name())
 		{
-		case * "position":
+		case * "Name":
+			property->QueryStringAttribute("Name", &n);
+			a->name = n;
+			break;
+
+		case * "Position":
 			float px, py;
 			property->FirstChildElement("x")->QueryFloatText(&px);
 			property->FirstChildElement("y")->QueryFloatText(&py);
 			a->transform->SetPosition(Vector2(px, py));
 			break;
 
-		case * "scale":
+		case * "Scale":
 			float sx, sy;
 			property->FirstChildElement("x")->QueryFloatText(&sx);
 			property->FirstChildElement("y")->QueryFloatText(&sy);
 			a->transform->SetScale(Vector2(sx, sy));
 			break;
 
-		case * "rotation":
+		case * "Rotation":
 			float angle;
 			property->QueryFloatText(&angle);
 			a->transform->SetRotation(angle);
@@ -257,14 +270,14 @@ void XMLCompiler::LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e)
 	{
 		switch (*property->Name())
 		{
-		case * "size":
+		case * "Size":
 			float px, py;
 			property->FirstChildElement("x")->QueryFloatText(&px);
 			property->FirstChildElement("y")->QueryFloatText(&py);
 			render->SetSize(sf::Vector2f(px, py));
 			break;
 
-		case * "color":
+		case * "Color":
 			float r, g, b, a;
 			property->FirstChildElement("r")->QueryFloatText(&r);
 			property->FirstChildElement("g")->QueryFloatText(&g);
@@ -291,20 +304,20 @@ void XMLCompiler::LoadRigidbodyProperties(Actor* a, tinyxml2::XMLElement* e)
 	{
 		switch (*property->Name())
 		{
-		case * "velocity":
+		case * "Velocity":
 			float vx, vy;
 			property->FirstChildElement("x")->QueryFloatText(&vx);
 			property->FirstChildElement("y")->QueryFloatText(&vy);
 			rb->SetCurrentVelocity(Vector2(vx, vy));
 			break;
 
-		case * "mass":
+		case * "Mass":
 			float m;
 			property->QueryFloatText(&m);
 			rb->SetMass(m);
 			break;
 
-		case * "bounciness":
+		case * "Bounciness":
 			float b;
 			property->QueryFloatText(&b);
 			rb->SetBounciness(b);

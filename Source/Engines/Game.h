@@ -11,6 +11,7 @@
 #include "Time.h"
 
 class EventMapper;
+class XMLCompiler;
 
 class Game
 {
@@ -32,5 +33,6 @@ private:
 	static Scene* scene;
 	static Time* time;
 	static EventMapper* mapper;
+	static XMLCompiler* xml;
 	static void Clear();
 };

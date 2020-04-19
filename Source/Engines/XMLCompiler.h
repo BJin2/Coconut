@@ -13,11 +13,11 @@ class XMLCompiler
 {
 public:
 	XMLError XMLSave(const char* path, Scene* scene);
-	XMLError XMLLoad(XMLDocument* doc, Scene* scene);
+	XMLError XMLLoad(tinyxml2::XMLDocument* doc, Scene* scene);
 private:
-	void SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement* e);
-	void SaveRenderProterties(Actor* a, XMLDocument* doc, XMLElement* e);
-	void SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElement* e);
+	void SaveTrnaformProperties(Actor* a, tinyxml2::XMLDocument* doc, XMLElement* e);
+	void SaveRenderProterties(Actor* a, tinyxml2::XMLDocument* doc, XMLElement* e);
+	void SaveRidgidbodyProperties(Actor* a, tinyxml2::XMLDocument* doc, XMLElement* e);
 
 	void LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* c);
 	void LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e);
