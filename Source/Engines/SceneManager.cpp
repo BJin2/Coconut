@@ -38,7 +38,7 @@ void Scenemanger::SetActive(int index)
 		xmlCompiler->XMLLoad(scenes[index], scene);
 	else
 	{
-		printf("Can not read file index: %s\n", index);
+		printf("Can not find index : %s\n", index);
 	}
 }
 
