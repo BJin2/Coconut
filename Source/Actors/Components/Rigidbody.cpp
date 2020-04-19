@@ -99,6 +99,16 @@ void Rigidbody::SetCurrentVelocity(Vector2 v)
 	m_currentVelocity += v;
 }
 
+void Rigidbody::SetMass(float m)
+{
+	m_mass = m;
+}
+
+void Rigidbody::SetBounciness(float b)
+{
+	m_bounciness = b;
+}
+
 Vector2 Rigidbody::GetCurrentVelocity()
 {
 	return m_currentVelocity;

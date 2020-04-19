@@ -36,11 +36,13 @@ public:
 	void AddForce(Vector2 force);
 	void Stop();
 	bool IsGrounded();
-	void SetAABB();
 	void Integrate(float dt);
-	float GetMass();
-	float GetBounciness();
+	void SetAABB();
 	void SetRigidbodySettings(float _mass = 1, float _bounciness = 0.8f, bool _obeysGravity = false);
 	void SetCurrentVelocity(Vector2 v);
+	void SetMass(float m);
+	void SetBounciness(float b);
 	Vector2 GetCurrentVelocity();
+	float GetMass();
+	float GetBounciness();
 };
