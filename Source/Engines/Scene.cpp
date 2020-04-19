@@ -10,7 +10,8 @@
 #include "Event/ExampleLoadedEvent.h"
 #include "GraphicEngine.hpp"
 
-class RenderComponent;
+float fire_timer = 0;
+Vector2 direction = Vector2(0, 1);
 
 Scene::~Scene()
 {
@@ -63,11 +64,11 @@ void Scene::Initialize()
 	player->AddComponent<RendererComponent>();
 	player->AddComponent<Rigidbody>();
 	Rigidbody* cachedPlayerRigidBody = player->GetComponent<Rigidbody>();
-	cachedPlayerRigidBody->SetRigidbodySettings(0.0f, 0.0f, false);//static
+	cachedPlayerRigidBody->SetRigidbodySettings(10000.0f, 0.0f, false);//static
 	cachedPlayerRigidBody->SetCurrentVelocity(Vector2(0, 0));
 	cachedRenderer = player->GetComponent<RendererComponent>();
 	cachedRenderer->SetSize(Vector2(50, 50));
-	cachedRenderer->SetTexture("../../../Assets/Textures/Player/Character_Down_Walk0.png");
+	cachedRenderer->SetTexture("../../../Assets/Textures/Player/Player_Down.png");
 	player->transform->SetPosition(320 - 25, 240 - 25);
 
 	Actor* bgm = AddActor("bgm");
@@ -95,22 +96,58 @@ void Scene::Update(float delta)
 	{
 		actor->VUpdate(delta);
 	}
-	//Input and translation testing
+	fire_timer += delta;
+	//printf("Timer : %f\n", delta);
+	//Hardcoded game logic
 	if (InputCommand::GetKeyDown(InputCommand::Key::D))
 	{
-		Find("player")->transform->Translate(Vector2(1, 0), 3 * delta);
+		//Find("player")->transform->Translate(Vector2(1, 0), 3 * delta);
+		Find("player")->GetComponent<RendererComponent>()->SetTexture("../../../Assets/Textures/Player/Player_Right.png");
+		direction = Vector2(1, 0);
 	}
 	if (InputCommand::GetKeyDown(InputCommand::Key::A))
 	{
-		Find("player")->transform->Translate(Vector2(-1, 0), 3 * delta);
+		//Find("player")->transform->Translate(Vector2(-1, 0), 3 * delta);
+		Find("player")->GetComponent<RendererComponent>()->SetTexture("../../../Assets/Textures/Player/Player_Left.png");
+		direction = Vector2(-1, 0);
 	}
 	if (InputCommand::GetKeyDown(InputCommand::Key::W))
 	{
-		Find("player")->transform->Translate(Vector2(0, 1), 3 * delta);
+		//Find("player")->transform->Translate(Vector2(0, 1), 3 * delta);
+		Find("player")->GetComponent<RendererComponent>()->SetTexture("../../../Assets/Textures/Player/Player_Up.png");
+		direction = Vector2(0, -1);
 	}
 	if (InputCommand::GetKeyDown(InputCommand::Key::S))
 	{
-		Find("player")->transform->Translate(Vector2(0, -1), 3 * delta);
+		//Find("player")->transform->Translate(Vector2(0, -1), 3 * delta);
+		Find("player")->GetComponent<RendererComponent>()->SetTexture("../../../Assets/Textures/Player/Player_Down.png");
+		direction = Vector2(0, 1);
+	}
+	if (InputCommand::GetKeyDown(InputCommand::Key::Space))
+	{
+		if (fire_timer >= 0.2f)
+		{
+			Vector2 playerHalfSize = Find("player")->GetComponent<RendererComponent>()->GetSize() * 0.5f;
+			Vector2 playerCenter = Find("player")->transform->GetPosition() + playerHalfSize;
+			Vector2 projectileHalfSize = Vector2(7, 7);
+
+			Actor* projectile = AddActor("projectile");
+			projectile->AddComponent<RendererComponent>();
+			projectile->AddComponent<Rigidbody>();
+			RendererComponent* cachedRenderer = projectile->GetComponent<RendererComponent>();
+			cachedRenderer->SetSize(projectileHalfSize*2.0f);
+			cachedRenderer->SetTexture("../../../Assets/Textures/projectile.png");
+			
+			Rigidbody* cachedRigidBody = projectile->GetComponent<Rigidbody>();
+			cachedRigidBody->SetRigidbodySettings(1.0f, 0.0f, false);//static
+			cachedRigidBody->SetCurrentVelocity(direction * 100.0f);
+			cachedRigidBody->SetAABB();
+			float x = playerCenter.x + (direction.x * playerHalfSize.x) + (direction.x * projectileHalfSize.x);
+			float y = playerCenter.y + (direction.y * playerHalfSize.y) + (direction.y * projectileHalfSize.y);
+			printf("Projectile pos : %f\n", y);
+			projectile->transform->SetPosition(x, y);
+			fire_timer = 0;
+		}
 	}
 }
 

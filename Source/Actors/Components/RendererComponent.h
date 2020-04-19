@@ -20,6 +20,7 @@ public:
 	void SetColor(sf::Color color);
 	void SetTexture(std::string textureFile);
 	void SetSize(sf::Vector2f _size);
+	void SetSize(int x, int y);
 	
 	sf::Shape* GetShape() { return shape; };
 	sf::Color GetColor() { return shape->getFillColor(); }

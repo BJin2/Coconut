@@ -115,7 +115,7 @@ void Game::Update()
 		}
 
 		time->Update();
-		scene->Update(timePerFrame);
+		scene->Update(time->GetDeltaTime());
 
 		time->SetTimeSinceLastUpdate(time->GetDeltaTime());
 		while (time->GetTimeSinceLastUpdate() > timePerFrame)

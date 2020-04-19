@@ -12,13 +12,13 @@ Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 	m_gravity = Vector2(0, 9.8f);
 	m_maxVelocity = Vector2(10.0f, 10.0f);
 	engine = PhysicsEngine::Instance();
+	engine->AddRigidBody(this);
 	m_grounded = false;
 }
 
 void Rigidbody::VStart()
 {
 	SetAABB();
-	engine->AddRigidBody(this);
 }
 
 void Rigidbody::VUpdate(float delta)
