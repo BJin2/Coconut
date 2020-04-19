@@ -16,19 +16,19 @@ ScriptComponent::~ScriptComponent()
 	lua_close(pL);
 }
 
-//void ScriptComponent::VInitialize()
-//{
-//	if (isFileAvailable)
-//	{
-//		lua_getglobal(pL, "Initialize");
-//		if (lua_isfunction(pL, -1))
-//		{
-//			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
-//			{
-//			}
-//		}
-//	}
-//}
+void ScriptComponent::VInitialize()
+{
+	if (isFileAvailable)
+	{
+		lua_getglobal(pL, "Initialize");
+		if (lua_isfunction(pL, -1))
+		{
+			if (CheckLua(lua_pcall(pL, 0, 1, 0)))
+			{
+			}
+		}
+	}
+}
 
 void ScriptComponent::VStart()
 {

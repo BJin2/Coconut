@@ -27,6 +27,14 @@ Actor::~Actor()
 	}
 }
 
+void Actor::VInitialize()
+{
+	for (auto comp : actorComponent)
+	{
+		comp->VInitialize();
+	}
+}
+
 void Actor::VStart()
 {
 	for (auto comp : actorComponent)
