@@ -169,6 +169,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\Actors\Actor.cpp" />
+    <ClCompile Include="..\..\Actors\Components\AnimatedSprite.cpp" />
+    <ClCompile Include="..\..\Actors\Components\Animation.cpp" />
     <ClCompile Include="..\..\Actors\Components\AudioComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\Rigidbody.cpp" />
@@ -196,6 +198,8 @@
     <ClInclude Include="..\..\..\Libs\tinyxml\tinyxml.h" />
     <ClInclude Include="..\..\Actors\Actor.h" />
     <ClInclude Include="..\..\Actors\Components\ActorComponent.h" />
+    <ClInclude Include="..\..\Actors\Components\AnimatedSprite.h" />
+    <ClInclude Include="..\..\Actors\Components\Animation.h" />
     <ClInclude Include="..\..\Actors\Components\AudioComponent.h" />
     <ClInclude Include="..\..\Actors\Components\RendererComponent.h" />
     <ClInclude Include="..\..\Actors\Components\Rigidbody.h" />
