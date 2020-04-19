@@ -135,6 +135,20 @@ void Scene::Update(float delta)
 	}
 }
 
+void Scene::DeleteAllActors()
+{
+	for (auto a : actors)
+	{
+		delete a;
+	}
+	actors.clear();
+}
+
+std::vector<Actor*> Scene::GetActor()
+{
+	return actors;
+}
+
 Actor* Scene::AddActor()
 {
 	Actor* actor = new Actor();

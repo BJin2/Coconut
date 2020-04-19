@@ -12,5 +12,7 @@ public:
 	void Initialize();
 	void Start();
 	void Update(float delta);
+	void DeleteAllActors();
+	std::vector<Actor*> GetActor();
 	Actor* AddActor();
 };
