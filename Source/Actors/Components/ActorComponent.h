@@ -17,7 +17,6 @@ protected:
 public:
 	virtual ~ActorComponent(void) { /*m_pOwner.reset();*/ }
 	// These functions are meant to be overridden by the implBementation classes of the components.
-	virtual void VInitialize() = 0;
 	virtual void VStart() = 0;
 	virtual void VUpdate(float dt) = 0;
 	// This function should be overridden by the interface class.
