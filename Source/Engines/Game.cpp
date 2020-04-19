@@ -8,7 +8,7 @@
 #include "AudioEngine.hpp"
 #include "ScriptManager.hpp"
 #include "../CoconutEngine/CoconutEngine/resource.h"
-#include "XMLCompiler.h"
+#include "../Engines/XMLCompiler.h"
 
 //Event example
 #include "Event/EventManager.h"
@@ -20,7 +20,7 @@ Game::GameState Game::gameState = Game::GameState::Uninitialized;
 Scene* Game::scene;
 Time* Game::time;
 EventMapper* Game::mapper;
-XMLComment* Game::xml;
+XMLCompiler* Game::xml;
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
