@@ -6,6 +6,7 @@
 #include "..\Actors\Components\ScriptComponent.h"
 #include "Utils.h"
 
+#pragma region SAVE
 XMLError XMLCompiler::XMLSave(const char* path, Scene* scene)
 {
 	XMLDocument xmlDoc;
@@ -25,32 +26,6 @@ XMLError XMLCompiler::XMLSave(const char* path, Scene* scene)
 	}
 	XMLError result = xmlDoc.SaveFile(path);
 	XMLCheckResult(result);
-}
-
-XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
-{
-	XMLNode* xml_scene = doc->FirstChildElement("Scene");
-	if (xml_scene == nullptr) return XML_ERROR_FILE_READ_ERROR;
-
-	XMLElement* element = xml_scene->FirstChildElement("Actor");
-	if (element == nullptr) {
-		std::cout << "Element null" << std::endl;
-		return XML_ERROR_PARSING_ELEMENT;
-	}
-
-	while (element != nullptr)
-	{
-		Actor* actor = scene->AddActor();
-		XMLElement* component = element->FirstChildElement();
-
-		while (component != nullptr)
-		{
-			LoadComponentFromXML(actor, component);
-			component = component->NextSiblingElement();
-		}
-
-		element = element->NextSiblingElement("GameObject");
-	}
 }
 
 void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement* e)
@@ -199,6 +174,33 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 		e->InsertEndChild(newRb);
 	}
 }
+#pragma endregion
+#pragma region LOAD
+XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
+{
+	XMLNode* xml_scene = doc->FirstChildElement("Scene");
+	if (xml_scene == nullptr) return XML_ERROR_FILE_READ_ERROR;
+
+	XMLElement* element = xml_scene->FirstChildElement("Actor");
+	if (element == nullptr) {
+		std::cout << "Element null" << std::endl;
+		return XML_ERROR_PARSING_ELEMENT;
+	}
+
+	while (element != nullptr)
+	{
+		Actor* actor = scene->AddActor();
+		XMLElement* component = element->FirstChildElement();
+
+		while (component != nullptr)
+		{
+			LoadComponentFromXML(actor, component);
+			component = component->NextSiblingElement();
+		}
+
+		element = element->NextSiblingElement("GameObject");
+	}
+}
 
 void XMLCompiler::LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* e)
 {
@@ -314,3 +316,4 @@ void XMLCompiler::LoadRigidbodyProperties(Actor* a, tinyxml2::XMLElement* e)
 		property = property->NextSiblingElement();
 	}
 }
+#pragma endregion
