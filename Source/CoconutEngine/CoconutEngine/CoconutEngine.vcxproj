@@ -160,8 +160,14 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinystr.cpp" />
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlerror.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\Actors\Actor.cpp" />
     <ClCompile Include="..\..\Actors\Components\AudioComponent.cpp" />
     <ClCompile Include="..\..\Actors\Components\RendererComponent.cpp" />
@@ -182,6 +188,7 @@
     <ClCompile Include="..\..\Engines\SceneManager.cpp" />
     <ClCompile Include="..\..\Engines\Time.cpp" />
     <ClCompile Include="..\..\Engines\Utils.cpp" />
+    <ClCompile Include="..\..\Engines\XMLCompiler.cpp" />
     <ClCompile Include="..\..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +221,7 @@
     <ClInclude Include="..\..\Engines\SceneManager.h" />
     <ClInclude Include="..\..\Engines\Time.h" />
     <ClInclude Include="..\..\Engines\Utils.h" />
+    <ClInclude Include="..\..\Engines\XMLCompiler.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

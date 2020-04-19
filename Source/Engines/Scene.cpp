@@ -10,8 +10,11 @@
 #include "Event/ExampleLoadedEvent.h"
 #include "GraphicEngine.hpp"
 
+//temporary variables. Will be moved to script
 float fire_timer = 0;
+float spawn_timer = 0;
 Vector2 direction = Vector2(0, 1);
+std::string spawner_direction[4] = {"east", "south", "west", "north"};
 
 Scene::~Scene()
 {
@@ -71,8 +74,8 @@ void Scene::Initialize()
 	cachedRenderer->SetTexture("../../../Assets/Textures/Player/Player_Down.png");
 	player->transform->SetPosition(320 - 25, 240 - 25);
 
-	Actor* bgm = AddActor("bgm");
-	bgm->AddComponent<AudioComponent>();
+	//Actor* bgm = AddActor("bgm");
+	//bgm->AddComponent<AudioComponent>();
 
 	ExampleLoadedEventData data;
 	data.example = "Scene Loaded";
@@ -87,7 +90,7 @@ void Scene::Start()
 		actor->VStart();
 	}
 
-	Find("bgm")->GetComponent<AudioComponent>()->Play();
+	//Find("bgm")->GetComponent<AudioComponent>()->Play();
 }
 
 void Scene::Update(float delta)
@@ -96,9 +99,33 @@ void Scene::Update(float delta)
 	{
 		actor->VUpdate(delta);
 	}
-	fire_timer += delta;
-	//printf("Timer : %f\n", delta);
+	
 	//Hardcoded game logic
+	fire_timer += delta;
+	spawn_timer += delta;
+	if (spawn_timer >= 3.0f)
+	{
+		Vector2 dir = Vector2(0, 0);
+		for (int i = 0; i < 4; i++)
+		{
+			Vector2 spawnPos = Find(spawner_direction[i])->transform->GetPosition();
+			dir = Find("player")->transform->GetPosition() - spawnPos;
+			dir /= Vector2Math::Magnitude(dir);
+			Actor* enemy = AddActor("enemy");
+			enemy->AddComponent<RendererComponent>();
+			enemy->AddComponent<Rigidbody>();
+			RendererComponent* cachedRenderer = enemy->GetComponent<RendererComponent>();
+			cachedRenderer->SetSize(50, 50);
+			cachedRenderer->SetTexture("../../../Assets/Textures/Enemy/Enemy_Walk0.png");
+			Rigidbody* cachedRigidBody = enemy->GetComponent<Rigidbody>();
+			cachedRigidBody->SetRigidbodySettings(1.0f, 0.0f, false);
+			cachedRigidBody->SetCurrentVelocity(dir * 50.0f);
+			cachedRigidBody->SetAABB();
+			enemy->transform->SetPosition(spawnPos);
+		}
+		spawn_timer = 0.0f;
+	}
+
 	if (InputCommand::GetKeyDown(InputCommand::Key::D))
 	{
 		//Find("player")->transform->Translate(Vector2(1, 0), 3 * delta);

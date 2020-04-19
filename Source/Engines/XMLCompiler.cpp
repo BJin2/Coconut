@@ -152,14 +152,14 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 		//Current Velocity
 		float vx, vy;
 		vx = rb->GetCurrentVelocity().x;
-		vx = rb->GetCurrentVelocity().y;
+		vy = rb->GetCurrentVelocity().y;
 
 		XMLElement* velocity = doc->NewElement("velocity");
 		XMLElement* velocityElement = doc->NewElement("x");
 		velocityElement->SetText(vx);
 		velocity->InsertEndChild(velocityElement);
 
-		XMLElement* velocityElement = doc->NewElement("y");
+		velocityElement = doc->NewElement("y");
 		velocityElement->SetText(vy);
 		velocity->InsertEndChild(velocityElement);
 		newRb->InsertEndChild(velocity);
@@ -208,7 +208,7 @@ void XMLCompiler::LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* e)
 	if (name == "Transform") LoadTransformProperties(a, e);
 	else if (name == "RenderComponent") LoadRenderProperties(a, e);
 	else if (name == "RigidbodyComponent") LoadRigidbodyProperties(a, e);
-	else if (name == "ScriptComponent") a->AddComponent<ScriptComponent>();
+	//else if (name == "ScriptComponent") a->AddComponent<ScriptComponent>();
 }
 
 void XMLCompiler::LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e)

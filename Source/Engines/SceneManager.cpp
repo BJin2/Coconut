@@ -28,6 +28,7 @@ XMLError Scenemanger::LoadScene(const char* path)
 	}
 
 	scenes.push_back(doc);
+	return eResult;
 }
 
 void Scenemanger::SetActive(int index)
