@@ -1,7 +1,6 @@
 <Scene>
     <Actor>
         <Transform>
-            <Name>อออออออออออýýýý</Name>
             <Position>
                 <x>320</x>
                 <y>240</y>
@@ -27,7 +26,6 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>ออออออýýýý</Name>
             <Position>
                 <x>320</x>
                 <y>70</y>
@@ -53,7 +51,6 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>ออออออýýýýÝÝ</Name>
             <Position>
                 <x>320</x>
                 <y>410</y>
@@ -79,7 +76,6 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>อออออýýýýÝÝÝ</Name>
             <Position>
                 <x>70</x>
                 <y>240</y>
@@ -105,7 +101,6 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>อออออýýýýÝÝÝ</Name>
             <Position>
                 <x>570</x>
                 <y>240</y>
@@ -131,7 +126,6 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>อออออออýýýýÝ</Name>
             <Position>
                 <x>295</x>
                 <y>215</y>
@@ -159,6 +153,138 @@
             <Velocity>
                 <x>0</x>
                 <y>0</y>
+            </Velocity>
+            <Bounciness>0</Bounciness>
+        </RigidbodyComponent>
+    </Actor>
+    <Actor>
+        <Transform>
+            <Position>
+                <x>482.03</x>
+                <y>232.00342</y>
+            </Position>
+            <Scale>
+                <x>1</x>
+                <y>1</y>
+            </Scale>
+            <Rotation>0</Rotation>
+        </Transform>
+        <RenderComponent>
+            <Size>
+                <x>50</x>
+                <y>50</y>
+            </Size>
+            <Color>
+                <r>255</r>
+                <g>255</g>
+                <b>255</b>
+                <a>255</a>
+            </Color>
+        </RenderComponent>
+        <RigidbodyComponent>
+            <Mass>true</Mass>
+            <Velocity>
+                <x>-49.794659</x>
+                <y>-4.5267873</y>
+            </Velocity>
+            <Bounciness>0</Bounciness>
+        </RigidbodyComponent>
+    </Actor>
+    <Actor>
+        <Transform>
+            <Position>
+                <x>308.76855</x>
+                <y>322.38373</y>
+            </Position>
+            <Scale>
+                <x>1</x>
+                <y>1</y>
+            </Scale>
+            <Rotation>0</Rotation>
+        </Transform>
+        <RenderComponent>
+            <Size>
+                <x>50</x>
+                <y>50</y>
+            </Size>
+            <Color>
+                <r>255</r>
+                <g>255</g>
+                <b>255</b>
+                <a>255</a>
+            </Color>
+        </RenderComponent>
+        <RigidbodyComponent>
+            <Mass>true</Mass>
+            <Velocity>
+                <x>-6.3582158</x>
+                <y>-49.594082</y>
+            </Velocity>
+            <Bounciness>0</Bounciness>
+        </RigidbodyComponent>
+    </Actor>
+    <Actor>
+        <Transform>
+            <Position>
+                <x>157.79311</x>
+                <y>230.24527</y>
+            </Position>
+            <Scale>
+                <x>1</x>
+                <y>1</y>
+            </Scale>
+            <Rotation>0</Rotation>
+        </Transform>
+        <RenderComponent>
+            <Size>
+                <x>50</x>
+                <y>50</y>
+            </Size>
+            <Color>
+                <r>255</r>
+                <g>255</g>
+                <b>255</b>
+                <a>255</a>
+            </Color>
+        </RenderComponent>
+        <RigidbodyComponent>
+            <Mass>true</Mass>
+            <Velocity>
+                <x>49.694187</x>
+                <y>-5.5215764</y>
+            </Velocity>
+            <Bounciness>0</Bounciness>
+        </RigidbodyComponent>
+    </Actor>
+    <Actor>
+        <Transform>
+            <Position>
+                <x>304.99023</x>
+                <y>157.04909</y>
+            </Position>
+            <Scale>
+                <x>1</x>
+                <y>1</y>
+            </Scale>
+            <Rotation>0</Rotation>
+        </Transform>
+        <RenderComponent>
+            <Size>
+                <x>50</x>
+                <y>50</y>
+            </Size>
+            <Color>
+                <r>255</r>
+                <g>255</g>
+                <b>255</b>
+                <a>255</a>
+            </Color>
+        </RenderComponent>
+        <RigidbodyComponent>
+            <Mass>true</Mass>
+            <Velocity>
+                <x>-8.4953461</x>
+                <y>49.273006</y>
             </Velocity>
             <Bounciness>0</Bounciness>
         </RigidbodyComponent>

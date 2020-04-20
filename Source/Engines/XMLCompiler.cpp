@@ -176,6 +176,22 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 }
 #pragma endregion
 #pragma region LOAD
+
+XMLError XMLCompiler::XMLLoad(const char* path, Scene* scene)
+{
+	XMLDocument* doc = new XMLDocument();
+	XMLError eResult = doc->LoadFile(path);
+
+	if (eResult != tinyxml2::XML_SUCCESS)
+	{
+		printf("Can not read file: %s\n", path);
+	}
+
+	scenes.push_back(doc);
+	XMLLoad(doc, scene);
+	return eResult;
+}
+
 XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
 {
 	XMLNode* xml_scene = doc->FirstChildElement("Scene");

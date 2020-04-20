@@ -13,6 +13,7 @@ class XMLCompiler
 {
 public:
 	XMLError XMLSave(const char* path, Scene* scene);
+	XMLError XMLLoad(const char* path, Scene* scene);
 	XMLError XMLLoad(tinyxml2::XMLDocument* doc, Scene* scene);
 private:
 	void SaveTrnaformProperties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);
@@ -23,5 +24,6 @@ private:
 	void LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e);
 	void LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e);
 	void LoadRigidbodyProperties(Actor* a, tinyxml2::XMLElement* e);
+	std::vector<XMLDocument*> scenes;
 
 };

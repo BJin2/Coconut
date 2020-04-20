@@ -201,7 +201,7 @@ LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			xml->XMLSave("../../../Assets/Scene1.xml",scene);
 			break;
 		case ID_FILE_LOAD:
-			//xml->XMLLoad(,scene);
+			xml->XMLLoad("../../../Assets/Scene1.xml", scene);
 			break;
 		}
 		break;
