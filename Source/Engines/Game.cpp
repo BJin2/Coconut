@@ -101,6 +101,7 @@ void Game::Initialize()
 			std::cout << exampleData->example << std::endl;
 		}, ExampleLoadedEventData::type);
 
+	xml = new XMLCompiler();
 	time = new Time();
 	scene = new Scene();
 	scene->Initialize();
