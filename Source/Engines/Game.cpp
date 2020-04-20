@@ -197,10 +197,11 @@ LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		switch (LOWORD(wParam))
 		{
 		case ID_FILE_SAVE:
-			//TODO call save function here
+			printf("SAVED");
+			xml->XMLSave("../../../Assets/Scene1.xml",scene);
 			break;
 		case ID_FILE_LOAD:
-			//TODO call load function here
+			//xml->XMLLoad(,scene);
 			break;
 		}
 		break;

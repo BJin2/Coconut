@@ -31,61 +31,54 @@ XMLError XMLCompiler::XMLSave(const char* path, Scene* scene)
 void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement* e)
 {
 	auto transform = a->GetComponent<Transform>();
-	if (transform != nullptr)
-	{
-		XMLElement* newtrasform = doc->NewElement("Transform");
+	XMLElement* newTransform = doc->NewElement("Transform");
 
-		//Name
-		char* n = new char[a->name.size() + 1];
-		XMLElement* name = doc->NewElement("Name");
-		name->SetText(n);
-		name->InsertEndChild(name);
-		newtrasform->InsertEndChild(name);
+	//char* n = new char[a->name.size() + 1];
+	//XMLElement* name = doc->NewElement("Name");
+	//name->SetText(n);
+	//name->InsertEndChild(name);
+	//newTransform->InsertEndChild(name);
 
-		//Postion
-		float px, py;
-		px = transform->GetPosition().x;
-		py = transform->GetPosition().y;
+	float px, py;
+	px = transform->GetPosition().x;
+	py = transform->GetPosition().y;
 
-		XMLElement* position = doc->NewElement("Position");
+	float sx, sy;
+	sx = transform->GetScale().x;
+	sy = transform->GetScale().y;
 
-		XMLElement* posElement = doc->NewElement("x");
-		posElement->SetText(px);
-		posElement->InsertEndChild(posElement);
+	float r;
+	r = transform->GetRotation();
 
-		posElement = doc->NewElement("y");
-		posElement->SetText(py);
-		posElement->InsertEndChild(posElement);
+	XMLElement* position = doc->NewElement("Position");
+	// x position
+	XMLElement* posElement = doc->NewElement("x");
+	posElement->SetText(px);
+	position->InsertEndChild(posElement);
+	// y position
+	posElement = doc->NewElement("y");
+	posElement->SetText(py);
+	position->InsertEndChild(posElement);
+	// End Child position
+	newTransform->InsertEndChild(position);
 
-		newtrasform->InsertEndChild(position);
+	XMLElement* scale = doc->NewElement("Scale");
+	// x scale
+	XMLElement* scaleElement = doc->NewElement("x");
+	scaleElement->SetText(sx);
+	scale->InsertEndChild(scaleElement);
+	// y scale
+	scaleElement = doc->NewElement("y");
+	scaleElement->SetText(sy);
+	scale->InsertEndChild(scaleElement);
+	// End Child scale
+	newTransform->InsertEndChild(scale);
 
-		//Scale
-		float sx, sy;
-		sx = a->transform->GetScale().x;
-		sy = a->transform->GetScale().y;
+	XMLElement* rotation = doc->NewElement("Rotation");
+	rotation->SetText(r);
+	newTransform->InsertEndChild(rotation);
 
-		XMLElement* scale = doc->NewElement("Scale");
-
-		XMLElement* scaleElement = doc->NewElement("x");
-		scaleElement->SetText(sx);
-		scale->InsertEndChild(scaleElement);
-
-		scaleElement = doc->NewElement("y");
-		scaleElement->SetText(sy);
-		scale->InsertEndChild(scaleElement);
-
-		newtrasform->InsertEndChild(scale);
-
-		//Rotation
-		float r;
-		r = a->transform->GetRotation();
-
-		XMLElement* rotation = doc->NewElement("Rotation");
-		rotation->SetText(r);
-		newtrasform->InsertEndChild(rotation);
-
-		e->InsertEndChild(newtrasform);
-	}
+	e->InsertEndChild(newTransform);
 }
 
 void XMLCompiler::SaveRenderProterties(Actor* a, XMLDocument* doc, XMLElement* e)
