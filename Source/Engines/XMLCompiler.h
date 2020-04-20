@@ -24,6 +24,5 @@ private:
 	void LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e);
 	void LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e);
 	void LoadRigidbodyProperties(Actor* a, tinyxml2::XMLElement* e);
-	std::vector<XMLDocument*> scenes;
-
+	//std::vector<tinyxml2::XMLDocument*> scenes;
 };

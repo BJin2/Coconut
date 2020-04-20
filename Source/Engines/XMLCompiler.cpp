@@ -33,11 +33,16 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 	auto transform = a->GetComponent<Transform>();
 	XMLElement* newTransform = doc->NewElement("Transform");
 
-	//char* n = new char[a->name.size() + 1];
-	//XMLElement* name = doc->NewElement("Name");
-	//name->SetText(n);
-	//name->InsertEndChild(name);
-	//newTransform->InsertEndChild(name);
+	char* n = new char[a->name.size() + 1];
+	/*for (int i = 0; i < a->name.size(); i++)
+	{
+		n = nullptr;
+	}
+	*/
+	XMLElement* name = doc->NewElement("Name");
+	name->SetText(n);
+	name->InsertEndChild(name);
+	newTransform->InsertEndChild(name);
 
 	float px, py;
 	px = transform->GetPosition().x;
@@ -187,7 +192,7 @@ XMLError XMLCompiler::XMLLoad(const char* path, Scene* scene)
 		printf("Can not read file: %s\n", path);
 	}
 
-	scenes.push_back(doc);
+	//scenes.push_back(doc);
 	XMLLoad(doc, scene);
 	return eResult;
 }
