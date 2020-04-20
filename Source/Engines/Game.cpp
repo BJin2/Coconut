@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+#include <stdio.h>
 #include "Game.h"
 #include "Initializer.h"
 #include "InputInterface.h"	
@@ -186,6 +186,24 @@ bool Game::CreateEngineWindow(HINSTANCE hInstance, LPSTR lpCmdLine, int nCmdShow
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 }
+void OpenFile(HWND hWnd, Scene* scene, XMLCompiler* xml)
+{
+	OPENFILENAME ofn;
+
+	char file_name[100];
+
+	ZeroMemory(&ofn, sizeof(OPENFILENAME));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = hWnd;
+	ofn.lpstrFile = file_name;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = 100;
+	ofn.lpstrFilter = "All files\0*.*\0Xml Files\0*.xml\0";
+	ofn.nFilterIndex = 1;
+
+	GetOpenFileName(&ofn);
+	xml->XMLLoad(ofn.lpstrFile, scene);
+}
 
 LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -202,7 +220,7 @@ LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			xml->XMLSave("../../../Assets/Scene1.xml",scene);
 			break;
 		case ID_FILE_LOAD:
-			xml->XMLLoad("../../../Assets/Scene1.xml", scene);
+			OpenFile(hWnd, scene, xml);
 			break;
 		}
 		break;
