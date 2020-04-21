@@ -17,6 +17,7 @@ public:
 	Actor* AddActor();
 	Actor* AddActor(std::string name);
 	Actor* Find(std::string name);
+	std::vector<Actor*> FindAll(std::string name);
 	void Destroy();
 	bool Destroy(std::string name);
 	bool Destroy(Actor* actor);

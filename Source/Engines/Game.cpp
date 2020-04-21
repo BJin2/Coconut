@@ -1,3 +1,4 @@
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include "Game.h"
@@ -15,12 +16,15 @@
 #include "Event/EventMapper.h"
 #include "Event/ExampleLoadedEvent.h"
 
+#include "../Gameplay/Gameplay.h"
+
 HWND Game::hWnd = 0;
 Game::GameState Game::gameState = Game::GameState::Uninitialized;
 Scene* Game::scene;
 Time* Game::time;
 EventMapper* Game::mapper;
 XMLCompiler* Game::xml;
+bool Game::playing = false;
 
 // The main window class name.  
 static TCHAR szWindowClass[] = _T("win32app");
@@ -130,6 +134,9 @@ void Game::Update()
 		time->Update();
 		scene->Update(time->GetDeltaTime());
 
+		if (playing)
+			GameplayUpdate(time->GetDeltaTime());
+
 		time->SetTimeSinceLastUpdate(time->GetDeltaTime());
 		while (time->GetTimeSinceLastUpdate() > timePerFrame)
 		{
@@ -139,8 +146,8 @@ void Game::Update()
 			PhysicsEngine::Instance()->UpdatePhysics(timePerFrame);
 			ScriptManager::Instance()->Update(timePerFrame);			
 		}
-		GraphicEngine::Instance()->Render();
 		scene->Destroy();
+		GraphicEngine::Instance()->Render();
 	}
 	Clear();
 }
@@ -227,6 +234,10 @@ LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			break;
 		case ID_FILE_LOAD:
 			OpenFile(hWnd, scene, xml);
+			break;
+		case ID_FILE_PLAY:
+			GameplayStart();
+			playing = true;
 			break;
 		}
 		break;

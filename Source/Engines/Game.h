@@ -35,5 +35,6 @@ private:
 	static Time* time;
 	static EventMapper* mapper;
 	static XMLCompiler* xml;
+	static bool playing;
 	static void Clear();
 };
