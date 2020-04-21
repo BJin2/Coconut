@@ -275,7 +275,7 @@ void XMLCompiler::LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* e)
 void XMLCompiler::LoadAudioProperties(Actor* a, tinyxml2::XMLElement* e)
 {
 	XMLElement* property = e->FirstChildElement();
-
+	a->AddComponent<AudioComponent>();
 	AudioComponent* audio = a->GetComponent<AudioComponent>();
 	if (audio != nullptr)
 	{
