@@ -16,6 +16,7 @@ public:
 	XMLError XMLLoad(const char* path, Scene* scene);
 	XMLError XMLLoad(tinyxml2::XMLDocument* doc, Scene* scene);
 private:
+	void SaveAudioProperties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);
 	void SaveTrnaformProperties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);
 	void SaveRenderProterties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);
 	void SaveRidgidbodyProperties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);

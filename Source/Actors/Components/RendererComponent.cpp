@@ -10,6 +10,11 @@ RendererComponent::RendererComponent()
 	//shape->setPosition(shape->getOrigin().x, shape->getOrigin().y);
 }
 
+RendererComponent::RendererComponent(std::string texture) : path(texture)
+{
+
+}
+
 RendererComponent::~RendererComponent()
 {
 	GraphicEngine::Instance()->DestroyRenderTarget(this);
@@ -43,6 +48,8 @@ void RendererComponent::SetColor(sf::Color color)
 
 void RendererComponent::SetTexture(std::string textureFile)
 {
+	path = textureFile;
+
 	texture = new sf::Texture();
 	if (texture->loadFromFile(textureFile))
 	{
@@ -66,4 +73,9 @@ void RendererComponent::SetSize(sf::Vector2f _size)
 void RendererComponent::SetSize(int x, int y)
 {
 	SetSize(sf::Vector2f(x, y));
+}
+
+std::string RendererComponent::GetPath()
+{
+	return path;
 }
