@@ -9,10 +9,12 @@ AudioComponent::AudioComponent()
 	AudioEngine::Instance()->RegisterAudioTarget(this);
 	loop = false;
 	volume = 100.0f;
+	path = nullptr;
 }
 
 AudioComponent::~AudioComponent()
 {
+	delete path;
 	AudioEngine::Instance()->DestroyAudioTarget(this);
 }
 
@@ -50,8 +52,14 @@ void AudioComponent::SetVolume(float volume)
 	sound.setVolume(volume);
 }
 
-void AudioComponent::SetSound(std::string path)
+void AudioComponent::SetSound(std::string p)
 {
+	if (path == nullptr)
+	{
+		path = new char[p.size() + 1];
+		std::strcpy(path, p.c_str());
+	}
+
 	AudioEngine::Instance()->RegisterAudioTarget(this);
 	if (buffer.loadFromFile(path))
 	{

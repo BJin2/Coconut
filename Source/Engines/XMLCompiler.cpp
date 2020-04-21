@@ -34,11 +34,11 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 	XMLElement* newTransform = doc->NewElement("Transform");
 
 	char* n = new char[a->name.size() + 1];
-	/*for (int i = 0; i < a->name.size(); i++)
+	for (int i = 0; i < a->name.size(); i++)
 	{
 		n = nullptr;
 	}
-	*/
+	
 	XMLElement* name = doc->NewElement("Name");
 	name->SetText(n);
 	name->InsertEndChild(name);

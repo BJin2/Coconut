@@ -15,11 +15,12 @@ public:
 	void Stop();
 	void Loop(bool loop);
 	void SetVolume(float volume);
-	void SetSound(std::string path);
+	void SetSound(std::string p);
 
 private:
 	float volume;
 	bool loop;
 	sf::SoundBuffer buffer;
 	sf::Sound sound;
+	char* path;
 };
