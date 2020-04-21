@@ -1,7 +1,7 @@
 <Scene>
     <Actor>
         <Transform>
-            <Name>background</Name>
+            <Name Name="background"/>
             <Position>
                 <x>320</x>
                 <y>240</y>
@@ -13,7 +13,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
-            <Texture></Texture>
+            <Texture Texture=""/>
             <Size>
                 <x>640</x>
                 <y>480</y>
@@ -28,7 +28,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>north</Name>
+            <Name Name="north"/>
             <Position>
                 <x>320</x>
                 <y>70</y>
@@ -40,7 +40,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
-            <Texture>../../../Assets/Textures/Spawner/Spawner_North.png</Texture>
+            <Texture Texture="../../../Assets/Textures/Spawner/Spawner_North.png"/>
             <Size>
                 <x>273</x>
                 <y>141</y>
@@ -55,7 +55,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>south</Name>
+            <Name Name="south"/>
             <Position>
                 <x>320</x>
                 <y>410</y>
@@ -67,7 +67,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
-            <Texture>../../../Assets/Textures/Spawner/Spawner_South.png</Texture>
+            <Texture Texture="../../../Assets/Textures/Spawner/Spawner_South.png"/>
             <Size>
                 <x>273</x>
                 <y>141</y>
@@ -82,7 +82,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>west</Name>
+            <Name Name="west"/>
             <Position>
                 <x>70</x>
                 <y>240</y>
@@ -94,7 +94,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
-            <Texture>../../../Assets/Textures/Spawner/Spawner_West.png</Texture>
+            <Texture Texture="../../../Assets/Textures/Spawner/Spawner_West.png"/>
             <Size>
                 <x>141</x>
                 <y>273</y>
@@ -109,7 +109,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>east</Name>
+            <Name Name="east"/>
             <Position>
                 <x>570</x>
                 <y>240</y>
@@ -121,7 +121,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
-            <Texture>../../../Assets/Textures/Spawner/Spawner_East.png</Texture>
+            <Texture Texture="../../../Assets/Textures/Spawner/Spawner_East.png"/>
             <Size>
                 <x>141</x>
                 <y>273</y>
@@ -136,7 +136,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>player</Name>
+            <Name Name="player"/>
             <Position>
                 <x>320</x>
                 <y>240</y>
@@ -148,7 +148,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
-            <Texture>../../../Assets/Textures/Player/Player_Down.png</Texture>
+            <Texture Texture="../../../Assets/Textures/Player/Player_Down.png"/>
             <Size>
                 <x>50</x>
                 <y>50</y>
@@ -169,14 +169,14 @@
             <Bounciness>0</Bounciness>
         </RigidbodyComponent>
         <AudioComponent>
-            <FilePath>../../../Assets/Sounds/Hit.wav</FilePath>
+            <FilePath FilePath="../../../Assets/Sounds/Hit.wav"/>
             <Loop>false</Loop>
             <Volume>100</Volume>
         </AudioComponent>
     </Actor>
     <Actor>
         <Transform>
-            <Name>bgm</Name>
+            <Name Name="bgm"/>
             <Position>
                 <x>0</x>
                 <y>0</y>
@@ -188,7 +188,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <AudioComponent>
-            <FilePath>../../../Assets/Sounds/file_example_WAV_1MG.wav</FilePath>
+            <FilePath FilePath="../../../Assets/Sounds/file_example_WAV_1MG.wav"/>
             <Loop>true</Loop>
             <Volume>20</Volume>
         </AudioComponent>

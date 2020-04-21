@@ -36,7 +36,7 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 	XMLElement* newTransform = doc->NewElement("Transform");
 
 	XMLElement* name = doc->NewElement("Name");
-	name->SetText(a->name.c_str());
+	name->SetAttribute("Name", a->name.c_str());
 	name->InsertEndChild(name);
 	newTransform->InsertEndChild(name);
 
@@ -92,7 +92,7 @@ void XMLCompiler::SaveRenderProterties(Actor* a, XMLDocument* doc, XMLElement* e
 
 		//Texture
 		XMLElement* texture = doc->NewElement("Texture");
-		texture->SetText(render->GetPath().c_str());
+		texture->SetAttribute("Texture", render->GetPath().c_str());
 		texture->InsertEndChild(texture);
 		newRender->InsertEndChild(texture);
 
@@ -194,7 +194,7 @@ void XMLCompiler::SaveAudioProperties(Actor* a, tinyxml2::XMLDocument* doc, tiny
 		XMLElement* newAudio = doc->NewElement("AudioComponent");
 
 		XMLElement* file = doc->NewElement("FilePath");
-		file->SetText(audio->GetPath().c_str());
+		file->SetAttribute("FilePath", audio->GetPath().c_str());
 		file->InsertEndChild(file);
 		newAudio->InsertEndChild(file);
 
@@ -253,7 +253,7 @@ XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
 			component = component->NextSiblingElement();
 		}
 
-		element = element->NextSiblingElement("GameObject");
+		element = element->NextSiblingElement("Actor");
 	}
 }
 
@@ -320,7 +320,7 @@ void XMLCompiler::LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e)
 		switch (*property->Name())
 		{
 		case * "Texture":
-			property->QueryStringAttribute("Path", &p);
+			property->QueryStringAttribute("Texture", &p);
 			render->SetTexture(p);
 			break;
 		case * "Size":
