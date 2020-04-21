@@ -65,16 +65,18 @@ void Scene::Initialize()
 	spawner_east->transform->SetPosition(640-70, 240);
 
 	Actor* player = AddActor("player");
+	player->transform->SetPosition(320, 240);
 	player->AddComponent<RendererComponent>();
 	player->AddComponent<Rigidbody>();
-	Rigidbody* cachedPlayerRigidBody = player->GetComponent<Rigidbody>();
-	cachedPlayerRigidBody->SetRigidbodySettings(10000.0f, 0.0f, false);//static
-	cachedPlayerRigidBody->SetCurrentVelocity(Vector2(0, 0));
+
 	cachedRenderer = player->GetComponent<RendererComponent>();
 	cachedRenderer->SetSize(Vector2(50, 50));
 	cachedRenderer->SetTexture("../../../Assets/Textures/Player/Player_Down.png");
-	player->transform->SetPosition(320 - 25, 240 - 25);
 
+	Rigidbody* cachedPlayerRigidBody = player->GetComponent<Rigidbody>();
+	cachedPlayerRigidBody->SetRigidbodySettings(10000.0f, 0.0f, false);//static
+	cachedPlayerRigidBody->SetCurrentVelocity(Vector2(0, 0));
+	
 	//Actor* bgm = AddActor("bgm");
 	//bgm->AddComponent<AudioComponent>();
 
@@ -158,12 +160,17 @@ void Scene::Update(float delta)
 		if (fire_timer >= 0.2f)
 		{
 			Vector2 playerHalfSize = Find("player")->GetComponent<RendererComponent>()->GetSize() * 0.5f;
-			Vector2 playerCenter = Find("player")->transform->GetPosition() + playerHalfSize;
+			Vector2 playerCenter = Find("player")->transform->GetPosition();
 			Vector2 projectileHalfSize = Vector2(7, 7);
 
+			float x = playerCenter.x + (direction.x * playerHalfSize.x) + (direction.x * projectileHalfSize.x*1.5f);
+			float y = playerCenter.y + (direction.y * playerHalfSize.y) + (direction.y * projectileHalfSize.y*1.5f);
+
 			Actor* projectile = AddActor("projectile");
+			projectile->transform->SetPosition(x, y);
 			projectile->AddComponent<RendererComponent>();
 			projectile->AddComponent<Rigidbody>();
+
 			RendererComponent* cachedRenderer = projectile->GetComponent<RendererComponent>();
 			cachedRenderer->SetSize(projectileHalfSize*2.0f);
 			cachedRenderer->SetTexture("../../../Assets/Textures/projectile.png");
@@ -173,10 +180,9 @@ void Scene::Update(float delta)
 			cachedRigidBody->SetCurrentVelocity(direction * 100.0f);
 			cachedRigidBody->SetAABB();
 			cachedRigidBody->SetOnCollide([](void* _projectile) {Game::GetCurrentScene()->Destroy(static_cast<Actor*>(_projectile)); }, projectile);
-			float x = playerCenter.x + (direction.x * playerHalfSize.x) + (direction.x * projectileHalfSize.x);
-			float y = playerCenter.y + (direction.y * playerHalfSize.y) + (direction.y * projectileHalfSize.y);
-			printf("Projectile pos : %f\n", y);
-			projectile->transform->SetPosition(x, y);
+			
+			//printf("Projectile pos : %f\n", x);
+			
 			fire_timer = 0;
 		}
 	}
