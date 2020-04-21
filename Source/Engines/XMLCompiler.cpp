@@ -218,6 +218,7 @@ void XMLCompiler::SaveAudioProperties(Actor* a, tinyxml2::XMLDocument* doc, tiny
 
 XMLError XMLCompiler::XMLLoad(const char* path, Scene* scene)
 {
+	scene->DeleteAllActors();
 	XMLDocument* doc = new XMLDocument();
 	XMLError eResult = doc->LoadFile(path);
 
@@ -256,6 +257,7 @@ XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
 		element = element->NextSiblingElement("Actor");
 	}
 }
+
 
 void XMLCompiler::LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* e)
 {
