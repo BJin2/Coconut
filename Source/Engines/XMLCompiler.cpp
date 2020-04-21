@@ -314,14 +314,11 @@ void XMLCompiler::LoadAudioProperties(Actor* a, tinyxml2::XMLElement* e)
 				printf("%f\n", isPlaying);
 				break;
 
-
 			default:
 				break;
 			}
 			property = property->NextSiblingElement();
 		}
-		if (audio->GetIsPlaying())
-			audio->Play();
 	}
 }
 
