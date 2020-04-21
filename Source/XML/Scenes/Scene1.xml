@@ -192,7 +192,7 @@
             <FilePath FilePath="../../../Assets/Sounds/file_example_WAV_1MG.wav"/>
             <Loop Loop="true"/>
             <Volume Volume="20"/>
-            <IsPlaying IsPlaying="true"/>
+            <IsPlaying IsPlaying="false"/>
         </AudioComponent>
     </Actor>
 </Scene>
