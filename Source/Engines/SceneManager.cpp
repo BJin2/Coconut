@@ -1,5 +1,5 @@
+
 #include "SceneManager.h"
-#include "../Actors/Components/AudioComponent.h"
 using namespace tinyxml2;
 
 Scenemanger::Scenemanger(Scene* s)
@@ -21,17 +21,7 @@ Scenemanger::~Scenemanger()
 XMLError Scenemanger::LoadScene(const char* path)
 {
 
-	for (int i = 0; i < scene->GetActor().size(); i++)
-	{
-		if (scene->GetActor()[i]->GetComponent<AudioComponent>() != nullptr)
-		{
-			scene->GetActor()[i]->GetComponent<AudioComponent>()->Stop();
-		}
-	}
-	scene->GetActor().clear();
-
 	XMLDocument* doc = new XMLDocument();
-	
 	XMLError eResult = doc->LoadFile(path);
 
 	if (eResult != tinyxml2::XML_SUCCESS)
