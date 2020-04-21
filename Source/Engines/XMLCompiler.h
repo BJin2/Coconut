@@ -21,6 +21,7 @@ private:
 	void SaveRenderProterties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);
 	void SaveRidgidbodyProperties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e);
 
+	void LoadAudioProperties(Actor* a, tinyxml2::XMLElement* e);
 	void LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* c);
 	void LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e);
 	void LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e);

@@ -79,6 +79,7 @@ void Scene::Initialize()
 	aud->Loop(true);
 	aud->SetVolume(20.0f);
 	aud->SetSound("../../../Assets/Sounds/file_example_WAV_1MG.wav");
+	aud->SetIsPlaying(true);
 
 	ExampleLoadedEventData data;
 	data.example = "Scene Loaded";

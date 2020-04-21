@@ -230,7 +230,7 @@ LRESULT CALLBACK Game::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		{
 		case ID_FILE_SAVE:
 			printf("SAVED");
-			xml->XMLSave("../../../Assets/Scene1.xml",scene);
+			xml->XMLSave("../../XML/Scenes/Scene1.xml",scene);
 			break;
 		case ID_FILE_LOAD:
 			OpenFile(hWnd, scene, xml);

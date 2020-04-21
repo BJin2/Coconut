@@ -9,6 +9,7 @@ AudioComponent::AudioComponent()
 	AudioEngine::Instance()->RegisterAudioTarget(this);
 	loop = false;
 	volume = 100.0f;
+	isPlaying = false;
 }
 
 AudioComponent::~AudioComponent()
@@ -55,12 +56,44 @@ void AudioComponent::SetSound(std::string p)
 	path = p;
 
 	AudioEngine::Instance()->RegisterAudioTarget(this);
-	if (buffer.loadFromFile(p))
+	if (buffer.loadFromFile(path))
 	{
 		sound.setBuffer(buffer);
 		Loop(loop);
 		SetVolume(volume);
 	}
+}
+
+void AudioComponent::SetSound()
+{
+	AudioEngine::Instance()->RegisterAudioTarget(this);
+	if (buffer.loadFromFile(path))
+	{
+		sound.setBuffer(buffer);
+		Loop(loop);
+		SetVolume(volume);
+	}
+}
+
+void AudioComponent::SetPath(std::string p)
+{
+	path = p;
+	AudioEngine::Instance()->RegisterAudioTarget(this);
+	if (buffer.loadFromFile(path))
+	{
+		sound.setBuffer(buffer);
+	}
+}
+
+
+void AudioComponent::SetIsPlaying(bool p)
+{
+	isPlaying = p;
+}
+
+bool AudioComponent::GetIsPlaying()
+{
+	return isPlaying;
 }
 
 std::string AudioComponent::GetPath()
