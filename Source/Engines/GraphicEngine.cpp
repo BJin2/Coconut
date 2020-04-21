@@ -52,6 +52,24 @@ void GraphicEngine::RegisterRenderTarget(RendererComponent* rItem)
 	m_pRenderTarget.push_back(rItem);
 }
 
+bool GraphicEngine::DestroyRenderTarget(RendererComponent* _rItem)
+{
+	for (auto rItem = m_pRenderTarget.begin(); rItem != m_pRenderTarget.end();)
+	{
+		if (*rItem == _rItem)
+		{
+			rItem = m_pRenderTarget.erase(rItem);
+			return true;
+		}
+		else
+		{
+			rItem++;
+		}
+	}
+
+	return false;
+}
+
 sf::RenderWindow* GraphicEngine::GetGameScreen()
 {
 	return m_pGameScreen;

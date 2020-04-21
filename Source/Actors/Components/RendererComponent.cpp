@@ -12,6 +12,7 @@ RendererComponent::RendererComponent()
 
 RendererComponent::~RendererComponent()
 {
+	GraphicEngine::Instance()->DestroyRenderTarget(this);
 	delete shape;
 	delete texture;
 }

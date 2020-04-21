@@ -4,7 +4,7 @@
 #include "SFML/Audio/SoundBuffer.hpp"
 
 
-void AudioComponent::VStart()
+AudioComponent::AudioComponent()
 {
 	AudioEngine::Instance()->RegisterAudioTarget(this);
 	if (buffer.loadFromFile("../../../Assets/Sounds/file_example_WAV_1MG.wav"))
@@ -13,6 +13,16 @@ void AudioComponent::VStart()
 		Loop(false);
 		SetVolume(100.0f);
 	}
+}
+
+AudioComponent::~AudioComponent()
+{
+	AudioEngine::Instance()->DestroyAudioTarget(this);
+}
+
+void AudioComponent::VStart()
+{
+	
 }
 
 void AudioComponent::VUpdate(float dt)

@@ -17,11 +17,13 @@ private:
 	Vector2 m_maxVelocity;
 	bool m_grounded;
 	Vector2 totalForces;
-	
+	void(*onCollide)(void*);
+	void* param;
 public:
 	PhysicsEngine *engine;
 
 	Rigidbody(float _mass = 1, float _bounciness = 0.8f, bool _obeysGravity = false);
+	~Rigidbody();
 
 	struct AABB
 	{
@@ -42,6 +44,8 @@ public:
 	void SetCurrentVelocity(Vector2 v);
 	void SetMass(float m);
 	void SetBounciness(float b);
+	void SetOnCollide(void(*runOnCollide)(void*), void* _param);
+	void OnCollide();
 	Vector2 GetCurrentVelocity();
 	float GetMass();
 	float GetBounciness();

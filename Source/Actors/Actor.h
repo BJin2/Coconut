@@ -19,6 +19,7 @@ public:
 
 	Transform* transform;
 	std::string name;
+	bool destroyFlag;
 
 	//template<typename T, typename... Args> void AddComponent(Args ... args);
 	void AddComponent(std::string fileName);

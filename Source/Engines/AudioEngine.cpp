@@ -33,3 +33,21 @@ void AudioEngine::RegisterAudioTarget(AudioComponent* aItem)
 {
 	m_pAudioTarget.push_back(aItem);
 }
+
+bool AudioEngine::DestroyAudioTarget(AudioComponent* _aItem)
+{
+	for(auto aItem = m_pAudioTarget.begin(); aItem != m_pAudioTarget.end();)
+	{
+		if (*aItem == _aItem)
+		{
+			aItem = m_pAudioTarget.erase(aItem);
+			return true;
+		}
+		else
+		{
+			aItem++;
+		}
+	}
+
+	return false;
+}

@@ -6,6 +6,7 @@
 
 Actor::Actor(std::string _name) : name(_name)
 {
+	destroyFlag = false;
 	transform = new Transform();
 	transform->SetOwner(this);
 	actorComponent.push_back(transform);

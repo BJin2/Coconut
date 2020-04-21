@@ -15,7 +15,7 @@ public:
 	~AudioEngine();
 	static AudioEngine* Instance();
 	void RegisterAudioTarget(AudioComponent* aItem);
-
+	bool DestroyAudioTarget(AudioComponent* aItem);
 };
 
 #endif /* AudioEngine_hpp */

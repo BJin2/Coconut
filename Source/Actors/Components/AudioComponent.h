@@ -6,6 +6,8 @@
 class AudioComponent : public ActorComponent
 {
 public:
+	AudioComponent();
+	~AudioComponent();
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
 

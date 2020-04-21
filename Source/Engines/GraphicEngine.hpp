@@ -17,5 +17,6 @@ public:
 	static GraphicEngine* Instance();
 	void Render();
 	void RegisterRenderTarget(RendererComponent* rItem);
+	bool DestroyRenderTarget(RendererComponent* _rItem);
 	sf::RenderWindow* GetGameScreen();
 };

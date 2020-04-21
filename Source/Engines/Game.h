@@ -25,6 +25,7 @@ public:
 
 	static HWND hWnd;
 	static HWND SFMLView;
+	static Scene* GetCurrentScene();
 private:
 	static void Update();
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

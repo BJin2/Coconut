@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Game.h"
 #include "../Actors/Actor.h"
 #include "../Actors/Components/RendererComponent.h"
 #include "../Actors/Components/AudioComponent.h"
@@ -112,6 +113,7 @@ void Scene::Update(float delta)
 			dir = Find("player")->transform->GetPosition() - spawnPos;
 			dir /= Vector2Math::Magnitude(dir);
 			Actor* enemy = AddActor("enemy");
+			enemy->transform->SetPosition(spawnPos);
 			enemy->AddComponent<RendererComponent>();
 			enemy->AddComponent<Rigidbody>();
 			RendererComponent* cachedRenderer = enemy->GetComponent<RendererComponent>();
@@ -121,7 +123,8 @@ void Scene::Update(float delta)
 			cachedRigidBody->SetRigidbodySettings(1.0f, 0.0f, false);
 			cachedRigidBody->SetCurrentVelocity(dir * 50.0f);
 			cachedRigidBody->SetAABB();
-			enemy->transform->SetPosition(spawnPos);
+			cachedRigidBody->SetOnCollide([](void* _enemy) {Game::GetCurrentScene()->Destroy(static_cast<Actor*>(_enemy));}, enemy);
+			
 		}
 		spawn_timer = 0.0f;
 	}
@@ -169,6 +172,7 @@ void Scene::Update(float delta)
 			cachedRigidBody->SetRigidbodySettings(1.0f, 0.0f, false);//static
 			cachedRigidBody->SetCurrentVelocity(direction * 100.0f);
 			cachedRigidBody->SetAABB();
+			cachedRigidBody->SetOnCollide([](void* _projectile) {Game::GetCurrentScene()->Destroy(static_cast<Actor*>(_projectile)); }, projectile);
 			float x = playerCenter.x + (direction.x * playerHalfSize.x) + (direction.x * projectileHalfSize.x);
 			float y = playerCenter.y + (direction.y * playerHalfSize.y) + (direction.y * projectileHalfSize.y);
 			printf("Projectile pos : %f\n", y);
@@ -214,4 +218,39 @@ Actor* Scene::Find(std::string name)
 			return actor;
 	}
 	return nullptr;
+}
+
+void Scene::Destroy()
+{
+	for (auto actor = actors.begin(); actor != actors.end();)
+	{
+		if ((*actor)->destroyFlag)
+		{
+			delete (*actor);
+			actor = actors.erase(actor);
+		}
+		else
+		{
+			actor++;
+		}
+	}
+}
+
+bool Scene::Destroy(std::string name)
+{
+	return Destroy(Find(name));
+}
+
+bool Scene::Destroy(Actor* _actor)
+{
+	for (auto actor : actors)
+	{
+		if (actor == _actor)
+		{
+			actor->destroyFlag = true;
+			return true;
+		}
+	}
+
+	return false;
 }

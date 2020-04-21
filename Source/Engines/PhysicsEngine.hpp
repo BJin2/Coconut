@@ -28,6 +28,7 @@ public:
 	};
 
 	void AddRigidBody(Rigidbody* _rigidBody);
+	bool DestroyRigidBody(Rigidbody* _rigidBody);
 	void IntegrateBodies(float dt);
 	bool IsGrounded(Rigidbody* _rigidBody);
 	void CheckCollision();

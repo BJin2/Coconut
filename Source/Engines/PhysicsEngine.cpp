@@ -44,6 +44,41 @@ void PhysicsEngine::AddRigidBody(Rigidbody* _rigidBody)
 	m_rigidBodies.push_back(_rigidBody);
 }
 
+bool PhysicsEngine::DestroyRigidBody(Rigidbody* _rigidBody)
+{
+	bool result = false;
+	for (auto rigidBody = m_rigidBodies.begin(); rigidBody != m_rigidBodies.end();)
+	{
+		if (*rigidBody == _rigidBody)
+		{
+			rigidBody = m_rigidBodies.erase(rigidBody);
+			result = true;
+			break;
+		}
+		else
+		{
+			rigidBody++;
+		}
+	}
+
+	for (auto collision = m_collisions.begin(); collision != m_collisions.end();)
+	{
+		if ((collision->first->rigidBodyA == _rigidBody) ||
+			(collision->first->rigidBodyB == _rigidBody))
+		{
+			collision = m_collisions.erase(collision);
+			result = true;
+		}
+		else
+		{
+			collision++;
+		}
+	}
+
+
+	return result;
+}
+
 void PhysicsEngine::IntegrateBodies(float dt)
 {
 	for (auto rb : m_rigidBodies)
@@ -159,6 +194,10 @@ void PhysicsEngine::ResolveCollisions()
 {
 	for (std::map<CollisionPair*, CollisionInfo*>::iterator pair = m_collisions.begin(); pair != m_collisions.end(); ++pair)
 	{
+		if (!pair->first->rigidBodyA ||
+			!pair->first->rigidBodyB)
+			continue;
+
 		float minBounce = min(pair->first->rigidBodyA->GetBounciness(), pair->first->rigidBodyB->GetBounciness());
 		float velAlongNormal = Vector2Math::Dot(pair->first->rigidBodyB->GetCurrentVelocity() - pair->first->rigidBodyA->GetCurrentVelocity(), pair->second->collisionNormal);
 		if (velAlongNormal > 0) continue;
@@ -180,7 +219,9 @@ void PhysicsEngine::ResolveCollisions()
 		Vector2 impulse = j * m_collisions[pair->first]->collisionNormal;
 
 		pair->first->rigidBodyA->SetCurrentVelocity(-impulse*invMassA);
+		pair->first->rigidBodyA->OnCollide();
 		pair->first->rigidBodyB->SetCurrentVelocity(impulse * invMassB);
+		pair->first->rigidBodyB->OnCollide();
 
 		if (abs(m_collisions[pair->first]->penetration > 0.01f))
 		{

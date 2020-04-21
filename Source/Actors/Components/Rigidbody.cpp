@@ -16,6 +16,11 @@ Rigidbody::Rigidbody(float _mass, float _bounciness, bool _obeysGravity)
 	m_grounded = false;
 }
 
+Rigidbody::~Rigidbody()
+{
+ 	engine->DestroyRigidBody(this);
+}
+
 void Rigidbody::VStart()
 {
 	SetAABB();
@@ -107,6 +112,18 @@ void Rigidbody::SetMass(float m)
 void Rigidbody::SetBounciness(float b)
 {
 	m_bounciness = b;
+}
+
+void Rigidbody::SetOnCollide(void(*runOnCollide)(void*), void* _param)
+{
+	param = _param;
+	onCollide = runOnCollide;
+}
+
+void Rigidbody::OnCollide()
+{
+	if(onCollide != nullptr)
+		onCollide(param);
 }
 
 Vector2 Rigidbody::GetCurrentVelocity()

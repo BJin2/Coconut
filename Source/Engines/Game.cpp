@@ -110,6 +110,11 @@ void Game::Initialize()
 	delete window;
 }
 
+Scene* Game::GetCurrentScene()
+{
+	return scene;
+}
+
 void Game::Update()
 {
 	MSG msg = { 0 };
@@ -132,9 +137,10 @@ void Game::Update()
 
 			//Fixed Update
 			PhysicsEngine::Instance()->UpdatePhysics(timePerFrame);
-			ScriptManager::Instance()->Update(timePerFrame);
+			ScriptManager::Instance()->Update(timePerFrame);			
 		}
 		GraphicEngine::Instance()->Render();
+		scene->Destroy();
 	}
 	Clear();
 }
