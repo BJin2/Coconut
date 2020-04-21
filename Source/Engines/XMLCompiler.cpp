@@ -314,6 +314,7 @@ void XMLCompiler::LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e)
 
 	XMLElement* property = e->FirstChildElement();
 
+
 	while (property != nullptr)
 	{
 		const char* p = new char[256];
@@ -321,6 +322,7 @@ void XMLCompiler::LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e)
 		{
 		case * "Texture":
 			property->QueryStringAttribute("Texture", &p);
+			printf(p);
 			render->SetTexture(p);
 			break;
 		case * "Size":
