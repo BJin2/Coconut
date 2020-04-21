@@ -228,6 +228,7 @@
     <ClInclude Include="..\..\Engines\Time.h" />
     <ClInclude Include="..\..\Engines\Utils.h" />
     <ClInclude Include="..\..\Engines\XMLCompiler.h" />
+    <ClInclude Include="..\..\Gameplay\Gameplay.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

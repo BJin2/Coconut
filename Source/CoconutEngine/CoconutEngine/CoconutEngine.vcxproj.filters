@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Engine\Event">
       <UniqueIdentifier>{3b4b8a28-7f72-4e98-9a4e-5ed2e97448ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Gameplay">
+      <UniqueIdentifier>{a06c43cd-a902-4ee8-b06f-61fcba5cb4aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Libs\tinyxml\tinyxmlparser.cpp">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Engines\ScriptManager.hpp">
       <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Gameplay\Gameplay.h">
+      <Filter>Gameplay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
