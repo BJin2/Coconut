@@ -9,8 +9,10 @@ private:
 	sf::Shape* shape;
 	sf::Texture *texture;
 	sf::Vector2f size;
+	std::string path;
 public:
 	RendererComponent();
+	RendererComponent(std::string texture);
 	~RendererComponent();
 	virtual void VStart() override;
 	virtual void VUpdate(float dt) override;
@@ -21,6 +23,7 @@ public:
 	void SetTexture(std::string textureFile);
 	void SetSize(sf::Vector2f _size);
 	void SetSize(int x, int y);
+	std::string GetPath();
 	
 	sf::Shape* GetShape() { return shape; };
 	sf::Color GetColor() { return shape->getFillColor(); }

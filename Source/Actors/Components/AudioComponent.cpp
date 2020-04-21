@@ -50,13 +50,30 @@ void AudioComponent::SetVolume(float volume)
 	sound.setVolume(volume);
 }
 
-void AudioComponent::SetSound(std::string path)
+void AudioComponent::SetSound(std::string p)
 {
+	path = p;
+
 	AudioEngine::Instance()->RegisterAudioTarget(this);
-	if (buffer.loadFromFile(path))
+	if (buffer.loadFromFile(p))
 	{
 		sound.setBuffer(buffer);
 		Loop(loop);
 		SetVolume(volume);
 	}
+}
+
+std::string AudioComponent::GetPath()
+{
+	return path;
+}
+
+bool AudioComponent::GetLoop()
+{
+	return loop;
+}
+
+float AudioComponent::GetVolume()
+{
+	return volume;
 }

@@ -1,7 +1,7 @@
 <Scene>
     <Actor>
         <Transform>
-            <Name>อออออออออออýýýý</Name>
+            <Name>background</Name>
             <Position>
                 <x>320</x>
                 <y>240</y>
@@ -13,6 +13,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
+            <Texture></Texture>
             <Size>
                 <x>640</x>
                 <y>480</y>
@@ -27,7 +28,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>ออออออýýýý</Name>
+            <Name>north</Name>
             <Position>
                 <x>320</x>
                 <y>70</y>
@@ -39,6 +40,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
+            <Texture>../../../Assets/Textures/Spawner/Spawner_North.png</Texture>
             <Size>
                 <x>273</x>
                 <y>141</y>
@@ -53,7 +55,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>ออออออýýýýÝÝ</Name>
+            <Name>south</Name>
             <Position>
                 <x>320</x>
                 <y>410</y>
@@ -65,6 +67,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
+            <Texture>../../../Assets/Textures/Spawner/Spawner_South.png</Texture>
             <Size>
                 <x>273</x>
                 <y>141</y>
@@ -79,7 +82,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>อออออýýýýÝÝÝ</Name>
+            <Name>west</Name>
             <Position>
                 <x>70</x>
                 <y>240</y>
@@ -91,6 +94,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
+            <Texture>../../../Assets/Textures/Spawner/Spawner_West.png</Texture>
             <Size>
                 <x>141</x>
                 <y>273</y>
@@ -105,7 +109,7 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>อออออýýýýÝÝÝ</Name>
+            <Name>east</Name>
             <Position>
                 <x>570</x>
                 <y>240</y>
@@ -117,6 +121,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
+            <Texture>../../../Assets/Textures/Spawner/Spawner_East.png</Texture>
             <Size>
                 <x>141</x>
                 <y>273</y>
@@ -131,10 +136,10 @@
     </Actor>
     <Actor>
         <Transform>
-            <Name>อออออออýýýýÝ</Name>
+            <Name>player</Name>
             <Position>
-                <x>295</x>
-                <y>215</y>
+                <x>320</x>
+                <y>240</y>
             </Position>
             <Scale>
                 <x>1</x>
@@ -143,6 +148,7 @@
             <Rotation>0</Rotation>
         </Transform>
         <RenderComponent>
+            <Texture>../../../Assets/Textures/Player/Player_Down.png</Texture>
             <Size>
                 <x>50</x>
                 <y>50</y>
@@ -162,5 +168,29 @@
             </Velocity>
             <Bounciness>0</Bounciness>
         </RigidbodyComponent>
+        <AudioComponent>
+            <FilePath>../../../Assets/Sounds/Hit.wav</FilePath>
+            <Loop>false</Loop>
+            <Volume>100</Volume>
+        </AudioComponent>
+    </Actor>
+    <Actor>
+        <Transform>
+            <Name>bgm</Name>
+            <Position>
+                <x>0</x>
+                <y>0</y>
+            </Position>
+            <Scale>
+                <x>1</x>
+                <y>1</y>
+            </Scale>
+            <Rotation>0</Rotation>
+        </Transform>
+        <AudioComponent>
+            <FilePath>../../../Assets/Sounds/file_example_WAV_1MG.wav</FilePath>
+            <Loop>true</Loop>
+            <Volume>20</Volume>
+        </AudioComponent>
     </Actor>
 </Scene>

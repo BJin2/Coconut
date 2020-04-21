@@ -4,6 +4,7 @@
 #include "..\Actors\Components\RendererComponent.h"
 #include "..\Actors\Components\Rigidbody.h"
 #include "..\Actors\Components\ScriptComponent.h"
+#include "..\Actors\Components\AudioComponent.h"
 #include "Utils.h"
 
 #pragma region SAVE
@@ -21,6 +22,7 @@ XMLError XMLCompiler::XMLSave(const char* path, Scene* scene)
 		SaveTrnaformProperties(*i, xmlDoc.ToDocument(), rootElement);
 		SaveRenderProterties(*i, xmlDoc.ToDocument(), rootElement);
 		SaveRidgidbodyProperties(*i, xmlDoc.ToDocument(), rootElement);
+		SaveAudioProperties(*i, xmlDoc.ToDocument(), rootElement);
 
 		xml_scene->InsertEndChild(rootElement);
 	}
@@ -33,14 +35,8 @@ void XMLCompiler::SaveTrnaformProperties(Actor* a, XMLDocument* doc, XMLElement*
 	auto transform = a->GetComponent<Transform>();
 	XMLElement* newTransform = doc->NewElement("Transform");
 
-	char* n = new char[a->name.size() + 1];
-	/*for (int i = 0; i < a->name.size(); i++)
-	{
-		n = nullptr;
-	}
-	*/
 	XMLElement* name = doc->NewElement("Name");
-	name->SetText(n);
+	name->SetText(a->name.c_str());
 	name->InsertEndChild(name);
 	newTransform->InsertEndChild(name);
 
@@ -93,6 +89,15 @@ void XMLCompiler::SaveRenderProterties(Actor* a, XMLDocument* doc, XMLElement* e
 	if (render != nullptr)
 	{
 		XMLElement* newRender = doc->NewElement("RenderComponent");
+
+		//Texture
+		XMLElement* texture = doc->NewElement("Texture");
+		texture->SetText(render->GetPath().c_str());
+		texture->InsertEndChild(texture);
+		newRender->InsertEndChild(texture);
+
+		printf(render->GetPath().c_str());
+		printf("\n");
 
 		//Size
 		float sx, sy;
@@ -179,6 +184,35 @@ void XMLCompiler::SaveRidgidbodyProperties(Actor* a, XMLDocument* doc, XMLElemen
 		e->InsertEndChild(newRb);
 	}
 }
+
+void XMLCompiler::SaveAudioProperties(Actor* a, tinyxml2::XMLDocument* doc, tinyxml2::XMLElement* e)
+{
+	auto audio = a->GetComponent< AudioComponent>();
+
+	if (audio != nullptr)
+	{
+		XMLElement* newAudio = doc->NewElement("AudioComponent");
+
+		XMLElement* file = doc->NewElement("FilePath");
+		file->SetText(audio->GetPath().c_str());
+		file->InsertEndChild(file);
+		newAudio->InsertEndChild(file);
+
+		XMLElement* loop = doc->NewElement("Loop");
+		loop->SetText(audio->GetLoop());
+		loop->InsertEndChild(loop);
+		newAudio->InsertEndChild(loop);
+
+		XMLElement* volume = doc->NewElement("Volume");
+		volume->SetText(audio->GetVolume());
+		volume->InsertEndChild(volume);
+		newAudio->InsertEndChild(volume);
+
+		e->InsertEndChild(newAudio);
+	}
+}
+
+
 #pragma endregion
 #pragma region LOAD
 
@@ -282,8 +316,13 @@ void XMLCompiler::LoadRenderProperties(Actor* a, tinyxml2::XMLElement* e)
 
 	while (property != nullptr)
 	{
+		const char* p = new char[256];
 		switch (*property->Name())
 		{
+		case * "Texture":
+			property->QueryStringAttribute("Path", &p);
+			render->SetTexture(p);
+			break;
 		case * "Size":
 			float px, py;
 			property->FirstChildElement("x")->QueryFloatText(&px);
