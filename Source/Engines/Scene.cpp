@@ -11,11 +11,14 @@
 #include "Event/ExampleLoadedEvent.h"
 #include "GraphicEngine.hpp"
 
+#pragma region Temporary variables
 //temporary variables. Will be moved to script
 float fire_timer = 0;
 float spawn_timer = 0;
 Vector2 direction = Vector2(0, 1);
-std::string spawner_direction[4] = {"east", "south", "west", "north"};
+std::string spawner_direction[4] = { "east", "south", "west", "north" };
+bool gameover = false;
+#pragma endregion
 
 Scene::~Scene()
 {
@@ -80,10 +83,7 @@ void Scene::Initialize()
 	Rigidbody* cachedPlayerRigidBody = player->GetComponent<Rigidbody>();
 	cachedPlayerRigidBody->SetRigidbodySettings(10000.0f, 0.0f, false);//static
 	cachedPlayerRigidBody->SetCurrentVelocity(Vector2(0, 0));
-	cachedPlayerRigidBody->SetOnCollide([](void* _player) {
-		printf("Game Over\n");
-		}, player);
-	
+
 	Actor* bgm = AddActor("bgm");
 	bgm->AddComponent<AudioComponent>();
 	AudioComponent* aud = bgm->GetComponent<AudioComponent>();
@@ -91,7 +91,6 @@ void Scene::Initialize()
 	aud->SetVolume(20.0f);
 	aud->SetSound("../../../Assets/Sounds/file_example_WAV_1MG.wav");
 	aud->Play();
-	
 
 	ExampleLoadedEventData data;
 	data.example = "Scene Loaded";
@@ -105,6 +104,37 @@ void Scene::Start()
 	{
 		actor->VStart();
 	}
+
+#pragma region Hard coded game logic
+	Find("player")->GetComponent<Rigidbody>()->SetOnCollide([](void* _player) {
+		printf("Game Over\n");
+
+		std::vector<Actor*> enemies = Game::GetCurrentScene()->FindAll("enemy");
+		std::vector<Actor*> projectiles = Game::GetCurrentScene()->FindAll("projectile");
+
+		for (auto enemy : enemies)
+		{
+			Rigidbody* er = enemy->GetComponent<Rigidbody>();
+			Vector2 reverseVelocity = er->GetCurrentVelocity() * -1.0f;
+			er->SetCurrentVelocity(reverseVelocity);
+		}
+		for (auto projectile : projectiles)
+		{
+			Rigidbody* pr = projectile->GetComponent<Rigidbody>();
+			Vector2 reverseVelocity = pr->GetCurrentVelocity() * -1.0f;
+			pr->SetCurrentVelocity(reverseVelocity);
+		}
+
+		Actor* game_over = Game::GetCurrentScene()->AddActor("gameover");
+		game_over->AddComponent<RendererComponent>();
+		game_over->transform->SetPosition(320, 240);
+		RendererComponent* cachedRenderer = game_over->GetComponent<RendererComponent>();
+		cachedRenderer->SetSize(Vector2(640, 480));
+		cachedRenderer->SetTexture("../../../Assets/Textures/gameover.png");
+
+		gameover = true;
+		}, Find("player"));
+#pragma endregion
 }
 
 void Scene::Update(float delta)
@@ -114,7 +144,10 @@ void Scene::Update(float delta)
 		actor->VUpdate(delta);
 	}
 	
-	//Hardcoded game logic
+#pragma region Hard coded game logic
+	if (gameover)
+		return;
+
 	fire_timer += delta;
 	spawn_timer += delta;
 	if (spawn_timer >= 3.0f)
@@ -179,8 +212,8 @@ void Scene::Update(float delta)
 			Vector2 playerCenter = Find("player")->transform->GetPosition();
 			Vector2 projectileHalfSize = Vector2(7, 7);
 
-			float x = playerCenter.x + (direction.x * playerHalfSize.x) + (direction.x * projectileHalfSize.x*1.5f);
-			float y = playerCenter.y + (direction.y * playerHalfSize.y) + (direction.y * projectileHalfSize.y*1.5f);
+			float x = playerCenter.x + (direction.x * playerHalfSize.x) + (direction.x * projectileHalfSize.x * 1.5f);
+			float y = playerCenter.y + (direction.y * playerHalfSize.y) + (direction.y * projectileHalfSize.y * 1.5f);
 
 			Actor* projectile = AddActor("projectile");
 			projectile->transform->SetPosition(x, y);
@@ -188,20 +221,21 @@ void Scene::Update(float delta)
 			projectile->AddComponent<Rigidbody>();
 
 			RendererComponent* cachedRenderer = projectile->GetComponent<RendererComponent>();
-			cachedRenderer->SetSize(projectileHalfSize*2.0f);
+			cachedRenderer->SetSize(projectileHalfSize * 2.0f);
 			cachedRenderer->SetTexture("../../../Assets/Textures/projectile.png");
-			
+
 			Rigidbody* cachedRigidBody = projectile->GetComponent<Rigidbody>();
 			cachedRigidBody->SetRigidbodySettings(1.0f, 0.0f, false);//static
 			cachedRigidBody->SetCurrentVelocity(direction * 100.0f);
 			cachedRigidBody->SetAABB();
 			cachedRigidBody->SetOnCollide([](void* _projectile) {Game::GetCurrentScene()->Destroy(static_cast<Actor*>(_projectile)); }, projectile);
-			
+
 			//printf("Projectile pos : %f\n", x);
-			
+
 			fire_timer = 0;
 		}
 	}
+#pragma endregion
 }
 
 void Scene::DeleteAllActors()
@@ -240,6 +274,17 @@ Actor* Scene::Find(std::string name)
 			return actor;
 	}
 	return nullptr;
+}
+
+std::vector<Actor*> Scene::FindAll(std::string name)
+{
+	std::vector<Actor*> result;
+	for (auto actor : actors)
+	{
+		if (actor->name == name)
+			result.push_back(actor);
+	}
+	return result;
 }
 
 void Scene::Destroy()
