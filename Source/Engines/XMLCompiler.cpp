@@ -199,14 +199,19 @@ void XMLCompiler::SaveAudioProperties(Actor* a, tinyxml2::XMLDocument* doc, tiny
 		newAudio->InsertEndChild(file);
 
 		XMLElement* loop = doc->NewElement("Loop");
-		loop->SetText(audio->GetLoop());
+		loop->SetAttribute("Loop", audio->GetLoop());
 		loop->InsertEndChild(loop);
 		newAudio->InsertEndChild(loop);
 
 		XMLElement* volume = doc->NewElement("Volume");
-		volume->SetText(audio->GetVolume());
+		volume->SetAttribute("Volume", audio->GetVolume());
 		volume->InsertEndChild(volume);
 		newAudio->InsertEndChild(volume);
+
+		XMLElement* playing = doc->NewElement("IsPlaying");
+		playing->SetAttribute("IsPlaying", audio->GetIsPlaying());
+		playing->InsertEndChild(playing);
+		newAudio->InsertEndChild(playing);
 
 		e->InsertEndChild(newAudio);
 	}
@@ -258,14 +263,66 @@ XMLError XMLCompiler::XMLLoad(XMLDocument* doc, Scene* scene)
 	}
 }
 
-
 void XMLCompiler::LoadComponentFromXML(Actor* a, tinyxml2::XMLElement* e)
 {
 	std::string name = e->Name();
 	if (name == "Transform") LoadTransformProperties(a, e);
 	else if (name == "RenderComponent") LoadRenderProperties(a, e);
 	else if (name == "RigidbodyComponent") LoadRigidbodyProperties(a, e);
-	//else if (name == "ScriptComponent") a->AddComponent<ScriptComponent>();
+	else if (name == "AudioComponent") LoadAudioProperties(a, e);
+}
+
+void XMLCompiler::LoadAudioProperties(Actor* a, tinyxml2::XMLElement* e)
+{
+	XMLElement* property = e->FirstChildElement();
+
+	AudioComponent* audio = a->GetComponent<AudioComponent>();
+	if (audio != nullptr)
+	{
+		while (property != nullptr)
+		{
+			const char* n = new char[256];
+			switch (*property->Name())
+			{
+			case * "FilePath":
+				property->QueryStringAttribute("FilePath", &n);
+				printf("\n");
+				printf(n);
+				printf("\n");
+				audio->SetPath(n);
+				break;
+
+			case * "Loop":
+				bool loop;
+				property->QueryBoolAttribute("Loop", &loop);
+				audio->Loop(loop);
+
+				printf(loop ? "true\n" : "false\n");
+				break;
+
+			case * "Volume":
+				float volume;
+				property->QueryFloatAttribute("Volume", &volume);
+				audio->SetVolume(volume);
+				printf("%f\n", volume);
+				break;
+
+			case * "IsPlaying":
+				bool isPlaying;
+				property->QueryBoolAttribute("IsPlaying", &isPlaying);
+				audio->SetIsPlaying(isPlaying);
+				printf("%f\n", isPlaying);
+				break;
+
+
+			default:
+				break;
+			}
+			property = property->NextSiblingElement();
+		}
+		if (audio->GetIsPlaying())
+			audio->Play();
+	}
 }
 
 void XMLCompiler::LoadTransformProperties(Actor* a, tinyxml2::XMLElement* e)

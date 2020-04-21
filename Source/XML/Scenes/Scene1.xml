@@ -170,8 +170,9 @@
         </RigidbodyComponent>
         <AudioComponent>
             <FilePath FilePath="../../../Assets/Sounds/Hit.wav"/>
-            <Loop>false</Loop>
-            <Volume>100</Volume>
+            <Loop Loop="false"/>
+            <Volume Volume="100"/>
+            <IsPlaying IsPlaying="false"/>
         </AudioComponent>
     </Actor>
     <Actor>
@@ -189,8 +190,9 @@
         </Transform>
         <AudioComponent>
             <FilePath FilePath="../../../Assets/Sounds/file_example_WAV_1MG.wav"/>
-            <Loop>true</Loop>
-            <Volume>20</Volume>
+            <Loop Loop="true"/>
+            <Volume Volume="20"/>
+            <IsPlaying IsPlaying="true"/>
         </AudioComponent>
     </Actor>
 </Scene>
