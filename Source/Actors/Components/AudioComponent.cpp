@@ -7,12 +7,8 @@
 AudioComponent::AudioComponent()
 {
 	AudioEngine::Instance()->RegisterAudioTarget(this);
-	if (buffer.loadFromFile("../../../Assets/Sounds/file_example_WAV_1MG.wav"))
-	{
-		sound.setBuffer(buffer);
-		Loop(false);
-		SetVolume(100.0f);
-	}
+	loop = false;
+	volume = 100.0f;
 }
 
 AudioComponent::~AudioComponent()
@@ -42,12 +38,25 @@ void AudioComponent::Stop()
 
 void AudioComponent::Loop(bool loop)
 {
+	this->loop = loop;
 	sound.setLoop(loop);
 }
 
 void AudioComponent::SetVolume(float volume)
 {
+	this->volume = volume;
 	if (volume > 100.0f) volume = 100.0f;
 	else if (volume < 0.0f) volume = 0.0f;
 	sound.setVolume(volume);
+}
+
+void AudioComponent::SetSound(std::string path)
+{
+	AudioEngine::Instance()->RegisterAudioTarget(this);
+	if (buffer.loadFromFile(path))
+	{
+		sound.setBuffer(buffer);
+		Loop(loop);
+		SetVolume(volume);
+	}
 }

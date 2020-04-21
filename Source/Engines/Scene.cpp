@@ -68,6 +68,10 @@ void Scene::Initialize()
 	player->transform->SetPosition(320, 240);
 	player->AddComponent<RendererComponent>();
 	player->AddComponent<Rigidbody>();
+	player->AddComponent<AudioComponent>();
+
+	AudioComponent* cachedAudio = player->GetComponent<AudioComponent>();
+	cachedAudio->SetSound("../../../Assets/Sounds/Hit.wav");
 
 	cachedRenderer = player->GetComponent<RendererComponent>();
 	cachedRenderer->SetSize(Vector2(50, 50));
@@ -76,9 +80,18 @@ void Scene::Initialize()
 	Rigidbody* cachedPlayerRigidBody = player->GetComponent<Rigidbody>();
 	cachedPlayerRigidBody->SetRigidbodySettings(10000.0f, 0.0f, false);//static
 	cachedPlayerRigidBody->SetCurrentVelocity(Vector2(0, 0));
+	cachedPlayerRigidBody->SetOnCollide([](void* _player) {
+		printf("Game Over\n");
+		}, player);
 	
-	//Actor* bgm = AddActor("bgm");
-	//bgm->AddComponent<AudioComponent>();
+	Actor* bgm = AddActor("bgm");
+	bgm->AddComponent<AudioComponent>();
+	AudioComponent* aud = bgm->GetComponent<AudioComponent>();
+	aud->Loop(true);
+	aud->SetVolume(20.0f);
+	aud->SetSound("../../../Assets/Sounds/file_example_WAV_1MG.wav");
+	aud->Play();
+	
 
 	ExampleLoadedEventData data;
 	data.example = "Scene Loaded";
@@ -92,8 +105,6 @@ void Scene::Start()
 	{
 		actor->VStart();
 	}
-
-	//Find("bgm")->GetComponent<AudioComponent>()->Play();
 }
 
 void Scene::Update(float delta)
@@ -114,19 +125,24 @@ void Scene::Update(float delta)
 			Vector2 spawnPos = Find(spawner_direction[i])->transform->GetPosition();
 			dir = Find("player")->transform->GetPosition() - spawnPos;
 			dir /= Vector2Math::Magnitude(dir);
+
 			Actor* enemy = AddActor("enemy");
 			enemy->transform->SetPosition(spawnPos);
 			enemy->AddComponent<RendererComponent>();
 			enemy->AddComponent<Rigidbody>();
+
 			RendererComponent* cachedRenderer = enemy->GetComponent<RendererComponent>();
 			cachedRenderer->SetSize(50, 50);
 			cachedRenderer->SetTexture("../../../Assets/Textures/Enemy/Enemy_Walk0.png");
+
 			Rigidbody* cachedRigidBody = enemy->GetComponent<Rigidbody>();
 			cachedRigidBody->SetRigidbodySettings(1.0f, 0.0f, false);
 			cachedRigidBody->SetCurrentVelocity(dir * 50.0f);
 			cachedRigidBody->SetAABB();
-			cachedRigidBody->SetOnCollide([](void* _enemy) {Game::GetCurrentScene()->Destroy(static_cast<Actor*>(_enemy));}, enemy);
-			
+			cachedRigidBody->SetOnCollide([](void* _enemy) {
+				Game::GetCurrentScene()->Find("player")->GetComponent<AudioComponent>()->Play();
+				Game::GetCurrentScene()->Destroy(static_cast<Actor*>(_enemy));
+				}, enemy);
 		}
 		spawn_timer = 0.0f;
 	}
